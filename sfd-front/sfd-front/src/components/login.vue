@@ -18,7 +18,7 @@
       <br/><br/>
          <el-checkbox label="记住密码" v-model="loginForm.isRemember"></el-checkbox>
       <br/><br/>
-        <el-button type="primary" @click="submitForm('loginForm')">登录</el-button>
+        <el-button type="primary" @click="submit()">登录</el-button>
         <el-button @click="resetForm('loginForm')">注册</el-button>
 
     </el-form>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import Config from '../Config'
+import qs from 'qs'
 export default {
   name: 'login',
   data () {
@@ -64,6 +66,18 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    submit () {
+      const param = qs.stringify(this.loginForm)
+      this.$ajax({
+        method: 'post',
+        url: 'http://' + Config.ip + ':' + Config.port + '/login',
+        data: param
+      }).then((response) => { // 这里使用了ES6的语法
+        console.log(response) // 请求成功返回的数据
+      }).catch((error) => {
+        console.log(error) // 请求失败返回的数据
+      })
     }
   }
 }
