@@ -1,3 +1,8 @@
 server:
   port: 3525
   contextPath: /sfd
+  
+mybatis:
+  mapper-locations: classpath:/mybatis/*Mapper.xml
+  type-aliases-package: com.newtouch.structfund.entity
+ 

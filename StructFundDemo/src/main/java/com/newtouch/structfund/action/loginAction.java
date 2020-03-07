@@ -5,39 +5,33 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.newtouch.structfund.entity.User;
+import com.newtouch.structfund.mapper.UserMapper;
+
 @Controller
 @ResponseBody
 @SuppressWarnings("all")
 public class loginAction {
+	@Autowired
+	UserMapper userMapper;
 	
 	@RequestMapping("login")
-	public String login(HttpServletRequest req) {
-		Map map=req.getParameterMap();  
-	    Set keSet=map.entrySet();  
-	    System.out.println(keSet.size());
-	    for(Iterator itr=keSet.iterator();itr.hasNext();){  
-	        Map.Entry me=(Map.Entry)itr.next();  
-	        Object ok=me.getKey();  
-	        Object ov=me.getValue();  
-	        String[] value=new String[1];  
-	        if(ov instanceof String[]){  
-	            value=(String[])ov;  
-	        }else{  
-	            value[0]=ov.toString();  
-	        }  
-	  
-	        for(int k=0;k<value.length;k++){  
-	            System.out.println(ok+"="+value[k]);  
-	        }  
-	      }  
-
-		return "success";
+	public String login(User user,HttpSession session) throws Exception {
+		User loginUser=userMapper.queryUser(user);
+		if(loginUser!=null) {
+			session.setAttribute("userInfo", loginUser);
+			return "success";
+		}else {
+			return "用户名或密码错误,登录失败!";
+		}
 		
 	}
 

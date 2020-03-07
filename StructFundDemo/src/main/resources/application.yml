@@ -13,8 +13,8 @@ spring:
     show-sql: true
       
 mybatis:
-  mapper-locations: classpath:mapping/*Mapper.xml
-  type-aliases-package: com.newtouch.entity
+  mapper-locations: classpath:/mybatis/*Mapper.xml
+  type-aliases-package: com.newtouch.structfund.entity
   
 pagehelper:
   helper-dialect: mysql
@@ -22,4 +22,3 @@ pagehelper:
   support-methods-arguments: true
   params: count=countsql
 
-  
