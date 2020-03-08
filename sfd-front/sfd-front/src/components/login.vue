@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="login">
     <h1>{{ title }}</h1>
   <el-row :gutter="20">
   <el-col :span="10"><div class="grid-content bg-purple"></div></el-col>
@@ -68,13 +68,13 @@ export default {
       this.$refs[formName].resetFields()
     },
     submit () {
-      const param = qs.stringify(this.loginForm)
       this.$ajax({
         method: 'post',
         url: 'http://' + Config.ip + ':' + Config.port + '/login',
-        data: param
-      }).then((response) => { // 这里使用了ES6的语法
+        data: qs.stringify(this.loginForm)
+      }).then((response) => {
         console.log(response) // 请求成功返回的数据
+        this.$router.push({ path: '/index' })
       }).catch((error) => {
         console.log(error) // 请求失败返回的数据
       })
