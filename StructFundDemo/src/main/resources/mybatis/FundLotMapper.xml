@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.FundLotMapper">
+	<resultMap type="com.newtouch.structfund.entity.FundLot" id="resultMap">
+	 	<result column="registerCode" property="registerCode" jdbcType="VARCHAR"/>
+	 	<result column="fundCode" property="fundCode" jdbcType="VARCHAR"/>
+		<result column="lotCode" property="lotCode" jdbcType="VARCHAR"/>
+		<result column="lotType" property="lotType" jdbcType="VARCHAR"/>
+		<result column="startTime" property="startTime" jdbcType="VARCHAR"/>
+		<result column="fundName" property="fundName" jdbcType="VARCHAR"/>
+		<result column="lotStatus" property="lotStatus" jdbcType="VARCHAR"/>
+		<result column="operator" property="operator" jdbcType="VARCHAR"/>
+		<result column="authorizer" property="authorizer" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<select id="list" parameterType="com.newtouch.structfund.entity.FundLot" resultType="com.newtouch.structfund.entity.FundLot">
+		select * from fund_lot t
+		<where>
+			<if test="registerCode!=null and registerCode!=''">
+				t.registerCode LIKE CONCAT(CONCAT('%', #{registerCode}), '%')
+			</if>
+			<if test="fundCode !=null and fundCode!=''">
+				 t.fundCode LIKE CONCAT(CONCAT('%', #{fundCode}), '%')
+			</if>
+		</where>
+	</select>
+
+	<delete id="delete" parameterType="java.util.List">
+		delete from fund_lot where registerCode in
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="getOne" parameterType="com.newtouch.structfund.entity.FundLot" resultType="com.newtouch.structfund.entity.FundLot">
+		select * from fund_lot t where t.registerCode = #{registerCode}
+	</select>
+	
+	<insert id="insert" parameterType="com.newtouch.structfund.entity.FundLot">
+		insert into fund_lot(registerCode,fundCode,lotCode,startTime) values(#{registerCode},#{fundCode},#{lotCode},#{startTime})
+	</insert>
+
+	<update id="update" parameterType="com.newtouch.structfund.entity.FundLot">
+		update fund_lot set lotCode=#{lotCode},startTime=#{startTime} where registerCode=#{registerCode} and fundCode=#{fundCode}
+	</update>
+</mapper>

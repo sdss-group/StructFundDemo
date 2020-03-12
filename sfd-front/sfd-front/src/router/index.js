@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import login from '@/components/login'
 import index from '@/components/index'
 import baseinfo from '@/components/fundinfo/baseinfo'
+import fundLot from '@/components/fundLot/fundLot'
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +22,14 @@ export default new Router({
       path: '/baseinfo',
       name: 'baseinfo',
       component: baseinfo
+    },
+    {
+      path: '/fundLot',
+      name: 'fundLot',
+      component: fundLot,
+      meta: {
+          keepAlive: true
+        }
     }
   ]
 })
