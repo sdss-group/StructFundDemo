@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.FundSetMapper">
+
+	<resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.FundSet">
+    <id column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
+    <id column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+    <result column="FUND_NAME" jdbcType="VARCHAR" property="fundName" />
+    <result column="FUND_NAME_ABBR" jdbcType="VARCHAR" property="fundNameAbbr" />
+    <result column="FUND_SPONSOR" jdbcType="CHAR" property="fundSponsor" />
+    <result column="FACE_VALUE" jdbcType="DECIMAL" property="faceValue" />
+    <result column="SHARE_CLASS" jdbcType="CHAR" property="shareClass" />
+    <result column="CURRENCY_TYPE" jdbcType="CHAR" property="currencyType" />
+    <result column="CASH_FLAG" jdbcType="CHAR" property="cashFlag" />
+    <result column="INCOME_CURR_TYPE" jdbcType="CHAR" property="incomeCurrType" />
+    <result column="COST_CURR_TYPE" jdbcType="CHAR" property="costCurrType" />
+    <result column="ISSUE_PRICE" jdbcType="DECIMAL" property="issuePrice" />
+    <result column="FUND_TYPE" jdbcType="CHAR" property="fundType" />
+    <result column="IPO_START_DATE" jdbcType="DATE" property="ipoStartDate" />
+    <result column="IPO_END_DATE" jdbcType="DATE" property="ipoEndDate" />
+    <result column="SETUP_DATE" jdbcType="DATE" property="setupDate" />
+    <result column="ALIMIT_DAY" jdbcType="DATE" property="alimitDay" />
+    <result column="START_DATE" jdbcType="DATE" property="startDate" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="SALE_OBJECT" jdbcType="CHAR" property="saleObject" />
+    <result column="MAX_REDEEM" jdbcType="DECIMAL" property="maxRedeem" />
+    <result column="INTER_PROPERTY" jdbcType="CHAR" property="interProperty" />
+    <result column="INTER_DATE" jdbcType="INTEGER" property="interDate" />
+    <result column="SUB_BASIC" jdbcType="CHAR" property="subBasic" />
+    <result column="INCOME_INTER_DATE" jdbcType="INTEGER" property="incomeInterDate" />
+    <result column="TRADE_TYPE" jdbcType="CHAR" property="tradeType" />
+    <result column="BONUS_TYPE" jdbcType="CHAR" property="bonusType" />
+    <result column="REDE_RETURN_TYPE" jdbcType="CHAR" property="redeReturnType" />
+    <result column="BREAK_EVEN" jdbcType="CHAR" property="breakEven" />
+    <result column="BENEFIT_GUARANTEE" jdbcType="CHAR" property="benefitGuarantee" />
+    <result column="IPO_TYPE" jdbcType="CHAR" property="ipoType" />
+    <result column="FUND_TRUSTEE" jdbcType="VARCHAR" property="fundTrustee" />
+    <result column="BREACH_REDE" jdbcType="CHAR" property="breachRede" />
+    <result column="DEBT_FUND_TYPE" jdbcType="CHAR" property="debtFundType" />
+    <result column="CLIENT_GROUP" jdbcType="CHAR" property="clientGroup" />
+    <result column="FUND_REGIST_CODE" jdbcType="VARCHAR" property="fundRegistCode" />
+    <result column="CANCEL_TYPE" jdbcType="CHAR" property="cancelType" />
+    <result column="BREA_REDE_FEE" jdbcType="DECIMAL" property="breaRedeFee" />
+    <result column="PART_REDE" jdbcType="CHAR" property="partRede" />
+    <result column="EXCESSIVE_RATIO" jdbcType="DECIMAL" property="excessiveRatio" />
+    <result column="INTEREST_RATE" jdbcType="DECIMAL" property="interestRate" />
+    <result column="REDE_FEE_BACK_RATIO" jdbcType="DECIMAL" property="redeFeeBackRatio" />
+    <result column="LOCK_DAYS" jdbcType="INTEGER" property="lockDays" />
+    <result column="IS_CHECK_INVESTER" jdbcType="CHAR" property="isCheckInvester" />
+    <result column="UPDATE_DATE" jdbcType="DATE" property="updateDate" />
+  </resultMap>
+
+
+	
+	<select id="queryBaseinfo" parameterType="com.newtouch.structfund.entity.FundSet" resultMap="BaseResultMap">
+		select * from fund_set where 1=1
+		<if test=" registerCode != null and registerCode != '' ">
+			and REGISTER_CODE = #{registerCode}
+		</if>
+		<if test=" fundCode != null and fundCode != '' ">
+			and FUNDCODE = #{fundCode}
+		</if>
+		<if test=" fundType != null and fundType != '' ">
+			and FUNDTYPE = #{fundType}
+		</if>
+		<if test=" ipoStartDate != null and ipoStartDate != '' ">
+			and IPO_START_DATE = #{ipoStartDate}
+		</if>
+		<if test=" ipoEndDate != null and ipoEndDate != '' ">
+			and IPO_END_DATE = #{ipoEndDate}
+		</if>
+	</select>
+</mapper> 

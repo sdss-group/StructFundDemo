@@ -7,8 +7,8 @@
             <el-form-item label="登记机构" prop="registerCode">
                 <el-input  :value="form.registerCode" readonly />
             </el-form-item>
-            <el-form-item label="产品代码" prop="fundcode">
-                <el-input  v-model="form.fundcode"/>
+            <el-form-item label="产品代码" prop="fundCode">
+                <el-input  v-model="form.fundCode"/>
             </el-form-item>
             </el-row>
             <el-row>
@@ -46,7 +46,7 @@
             </el-row>
             <el-row>
             <el-form-item>
-                <el-button type="primary" plain>查询</el-button>
+                <el-button type="primary" @click="query()" plain>查询</el-button>
                 <el-button @click="resetForm('form')" >重置</el-button>
             </el-form-item>
             </el-row>
@@ -56,7 +56,7 @@
   <div class="block">
     <el-table :data="fundList" border stripe style="width: 100%">
     <el-table-column fixed prop="registerCode" label="登记机构" width="150" align="center"></el-table-column>
-    <el-table-column fixed prop="fundcode" label="产品代码" width="150" align="center"></el-table-column>
+    <el-table-column fixed prop="fundCode" label="产品代码" width="150" align="center"></el-table-column>
     <el-table-column prop="fundname" label="产品名称" width="150" align="center"></el-table-column>
     <el-table-column prop="fundType" label="产品类型" width="150" align="center">
       <template slot-scope="scope">
@@ -88,10 +88,10 @@
         <span>{{ bonusType.get(scope.row.bonusType) }}</span>
       </template>
     </el-table-column>
-    <el-table-column prop="ipoStartDate" label="认购起日" width="150" align="center"></el-table-column>
-    <el-table-column prop="ipoEndDate" label="认购止日" width="150" align="center"></el-table-column>
-    <el-table-column prop="setupDate" label="成立日期" width="150" align="center"></el-table-column>
-    <el-table-column prop="alimitDay" label="封闭结束日期" width="150" align="center"></el-table-column>
+    <el-table-column prop="ipoStartDate" label="认购起日" width="150" align="center" :formatter="dateFormat"></el-table-column>
+    <el-table-column prop="ipoEndDate" label="认购止日" width="150" align="center" :formatter="dateFormat"></el-table-column>
+    <el-table-column prop="setupDate" label="成立日期" width="150" align="center" :formatter="dateFormat"></el-table-column>
+    <el-table-column prop="alimitDay" label="封闭结束日期" width="150" align="center" :formatter="dateFormat"></el-table-column>
     <el-table-column prop="maxRedeem" label="巨额赎回比例" width="150" align="center"></el-table-column>
     <el-table-column prop="interProperty" label="计息属性" width="150" align="center">
       <template slot-scope="scope">
@@ -126,7 +126,8 @@
 </template>
 
 <script>
-import {arrToMap} from '@/utils/commonUtil'
+import {arrToMap, dateFormat} from '@/utils/commonUtil'
+
 export default {
   name: 'baseinfo',
   data () {
@@ -134,7 +135,7 @@ export default {
       param: this.$param,
       form: {
         registerCode: 'TA',
-        fundcode: '',
+        fundCode: '',
         fundType: '',
         ipoStartDate: '',
         ipoEndDate: ''
@@ -146,7 +147,7 @@ export default {
       ipoType: arrToMap(this.$param.ipoType),
       tradeType: arrToMap(this.$param.tradeType),
       bonusType: arrToMap(this.$param.bonusType),
-      redeReturnType: arrToMap(this.$param.tradeType),
+      redeReturnType: arrToMap(this.$param.redeReturnType),
       interProperty: arrToMap(this.$param.interProperty),
       shareClass: arrToMap(this.$param.shareClass),
       cashFlag: arrToMap(this.$param.cashFlag),
@@ -158,17 +159,19 @@ export default {
       this.$refs[formName].resetFields()
     },
     query () {
+      let _this = this
       this.$ajax({
         method: 'post',
-        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/login',
-        data: this.$qs.stringify(this.loginForm)
-      }).then((response) => {
-        console.log(response) // 请求成功返回的数据
-        this.$router.push({ path: '/index' })
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/baseinfo/queryBaseinfo',
+        data: this.$qs.stringify(this.form)
+      }).then((result) => {
+        console.log(result)
+        _this.fundList = result.data
       }).catch((error) => {
-        console.log(error) // 请求失败返回的数据
+        console.log(error)
       })
-    }
+    },
+    dateFormat: dateFormat
   }
 }
 </script>

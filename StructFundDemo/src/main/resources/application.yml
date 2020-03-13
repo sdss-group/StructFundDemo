@@ -15,6 +15,8 @@ spring:
 mybatis:
   mapper-locations: classpath:/mybatis/*Mapper.xml
   type-aliases-package: com.newtouch.structfund.entity
+  configuration: 
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   
 pagehelper:
   helper-dialect: mysql

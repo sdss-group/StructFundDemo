@@ -9,6 +9,9 @@ import axios from 'axios'
 import qs from 'qs'
 import param from '@/common/param.js'
 import Config from '@/Config'
+import moment from 'moment'
+Vue.prototype.$moment = moment
+moment.locale('zh-cn')
 
 Vue.prototype.$param = param
 Vue.prototype.$qs = qs

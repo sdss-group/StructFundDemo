@@ -203,3 +203,9 @@ export function numToSan (obj) {
     return sFloat ? sInt1 + '.' + sFloat : sInt1
   }
 }
+
+export function dateFormat (row, column) {
+  var date = row[column.property]
+  if (date == undefined) { return '' };
+  return this.$moment(date).format('YYYY-MM-DD')
+}
