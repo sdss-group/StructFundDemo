@@ -6,8 +6,7 @@ const fundType = [
 ]
 
 const param = {
-  fundType,
-  saleObject
+  fundType
 }
 
 export default param
