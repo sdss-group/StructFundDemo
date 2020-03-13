@@ -30,8 +30,7 @@
 </template>
 
 <script>
-import Config from '../Config'
-import qs from 'qs'
+
 export default {
   name: 'login',
   data () {
@@ -70,8 +69,8 @@ export default {
     submit () {
       this.$ajax({
         method: 'post',
-        url: 'http://' + Config.ip + ':' + Config.port + '/login',
-        data: qs.stringify(this.loginForm)
+        url: 'http://' + this.$Config.ip + ':' + Config.port + '/login',
+        data: this.$qs.stringify(this.loginForm)
       }).then((response) => {
         console.log(response) // 请求成功返回的数据
         this.$router.push({ path: '/index' })

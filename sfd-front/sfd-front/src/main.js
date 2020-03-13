@@ -6,7 +6,13 @@ import router from './router'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
+import qs from 'qs'
+import param from '@/common/param.js'
+import Config from '@/Config'
 
+Vue.prototype.$param = param
+Vue.prototype.$qs = qs
+Vue.prototype.$Config = Config
 Vue.use(Element, axios)
 Vue.prototype.$ajax = axios
 
