@@ -15,7 +15,7 @@
             <el-form-item label="产品类型" prop="fundType">
                 <el-select v-model="form.fundType" style="width:203px">
                     <el-option
-                    v-for="item in fundTypeArr"
+                    v-for="item in param.fundType"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -104,7 +104,7 @@ export default {
         ipoEndDate: ''
 
       },
-      fundTypeArr: param.fundType,
+      param: param,
       fundType: arrToMap(param.fundType),
       fundList: [
         {registerCode: '123', fundType: '2'}
