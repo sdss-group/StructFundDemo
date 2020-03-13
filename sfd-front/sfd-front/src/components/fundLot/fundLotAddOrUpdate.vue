@@ -43,109 +43,102 @@
 </template>
 
 <script>
-  import Config from '@/Config'
-  import qs from 'qs'
-    export default {
-      data () {
-        return {
-          visible: false,
-          dataForm: {
-            id: 0,
-            registerCode: '',
-            fundCode: '',
-            lotCode: '',
-            startTime: '',
-            isDisabled: false
-          },
-          registerCodeList: [],
-          fundCodeList: [],
-          dataRule: {
-            registerCode: [
-              { required: true, message: '登记机构', trigger: 'blur' }
-            ],
-            fundCode: [
-              { required: true, message: '产品代码', trigger: 'blur' }
-            ],
-            lotCode: [
-              { required: true, message: '产品批次', trigger: 'blur' }
-            ],
-            startTime: [
-              { required: true, message: '批次发起时间', trigger: 'blur' }
-            ]
-          }
-        }
+import req from '../../common/req'
+export default {
+  data () {
+    return {
+      visible: false,
+      dataForm: {
+        id: 0,
+        registerCode: '',
+        fundCode: '',
+        lotCode: '',
+        startTime: '',
+        isDisabled: false
       },
-      methods: {
-        init (id) {
-          this.initFundCusttype()
-          this.dataForm.id = id || 0
-          this.isDisabled = false
-          this.visible = true
-          this.$nextTick(() => {
-            this.$refs['dataForm'].resetFields()
-            if (this.dataForm.id) {
-              this.$ajax({
-                method: 'post',
-                url: 'http://' + Config.ip + ':' + Config.port + '/fundLot/getOne',
-                data: qs.stringify({'registerCode': this.dataForm.id})
-              }).then((response) => {
-                this.dataForm.registerCode = response.data.registerCode
-                this.dataForm.fundCode = response.data.fundCode
-                this.dataForm.lotCode = response.data.lotCode
-                this.dataForm.startTime = response.data.startTime
-                // 登记机构及产品代码不可更改
-                this.isDisabled = true
-              }).catch((error) => {
-                console.log(error)
-              })
-            }
-          })
-        },
-        // 初始化注册机构代码和产品代码
-        initFundCusttype () {
-          this.registerCodeList = []
-          this.fundCodeList = []
+      registerCodeList: [],
+      fundCodeList: [],
+      dataRule: {
+        registerCode: [
+          { required: true, message: '请选择登记机构', trigger: 'blur' }
+        ],
+        fundCode: [
+          { required: true, message: '请选择产品代码', trigger: 'blur' }
+        ],
+        lotCode: [
+          { required: true, message: '请输入产品批次', trigger: 'blur' }
+        ],
+        startTime: [
+          { required: true, message: '请输入批次发起时间', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  methods: {
+    init (id) {
+      this.initFundCusttype()
+      this.dataForm.id = id || 0
+      this.isDisabled = false
+      this.visible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].resetFields()
+        if (this.dataForm.id) {
           this.$ajax({
-            method: 'get',
-            url: 'http://' + Config.ip + ':' + Config.port + '/fundLot/listFundCusttype '
+            method: 'post',
+            url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/getOne',
+            data: this.$qs.stringify({'registerCode': this.dataForm.id})
           }).then((response) => {
-            this.registerCodeList = response.data
-            this.fundCodeList = response.data
+            this.dataForm.registerCode = response.data.registerCode
+            this.dataForm.fundCode = response.data.fundCode
+            this.dataForm.lotCode = response.data.lotCode
+            this.dataForm.startTime = response.data.startTime
+            // 登记机构及产品代码不可更改
+            this.isDisabled = true
           }).catch((error) => {
             console.log(error)
           })
-        },
-        // 表单提交
-        dataFormSubmit () {
-          this.$refs['dataForm'].validate((valid) => {
-            if (valid) {
-              this.$ajax({
-                method: 'post',
-                url: 'http://' + Config.ip + ':' + Config.port + '/fundLot/' + (!this.dataForm.id ? 'insert' : 'update'),
-                data: qs.stringify(this.dataForm)
-              }).then((response) => {
-                if (response.data === 1) {
-                  this.$message({
-                    message: '操作成功',
-                    type: 'success',
-                    duration: 500,
-                    onClose: () => {
-                      this.visible = false
-                      // 刷新页面
-                      this.$emit('refreshDataList')
-                    }
-                  })
-                } else {
-                  this.$message({
-                    message: '操作失败',
-                    type: 'error',
-                    duration: 1500
-                  })
+        }
+      })
+    },
+    // 初始化注册机构代码和产品代码
+    async initFundCusttype () {
+      this.registerCodeList = []
+      this.fundCodeList = []
+      let res = await this.$req.listFundCusttype()
+      this.registerCodeList = res.data
+      this.fundCodeList = res.data
+    },
+    // 表单提交
+    dataFormSubmit () {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          this.$ajax({
+            method: 'post',
+            url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/' + (!this.dataForm.id ? 'insert' : 'update'),
+            data: this.$qs.stringify(this.dataForm)
+          }).then((response) => {
+            if (response.data === 1) {
+              this.$message({
+                message: '操作成功',
+                type: 'success',
+                duration: 500,
+                onClose: () => {
+                  this.visible = false
+                  // 刷新页面
+                  this.$emit('refreshDataList')
                 }
-            })
-          }
-        })
-      }
+              })
+            } else {
+              this.$message({
+                message: '操作失败',
+                type: 'error',
+                duration: 1500
+              })
+            }
+          })
+        }
+      })
     }
   }
+}
 </script>

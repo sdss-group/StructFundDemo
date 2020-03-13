@@ -120,154 +120,144 @@
 </template>
 
 <script>
-  import Config from '@/Config'
-  import qs from 'qs'
-  import AddOrUpdate from './fundLotAddOrUpdate'
+import AddOrUpdate from './fundLotAddOrUpdate'
+import req from '../../common/req'
 
-  export default {
-    data () {
-      return {
-        dataForm: {
-          registerCode: '',
-          fundCode: ''
-        },
-        dataList: [],
-        pageIndex: 1,
-        pageSize: 10,
-        totalPage: 0,
-        dataListLoading: false,
-        dataListSelections: [],
-        addOrUpdateVisible: false,
-        registerCodeList: []
-      }
+export default {
+  data () {
+    return {
+      dataForm: {
+        registerCode: '',
+        fundCode: ''
+      },
+      dataList: [],
+      pageIndex: 1,
+      pageSize: 10,
+      totalPage: 0,
+      dataListLoading: false,
+      dataListSelections: [],
+      addOrUpdateVisible: false,
+      registerCodeList: []
+    }
+  },
+  components: {
+    AddOrUpdate
+  },
+  created () {
+    this.getDataList()
+    this.initFundCusttype()
+  },
+  methods: {
+    getDataList () {
+      this.dataListLoading = true
+      this.$ajax({
+        method: 'post',
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/listFundLot',
+        data: this.$qs.stringify(this.dataForm)
+      }).then((response) => {
+        this.dataList = response.data
+        // this.totalPage = 10
+        //  var j = JSON.stringify(response)
+        // console.log(j.toString())
+      }).catch((error) => {
+        console.log(error)
+      })
+      this.dataListLoading = false
     },
-    components: {
-      AddOrUpdate
-    },
-    created () {
+    // 每页数
+    sizeChangeHandle (val) {
+      this.pageSize = val
+      this.pageIndex = 1
       this.getDataList()
-      this.initFundCusttype()
     },
-    methods: {
-      getDataList () {
-        this.dataListLoading = true
-        this.$ajax({
-          method: 'post',
-          url: 'http://' + Config.ip + ':' + Config.port + '/fundLot/listFundLot',
-          data: qs.stringify(this.dataForm)
-        }).then((response) => {
-          this.dataList = response.data
-          // this.totalPage = 10
-          var j = JSON.stringify(response)
-         // console.log(j.toString())
-        }).catch((error) => {
-          console.log(error)
+    // 当前页
+    currentChangeHandle (val) {
+      this.pageIndex = val
+      this.getDataList()
+    },
+    // 多选
+    selectionChangeHandle (val) {
+      this.dataListSelections = val
+    },
+    // 新增 / 修改
+    addOrUpdateHandle (registerCode, lotStatus) {
+      // 非初始化状态不能修改
+      if (lotStatus === '1' || lotStatus === '2' || lotStatus === '3') {
+        this.$message({
+          showClose: true,
+          message: '非初始化状态不允许修改!',
+          type: 'error'
         })
-        this.dataListLoading = false
-      },
-      // 每页数
-      sizeChangeHandle (val) {
-        this.pageSize = val
-        this.pageIndex = 1
-        this.getDataList()
-      },
-      // 当前页
-      currentChangeHandle (val) {
-        this.pageIndex = val
-        this.getDataList()
-      },
-      // 多选
-      selectionChangeHandle (val) {
-        this.dataListSelections = val
-      },
-      // 新增 / 修改
-      addOrUpdateHandle (registerCode, lotStatus) {
-        // 非初始化状态不能修改
-        if (lotStatus === '1' || lotStatus === '2' || lotStatus === '3') {
-          this.$message({
-            showClose: true,
-            message: '非初始化状态不允许修改!',
-            type: 'error'
-          })
-          return 0
-        }
-        this.addOrUpdateVisible = true
-        this.$nextTick(() => {
-          this.$refs.addOrUpdate.init(registerCode)
-        })
-      },
-      // 重置
-      resetForm (formName) {
-        this.$refs[formName].resetFields()
-        this.getDataList()
-      },
-      // 判断状态如果非初始化，则不能删除
-      ifDelete (status, id) {
-        let statuss = status ? [status] : this.dataListSelections.map(item => {
-          return item.lotStatus
-        })
-        let deleteFlag = 0
-        statuss.forEach((item) => {
-          if (item === '1' || item === '2' || item === '3') {
-            deleteFlag++
-          }
-        })
-        if (deleteFlag > 0) {
-          this.$message({
-            showClose: true,
-            message: '非初始化状态，不允许删除!',
-            type: 'error'
-          })
-          return 0
-        } else {
-          this.deleteHandle(id)
-        }
-      },
-      // 删除
-      deleteHandle (id) {
-        let ids = id ? [id] : this.dataListSelections.map(item => {
-          return item.registerCode
-        })
-        this.$confirm(`确定对[ 注册机构 = ${ids.join('，')} ]进行[${ids.length === 1 ? ' 删除 ' : ' 批量删除 '}]操作?`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$ajax({
-            method: 'post',
-            url: 'http://' + Config.ip + ':' + Config.port + '/fundLot/delete',
-            data: qs.stringify({'ids': ids}, {arrayFormat: 'repeat'}),
-            traditional: true
-          }).then((response) => {
-            this.$message({
-              message: '操作成功',
-              type: 'success',
-              duration: 1500,
-              onClose: () => {
-                this.getDataList()
-              }
-            })
-          }).catch((error) => {
-            console.log(error)
-          })
-        })
-      },
-      // 登记机构
-      initFundCusttype () {
-        this.registerCodeList = []
-        this.$ajax({
-          method: 'post',
-          url: 'http://' + Config.ip + ':' + Config.port + '/fundLot/listFundCusttype '
-        }).then((response) => {
-          this.registerCodeList = response.data
-          var j = JSON.stringify(response)
-          console.log('登记机构:' + j.toString())
-        }).catch((error) => {
-          console.log(error)
-        })
+        return 0
       }
+      this.addOrUpdateVisible = true
+      this.$nextTick(() => {
+        this.$refs.addOrUpdate.init(registerCode)
+      })
+    },
+    // 重置
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+      this.getDataList()
+    },
+    // 判断状态如果非初始化，则不能删除
+    ifDelete (status, id) {
+      let statuss = status ? [status] : this.dataListSelections.map(item => {
+        return item.lotStatus
+      })
+      let deleteFlag = 0
+      statuss.forEach((item) => {
+        if (item === '1' || item === '2' || item === '3') {
+          deleteFlag++
+        }
+      })
+      if (deleteFlag > 0) {
+        this.$message({
+          showClose: true,
+          message: '非初始化状态，不允许删除!',
+          type: 'error'
+        })
+        return 0
+      } else {
+        this.deleteHandle(id)
+      }
+    },
+    // 删除
+    deleteHandle (id) {
+      let ids = id ? [id] : this.dataListSelections.map(item => {
+        return item.registerCode
+      })
+      this.$confirm(`确定对[ 注册机构 = ${ids.join('，')} ]进行[${ids.length === 1 ? ' 删除 ' : ' 批量删除 '}]操作?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$ajax({
+          method: 'post',
+          url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/delete',
+          data: this.$qs.stringify({'ids': ids}, {arrayFormat: 'repeat'}),
+          traditional: true
+        }).then((response) => {
+          this.$message({
+            message: '操作成功',
+            type: 'success',
+            duration: 1500,
+            onClose: () => {
+              this.getDataList()
+            }
+          })
+        }).catch((error) => {
+          console.log(error)
+        })
+      })
+    },
+    // 登记机构
+    async initFundCusttype () {
+      this.registerCodeList = []
+      this.registerCodeList = (await req.listFundCusttype()).data
     }
   }
+}
 </script>
 
 <style scoped>
