@@ -8,9 +8,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import qs from 'qs'
 import param from '@/common/param.js'
+import req from '@/common/req.js'
 import Config from '@/Config'
 
 Vue.prototype.$param = param
+Vue.prototype.$req = req
 Vue.prototype.$qs = qs
 Vue.prototype.$Config = Config
 Vue.use(Element, axios)

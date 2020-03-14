@@ -48,6 +48,13 @@ const breachRede = [
   {value: '0', label: '允许'}
 ]
 
+const lotStatus = {
+  '0': {label: '初始化', type: 'info'},
+  '1': {label: '正在执行', type: 'warning'},
+  '2': {label: '执行成功', type: 'success'},
+  '3': {label: '执行失败', type: 'danger'}
+}
+
 const param = {
   fundType,
   saleObject,
@@ -58,7 +65,8 @@ const param = {
   interProperty,
   shareClass,
   cashFlag,
-  breachRede
+  breachRede,
+  lotStatus
 }
 
 export default param

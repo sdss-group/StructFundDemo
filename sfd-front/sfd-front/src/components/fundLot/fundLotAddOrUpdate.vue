@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import req from '../../common/req'
 export default {
   data () {
     return {

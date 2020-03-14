@@ -68,10 +68,10 @@
         align="center"
         label="批次状态">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.lotStatus === '0'" size="medium">初始化</el-tag>
-          <el-tag v-if="scope.row.lotStatus === '1'" size="medium" type="info">正在执行</el-tag>
-          <el-tag v-if="scope.row.lotStatus === '2'" size="medium" type="success">执行成功</el-tag>
-          <el-tag v-if="scope.row.lotStatus === '3'" size="medium" type="danger">执行失败</el-tag>
+          <el-tag v-if="lotStatus[scope.row.lotStatus]" size="medium"
+                  :type='lotStatus[scope.row.lotStatus].type'>
+            {{lotStatus[scope.row.lotStatus].label}}
+          </el-tag>
         </template>
       </el-table-column>
       <el-table-column
@@ -121,7 +121,6 @@
 
 <script>
 import AddOrUpdate from './fundLotAddOrUpdate'
-import req from '../../common/req'
 
 export default {
   data () {
@@ -130,6 +129,7 @@ export default {
         registerCode: '',
         fundCode: ''
       },
+      lotStatus: this.$param.lotStatus,
       dataList: [],
       pageIndex: 1,
       pageSize: 10,
@@ -254,7 +254,7 @@ export default {
     // 登记机构
     async initFundCusttype () {
       this.registerCodeList = []
-      this.registerCodeList = (await req.listFundCusttype()).data
+      this.registerCodeList = (await this.$req.listFundCusttype()).data
     }
   }
 }
