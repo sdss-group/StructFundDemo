@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 public class FundSet {
 	
 	private String registerCode;
@@ -33,10 +34,8 @@ public class FundSet {
 
     private String fundType;
 
-    @DateTimeFormat(pattern = "yyyyMMdd")
     private Date ipoStartDate;
 
-    @DateTimeFormat(pattern = "yyyyMMdd")
     private Date ipoEndDate;
 
     private Date setupDate;

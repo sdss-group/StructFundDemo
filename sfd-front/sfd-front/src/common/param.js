@@ -45,7 +45,7 @@ const cashFlag = [
 ]
 const breachRede = [
   {value: '0', label: '不允许'},
-  {value: '0', label: '允许'}
+  {value: '1', label: '允许'}
 ]
 
 const lotStatus = {
@@ -54,6 +54,23 @@ const lotStatus = {
   '2': {label: '执行成功', type: 'success'},
   '3': {label: '执行失败', type: 'danger'}
 }
+
+const fundStatus = [
+  {value: '0', label: '正常开放'},
+  {value: '1', label: '认购期'},
+  {value: '3', label: '发行失败'},
+  {value: '4', label: '暂停交易'},
+  {value: '5', label: '暂停申购'},
+  {value: '6', label: '暂停赎回'},
+  {value: '7', label: '理财产品封闭'},
+  {value: 'a', label: '理财产品终止'},
+  {value: 'b', label: '基金信息未下发'}
+]
+const incomeInterDate = [
+  {value: '0', label: '360'},
+  {value: '1', label: '365'}
+]
+
 
 const param = {
   fundType,
@@ -66,7 +83,9 @@ const param = {
   shareClass,
   cashFlag,
   breachRede,
-  lotStatus
+  lotStatus,
+  fundStatus,
+  incomeInterDate
 }
 
 export default param

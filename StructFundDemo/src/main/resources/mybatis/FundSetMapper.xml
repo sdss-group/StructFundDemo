@@ -52,22 +52,43 @@
 
 
 	
-	<select id="queryBaseinfo" parameterType="com.newtouch.structfund.entity.FundSet" resultMap="BaseResultMap">
-		select * from fund_set where 1=1
-		<if test=" registerCode != null and registerCode != '' ">
-			and REGISTER_CODE = #{registerCode}
+	<select id="queryBaseinfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select t1.*,t2.fund_status as fundStatus from fund_set t1 left join ta_func t2 on t1.fund_code=t2.fund_code where 1=1
+		<if test=" baseinfo.registerCode != null and baseinfo.registerCode != '' ">
+			and t1.REGISTER_CODE = #{baseinfo.registerCode}
 		</if>
-		<if test=" fundCode != null and fundCode != '' ">
-			and FUNDCODE = #{fundCode}
+		<if test=" baseinfo.fundCode != null and baseinfo.fundCode != '' ">
+			and t1.FUND_CODE = #{baseinfo.fundCode}
 		</if>
-		<if test=" fundType != null and fundType != '' ">
-			and FUNDTYPE = #{fundType}
+		<if test=" baseinfo.fundType != null and baseinfo.fundType != '' ">
+			and t1.FUND_TYPE = #{baseinfo.fundType}
 		</if>
-		<if test=" ipoStartDate != null and ipoStartDate != '' ">
-			and IPO_START_DATE = #{ipoStartDate}
+		<if test=" baseinfo.ipoStartDate != null ">
+			and t1.IPO_START_DATE = #{baseinfo.ipoStartDate}
 		</if>
-		<if test=" ipoEndDate != null and ipoEndDate != '' ">
-			and IPO_END_DATE = #{ipoEndDate}
+		<if test=" baseinfo.ipoEndDate != null ">
+			and t1.IPO_END_DATE = #{baseinfo.ipoEndDate}
+		</if>
+		limit #{startRow},#{pageSize}
+	</select>
+	
+	
+	<select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(1) from fund_set where 1=1
+		<if test=" baseinfo.registerCode != null and baseinfo.registerCode != '' ">
+			and REGISTER_CODE = #{baseinfo.registerCode}
+		</if>
+		<if test=" baseinfo.fundCode != null and baseinfo.fundCode != '' ">
+			and FUND_CODE = #{baseinfo.fundCode}
+		</if>
+		<if test=" baseinfo.fundType != null and baseinfo.fundType != '' ">
+			and FUND_TYPE = #{baseinfo.fundType}
+		</if>
+		<if test=" baseinfo.ipoStartDate != null ">
+			and IPO_START_DATE = #{baseinfo.ipoStartDate}
+		</if>
+		<if test=" baseinfo.ipoEndDate != null ">
+			and IPO_END_DATE = #{baseinfo.ipoEndDate}
 		</if>
 	</select>
 </mapper> 
