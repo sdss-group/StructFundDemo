@@ -12,8 +12,10 @@ public interface SaleBillDateMapper {
 
     int delete(List<SaleBillDate> list);
 
-    /*public void insert(SaleBillDate exemple);
+    public SaleBillDate getOne(SaleBillDate example);
 
-    public void update(SaleBillDate exemple);*/
+    public int insert(SaleBillDate exemple);
+
+    public int update(SaleBillDate exemple);
 
 }

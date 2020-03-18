@@ -28,15 +28,26 @@ public class SaleBillDateAction {
 
     @RequestMapping("delete")
     public int delete(@RequestBody List<SaleBillDate> items) {
-        System.out.println("--------------------");
-        System.out.println(items);
-        for(SaleBillDate s:items){
-            System.out.println(s);
-        }
-        System.out.println("---------------------");
+
+
         return sdm.delete(items);
 
+    }
 
+    @RequestMapping("getOne")
+    public SaleBillDate delete(@RequestBody SaleBillDate item) {
+
+        return sdm.getOne(item);
+    }
+    @RequestMapping("insert")
+    public int insert(@RequestBody SaleBillDate item) {
+
+        return sdm.insert(item);
+    }
+    @RequestMapping("update")
+    public int update(@RequestBody SaleBillDate item) {
+
+        return sdm.update(item);
     }
 
 }
