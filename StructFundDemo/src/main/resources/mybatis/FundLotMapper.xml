@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.newtouch.structfund.mapper.FundLotMapper">
-	<resultMap type="com.newtouch.structfund.entity.FundLot" id="resultMap">
-	 	<result column="registerCode" property="registerCode" jdbcType="VARCHAR"/>
-	 	<result column="fundCode" property="fundCode" jdbcType="VARCHAR"/>
-		<result column="lotCode" property="lotCode" jdbcType="VARCHAR"/>
-		<result column="lotType" property="lotType" jdbcType="VARCHAR"/>
-		<result column="startTime" property="startTime" jdbcType="VARCHAR"/>
-		<result column="fundName" property="fundName" jdbcType="VARCHAR"/>
-		<result column="lotStatus" property="lotStatus" jdbcType="VARCHAR"/>
-		<result column="operator" property="operator" jdbcType="VARCHAR"/>
-		<result column="authorizer" property="authorizer" jdbcType="VARCHAR"/>
+	<resultMap type="com.newtouch.structfund.entity.FundLot" id="BaseResultMap">
+
+		<result column="REGISTER_CODE" property="registerCode" jdbcType="VARCHAR"/>
+	 	<result column="FUND_CODE" property="fundCode" jdbcType="VARCHAR"/>
+		<result column="LOT_CODE" property="lotCode" jdbcType="VARCHAR"/>
+		<result column="LOT_TYPE" property="lotType" jdbcType="VARCHAR"/>
+		<result column="START_TIME" property="startTime" jdbcType="VARCHAR"/>
+		<result column="FUND_NAME" property="fundName" jdbcType="VARCHAR"/>
+		<result column="LOT_STATUS" property="lotStatus" jdbcType="VARCHAR"/>
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+		<result column="AUTHORIZER" property="authorizer" jdbcType="VARCHAR"/>
 	</resultMap>
 
-	<select id="list" parameterType="com.newtouch.structfund.entity.FundLot" resultType="com.newtouch.structfund.entity.FundLot">
+	<select id="queryFundLot" parameterType="java.util.Map" resultMap="BaseResultMap">
 		select * from fund_lot t
 		<where>
-			<if test="registerCode!=null and registerCode!=''">
-				t.registerCode LIKE CONCAT(CONCAT('%', #{registerCode}), '%')
+			<if test="fundLot.registerCode!=null and fundLot.registerCode!=''">
+				t.REGISTER_CODE = #{fundLot.registerCode}
 			</if>
-			<if test="fundCode !=null and fundCode!=''">
-				 t.fundCode LIKE CONCAT(CONCAT('%', #{fundCode}), '%')
+			<if test="fundLot.fundCode !=null and fundLot.fundCode!=''">
+				t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundLot.fundCode}), '%')
 			</if>
 		</where>
+		limit #{startRow},#{pageSize}
 	</select>
 
 	<delete id="delete" parameterType="java.util.List">

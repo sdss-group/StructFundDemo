@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @ResponseBody
@@ -26,11 +29,19 @@ public class FundLotAction {
     @Autowired
     FundCusttypeMapper fundCusttypeMapper;
 
-    @RequestMapping("listFundLot")
-    public List<FundLot> listFundLot(Integer pageIndex, Integer pageSize, FundLot fundLot) {
+    @RequestMapping("queryFundLot")
+    public Map queryFundLot(FundLot fundLot, Integer currentPage, Integer pageSize) {
 
-     //   PageHelper.startPage(pageIndex, pageSize);
-        return fundLotMapper.list(fundLot);
+        Map<String, Object> param = new HashMap();
+        param.put("fundLot", fundLot);
+        param.put("startRow", (currentPage - 1) * pageSize);
+        param.put("pageSize", pageSize);
+        List<FundLot> resultList = fundLotMapper.queryFundLot(param);
+        // Integer totalRows = fundLotMapper.count(param);
+        Map<String, Object> resultMap = new HashMap();
+        resultMap.put("dataList", resultList);
+        resultMap.put("totalRows", resultList.size());
+        return resultMap;
     }
 
     @RequestMapping("listFundCusttype")

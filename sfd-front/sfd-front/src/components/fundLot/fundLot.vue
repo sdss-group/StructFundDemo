@@ -106,13 +106,10 @@
     </el-table>
     <!--分页-->
     <el-pagination
-      @size-change="sizeChangeHandle"
-      @current-change="currentChangeHandle"
-      :current-page="pageIndex"
-      :page-sizes="[10, 20, 50, 100]"
-      :page-size="pageSize"
-      :total="totalPage"
-      layout="total, sizes, prev, pager, next, jumper">
+      @current-change="handleCurrentChange"
+      :current-page="dataForm.currentPage"
+      layout="total, prev, pager, next, jumper"
+      :total="totalRows">
     </el-pagination>
     <!-- 弹窗, 新增 / 修改 -->
     <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
@@ -127,13 +124,13 @@ export default {
     return {
       dataForm: {
         registerCode: '',
-        fundCode: ''
+        fundCode: '',
+        currentPage: 1,
+        pageSize: 10
       },
+      totalRows: 0,
       lotStatus: this.$param.lotStatus,
       dataList: [],
-      pageIndex: 1,
-      pageSize: 10,
-      totalPage: 0,
       dataListLoading: false,
       dataListSelections: [],
       addOrUpdateVisible: false,
@@ -152,10 +149,11 @@ export default {
       this.dataListLoading = true
       this.$ajax({
         method: 'post',
-        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/listFundLot',
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/queryFundLot',
         data: this.$qs.stringify(this.dataForm)
-      }).then((response) => {
-        this.dataList = response.data
+      }).then((result) => {
+        this.dataList = result.data.dataList
+        this.totalRows = result.data.totalRows
         // this.totalPage = 10
         //  var j = JSON.stringify(response)
         // console.log(j.toString())
@@ -164,15 +162,8 @@ export default {
       })
       this.dataListLoading = false
     },
-    // 每页数
-    sizeChangeHandle (val) {
-      this.pageSize = val
-      this.pageIndex = 1
-      this.getDataList()
-    },
-    // 当前页
-    currentChangeHandle (val) {
-      this.pageIndex = val
+    handleCurrentChange (current) {
+      this.dataForm.currentPage = current
       this.getDataList()
     },
     // 多选
