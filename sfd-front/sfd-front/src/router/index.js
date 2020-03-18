@@ -4,6 +4,9 @@ import login from '@/components/login'
 import index from '@/components/index'
 import baseinfo from '@/components/fundinfo/baseinfo'
 import fundLot from '@/components/fundLot/fundLot'
+import accountTrans from '@/components/accountTrans/accountTrans'
+import agencyTrans from '@/components/agencyTrans/agencyTrans'
+
 Vue.use(Router)
 
 export default new Router({
@@ -28,8 +31,24 @@ export default new Router({
       name: 'fundLot',
       component: fundLot,
       meta: {
-          keepAlive: true
-        }
+        keepAlive: true
+      }
+    },
+    {
+      path: '/accountTrans',
+      name: 'accountTrans',
+      component: accountTrans,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/agencyTrans',
+      name: 'agencyTrans',
+      component: agencyTrans,
+      meta: {
+        keepAlive: true
+      }
     }
   ]
 })
