@@ -71,6 +71,11 @@ const incomeInterDate = [
   {value: '1', label: '365'}
 ]
 
+const moneyTypeAllot={
+  '1' :  '每天T+N到账',
+  '2' :  '募集结束日+N到账'
+}
+
 
 const param = {
   fundType,
@@ -85,7 +90,8 @@ const param = {
   breachRede,
   lotStatus,
   fundStatus,
-  incomeInterDate
+  incomeInterDate,
+  moneyTypeAllot
 }
 
 export default param
