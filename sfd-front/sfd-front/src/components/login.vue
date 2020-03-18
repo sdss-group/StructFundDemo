@@ -69,7 +69,7 @@ export default {
     submit () {
       this.$ajax({
         method: 'post',
-        url: 'http://' + this.$Config.ip + ':' + Config.port + '/login',
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/login',
         data: this.$qs.stringify(this.loginForm)
       }).then((response) => {
         console.log(response) // 请求成功返回的数据
