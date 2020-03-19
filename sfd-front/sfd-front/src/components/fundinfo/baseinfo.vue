@@ -151,7 +151,7 @@ export default {
       totalRows: 0,
       detailVisible: false,
       form: {
-        registerCode: 'TA',
+        registerCode: 'ZX',
         fundCode: '',
         fundType: '',
         ipoStartDate: '',

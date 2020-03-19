@@ -31,21 +31,18 @@ public class BaseinfoAction {
 	@Autowired
 	FundSetMapper fundSetMapper;
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder, WebRequest request) {
-		//转换日期格式
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		//注册自定义的编辑器
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-		
-	}
+	
 	@RequestMapping("/queryBaseinfo")
 	public Map queryBaseinfo(FundSet baseinfo,Integer currentPage,Integer pageSize) {
 		Map param=new HashMap();
+		System.out.println(baseinfo.getRegisterCode());
 		param.put("baseinfo", baseinfo);
 		param.put("startRow", (currentPage-1)*pageSize);
 		param.put("pageSize", pageSize);
 		List<FundSet> resultList=fundSetMapper.queryBaseinfo(param);
+		for (FundSet fundSet : resultList) {
+			System.out.println(fundSet.getFundCode()+":"+ fundSet.getFundStatus());
+		}
 		Integer totalRows=fundSetMapper.count(param);
 		Map resultMap=new HashMap();
 		resultMap.put("dataList", resultList);

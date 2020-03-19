@@ -3,7 +3,7 @@
 <mapper namespace="com.newtouch.structfund.mapper.FundSetMapper">
 
 	<resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.FundSet">
-    <id column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
+   <id column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
     <id column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
     <result column="FUND_NAME" jdbcType="VARCHAR" property="fundName" />
     <result column="FUND_NAME_ABBR" jdbcType="VARCHAR" property="fundNameAbbr" />
@@ -48,27 +48,111 @@
     <result column="LOCK_DAYS" jdbcType="INTEGER" property="lockDays" />
     <result column="IS_CHECK_INVESTER" jdbcType="CHAR" property="isCheckInvester" />
     <result column="UPDATE_DATE" jdbcType="DATE" property="updateDate" />
+    <result column="FUND_NAME" jdbcType="VARCHAR" property="fundName" />
+    <result column="TOTAL_FUND_VOL" jdbcType="DECIMAL" property="totalFundVol" />
+    <result column="FUND_STATUS" jdbcType="CHAR" property="fundStatus" />
+    <result column="NAV" jdbcType="DECIMAL" property="nav" />
+    <result column="PS_DATE" jdbcType="DATE" property="psDate" />
+    <result column="DIVIDENT_DATE" jdbcType="DATE" property="dividentDate" />
+    <result column="XR_DATE" jdbcType="DATE" property="xrDate" />
+    <result column="REGIST_DATE" jdbcType="DATE" property="registDate" />
+    <result column="INDI_ISSUE_TYPE" jdbcType="CHAR" property="indiIssueType" />
+    <result column="INST_ISSUE_TYPE" jdbcType="CHAR" property="instIssueType" />
+    <result column="SUBS_TYPE" jdbcType="CHAR" property="subsType" />
+    <result column="COLLECT_FEE_TYPE" jdbcType="CHAR" property="collectFeeType" />
+    <result column="TRAD_PRICE" jdbcType="DECIMAL" property="tradPrice" />
+    <result column="NEXT_TRADE_DATE" jdbcType="DATE" property="nextTradeDate" />
+    <result column="VALUE_LINE" jdbcType="DECIMAL" property="valueLine" />
+    <result column="NET_VALUE_TYPE" jdbcType="CHAR" property="netValueType" />
+    <result column="ACCUMULATIVE_NAV" jdbcType="DECIMAL" property="accumulativeNav" />
+    <result column="CONVERT_STATUS" jdbcType="CHAR" property="convertStatus" />
+    <result column="PERIODIC_STATUS" jdbcType="CHAR" property="periodicStatus" />
+    <result column="TRANSFER_AGEN_STATUS" jdbcType="CHAR" property="transferAgenStatus" />
+    <result column="ANNOUNC_FLAG" jdbcType="CHAR" property="announcFlag" />
+    <result column="TOTAL_DIVIDENT" jdbcType="DECIMAL" property="totalDivident" />
+    <result column="FUND_INCOME" jdbcType="DECIMAL" property="fundIncome" />
+    <result column="FUND_INCOME_FLAG" jdbcType="CHAR" property="fundIncomeFlag" />
+    <result column="YIELD" jdbcType="DECIMAL" property="yield" />
+    <result column="YIELD_FLAG" jdbcType="CHAR" property="yieldFlag" />
+    <result column="GUARANT_NAV" jdbcType="DECIMAL" property="guarantNav" />
+    <result column="YEAR_INCOME" jdbcType="DECIMAL" property="yearIncome" />
+    <result column="YEAR_INCOME_FLAG" jdbcType="CHAR" property="yearIncomeFlag" />
+    <result column="DAY_INCOME_FLAG" jdbcType="CHAR" property="dayIncomeFlag" />
+    <result column="DAY_INCOME" jdbcType="DECIMAL" property="dayIncome" />
+    <result column="UPDATE_DATE" jdbcType="DATE" property="updateDate" />
+    <result column="INDI_MAX_REDE_DAY" jdbcType="DECIMAL" property="indiMaxRedeDay" />
+    <result column="PER_MAX_REDE_DAY_FAST" jdbcType="DECIMAL" property="perMaxRedeDayFast" />
+    <result column="MAX_PERIOD_SUB" jdbcType="DECIMAL" property="maxPeriodSub" />
+    <result column="INDI_UNIT_SUBS_VOL" jdbcType="DECIMAL" property="indiUnitSubsVol" />
+    <result column="INDI_UNIT_SUBS_AMT" jdbcType="DECIMAL" property="indiUnitSubsAmt" />
+    <result column="INDI_REDEEM_BASE" jdbcType="DECIMAL" property="indiRedeemBase" />
+    <result column="INDI_ADD_SUBS_VOL" jdbcType="DECIMAL" property="indiAddSubsVol" />
+    <result column="INDI_ADD_SUBS_AMT" jdbcType="DECIMAL" property="indiAddSubsAmt" />
+    <result column="INDI_ADD_BIDS_AMT" jdbcType="DECIMAL" property="indiAddBidsAmt" />
+    <result column="INDI_MIN_SUBS_VOL" jdbcType="DECIMAL" property="indiMinSubsVol" />
+    <result column="INDI_MIN_SUBS_AMT" jdbcType="DECIMAL" property="indiMinSubsAmt" />
+    <result column="INDI_MIN_BIDS_AMT" jdbcType="DECIMAL" property="indiMinBidsAmt" />
+    <result column="INDI_MAX_SUBS_VOL" jdbcType="DECIMAL" property="indiMaxSubsVol" />
+    <result column="INDI_MAX_SUBS_AMT" jdbcType="DECIMAL" property="indiMaxSubsAmt" />
+    <result column="INDI_MAX_BIDS_AMT" jdbcType="DECIMAL" property="indiMaxBidsAmt" />
+    <result column="INDI_DAY_MAX_BUY" jdbcType="DECIMAL" property="indiDayMaxBuy" />
+    <result column="INDI_MIN_REDE_VOL" jdbcType="DECIMAL" property="indiMinRedeVol" />
+    <result column="INDI_MAX_REDE" jdbcType="DECIMAL" property="indiMaxRede" />
+    <result column="INDI_DAY_MAX_REDE" jdbcType="DECIMAL" property="indiDayMaxRede" />
+    <result column="INDI_MIN_CONV_VOL" jdbcType="DECIMAL" property="indiMinConvVol" />
+    <result column="INDI_MIN_PS" jdbcType="DECIMAL" property="indiMinPs" />
+<!--     <result column="INST_UNIT_SUBS_VOL" jdbcType="DECIMAL" property="instUnitSubsVol" />
+    <result column="INST_UNIT_SUBS_AMT" jdbcType="DECIMAL" property="instUnitSubsAmt" />
+    <result column="INST_REDE_BASE" jdbcType="DECIMAL" property="instRedeBase" />
+    <result column="INST_ADD_SUBS_AMT" jdbcType="DECIMAL" property="instAddSubsAmt" />
+    <result column="INST_ADD_SUBS_VOL" jdbcType="DECIMAL" property="instAddSubsVol" />
+    <result column="INST_MIN_ADD_BIDS_AMT" jdbcType="DECIMAL" property="instMinAddBidsAmt" />
+    <result column="INST_MIN_BIDS_VOL" jdbcType="DECIMAL" property="instMinBidsVol" />
+    <result column="INST_MIN_SUBS_AMT" jdbcType="DECIMAL" property="instMinSubsAmt" />
+    <result column="INST_MIN_BIDS_AMT" jdbcType="DECIMAL" property="instMinBidsAmt" />
+    <result column="INST_MAX_SUBS_VOL" jdbcType="DECIMAL" property="instMaxSubsVol" />
+    <result column="INST_MAX_SUBS_AMT" jdbcType="DECIMAL" property="instMaxSubsAmt" />
+    <result column="INST_MAX_BIDS_AMT" jdbcType="DECIMAL" property="instMaxBidsAmt" />
+    <result column="INST_DAY_MAX_SUM_BUY" jdbcType="DECIMAL" property="instDayMaxSumBuy" />
+    <result column="INST_MIN_REDE_VOL" jdbcType="DECIMAL" property="instMinRedeVol" />
+    <result column="INST_MAX_REDE" jdbcType="DECIMAL" property="instMaxRede" />
+    <result column="INST_MAX_DAY_SUM_REDE" jdbcType="DECIMAL" property="instMaxDaySumRede" />
+    <result column="INST_MAX_REDE_DAY_FAST" jdbcType="DECIMAL" property="instMaxRedeDayFast" />
+    <result column="INST_MIN_BALANCE" jdbcType="DECIMAL" property="instMinBalance" />
+    <result column="INST_MIN_CONV_VOL" jdbcType="DECIMAL" property="instMinConvVol" /> -->
+    <result column="IND_MIN_BALANCE" jdbcType="DECIMAL" property="indMinBalance" />
+    <result column="REGISTER_NAME" jdbcType="VARCHAR" property="registerName" />
   </resultMap>
 
 
 	
 	<select id="queryBaseinfo" parameterType="java.util.Map" resultMap="BaseResultMap">
-		select t1.*,t2.fund_status as fundStatus from fund_set t1 left join ta_func t2 on t1.fund_code=t2.fund_code where 1=1
-		<if test=" baseinfo.registerCode != null and baseinfo.registerCode != '' ">
-			and t1.REGISTER_CODE = #{baseinfo.registerCode}
-		</if>
-		<if test=" baseinfo.fundCode != null and baseinfo.fundCode != '' ">
-			and t1.FUND_CODE = #{baseinfo.fundCode}
-		</if>
-		<if test=" baseinfo.fundType != null and baseinfo.fundType != '' ">
-			and t1.FUND_TYPE = #{baseinfo.fundType}
-		</if>
-		<if test=" baseinfo.ipoStartDate != null ">
-			and t1.IPO_START_DATE = #{baseinfo.ipoStartDate}
-		</if>
-		<if test=" baseinfo.ipoEndDate != null ">
-			and t1.IPO_END_DATE = #{baseinfo.ipoEndDate}
-		</if>
+		select a.*,b.FUND_STATUS,b.NAV,b.PS_DATE,b.DIVIDENT_DATE,b.XR_DATE,b.INDI_ISSUE_TYPE,b.INST_ISSUE_TYPE,b.SUBS_TYPE,b.COLLECT_FEE_TYPE,b.TRAD_PRICE,b.NEXT_TRADE_DATE,b.NET_VALUE_TYPE,b.ACCUMULATIVE_NAV,
+           b.CONVERT_STATUS, b.PERIODIC_STATUS,b.TRANSFER_AGEN_STATUS,b.ANNOUNC_FLAG,b.TOTAL_DIVIDENT,b.FUND_INCOME,b.FUND_INCOME_FLAG,b.YIELD,b.YIELD_FLAG,b.GUARANT_NAV,b.YEAR_INCOME,b.YEAR_INCOME_FLAG,
+           b.DAY_INCOME_FLAG,b.DAY_INCOME,
+           c.MAX_REDE_DAY,c.INDI_MAX_REDE_DAY_FAST,c.MAX_PERIOD_SUB,c.INDI_UNIT_SUBS_VOL,c.INDI_UNIT_SUBS_AMT,c.INDI_REDEEM_BASE,c.INDI_ADD_SUBS_VOL,c.INDI_ADD_SUBS_AMT,c.INDI_ADD_BIDS_AMT,c.INDI_MIN_SUBS_VOL,
+           c.INDI_MIN_SUBS_AMT,c.INDI_MIN_BIDS_AMT,c.INDI_MAX_SUBS_VOL,c.INDI_MAX_SUBS_AMT,c.INDI_MAX_SUBS_AMT,c.INDI_MAX_BIDS_AMT,c.INDI_DAY_MAX_BUY,c.INDI_MIN_REDE_VOL,c.INDI_MAX_REDE,c.INDI_DAY_MAX_REDE,
+           c.INDI_MIN_CONV_VOL,c.INDI_MAX_REDE,c.INDI_DAY_MAX_REDE,c.INDI_MIN_CONV_VOL,c.INDI_MIN_PS,c.indi_min_balance
+        from fund_set a 
+        left join fund_info b on a.fund_code = b.fund_code and a.register_code = b.register_code  
+        left join trans_ctrl c on   a.fund_code = c.fund_code and a.register_code = c.register_code
+        <where>
+			<if test=" baseinfo.registerCode != null and baseinfo.registerCode != '' ">
+				and a.REGISTER_CODE = #{baseinfo.registerCode}
+			</if>
+			<if test=" baseinfo.fundCode != null and baseinfo.fundCode != '' ">
+				and a.FUND_CODE = #{baseinfo.fundCode}
+			</if>
+			<if test=" baseinfo.fundType != null and baseinfo.fundType != '' ">
+				and a.FUND_TYPE = #{baseinfo.fundType}
+			</if>
+			<if test=" baseinfo.ipoStartDate != null ">
+				and a.IPO_START_DATE = #{baseinfo.ipoStartDate}
+			</if>
+			<if test=" baseinfo.ipoEndDate != null ">
+				and a.IPO_END_DATE = #{baseinfo.ipoEndDate}
+			</if>
+		</where>
 		limit #{startRow},#{pageSize}
 	</select>
 	

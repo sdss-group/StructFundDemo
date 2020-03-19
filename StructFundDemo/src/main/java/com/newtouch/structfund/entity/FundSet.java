@@ -34,8 +34,10 @@ public class FundSet {
 
     private String fundType;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ipoStartDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ipoEndDate;
 
     private Date setupDate;
