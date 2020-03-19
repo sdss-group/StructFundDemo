@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.SaleBillDateMapper">
+
+    <resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.SaleBillDate" >
+        <result column="REGISTER_CODE" property="registerCode" jdbcType="CHAR" />
+        <result column="FUND_CODE" property="fundCode" jdbcType="VARCHAR" />
+        <result column="DISTRIBUTOR_CODE" property="distributorCode" jdbcType="CHAR" />
+        <result column="DELAY_DATE_ALLOT" property="delayDateAllot" jdbcType="INTEGER" />
+        <result column="DELAY_DATE_PURSE" property="delayDatePurse" jdbcType="INTEGER" />
+        <result column="DELAY_DATE_REDEEM" property="delayDateRedeem" jdbcType="INTEGER" />
+        <result column="DELAY_DATE_BONUS" property="delayDateBonus" jdbcType="INTEGER" />
+        <result column="DELAY_DATE_CHANGE" property="delayDateChange" jdbcType="INTEGER" />
+        <result column="MONEY_TYPE_ALLOT" property="moneyTypeAllot" jdbcType="CHAR" />
+        <result column="MIN_BONUS" property="minBonus" jdbcType="DECIMAL" />
+        <result column="DELAY_DATE_ADV_END" property="delayDateAdvEnd" jdbcType="INTEGER" />
+        <result column="DELAY_DATE_END" property="delayDateEnd" jdbcType="INTEGER" />
+        <result column="CONF_REDEEM_DAYS" property="confRedeemDays" jdbcType="INTEGER" />
+        <result column="TIMESTAMP_C" property="timestampC" jdbcType="TIMESTAMP" />
+        <result column="TIMESTAMP_U" property="timestampU" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="getList" parameterType="com.newtouch.structfund.entity.SaleBillDate" resultMap="BaseResultMap" >
+        select * from SALE_BILLDATE t
+        <where>
+            <if test="registerCode!=null and registerCode!=''">
+                t.REGISTER_CODE LIKE CONCAT(CONCAT('%', #{registerCode}), '%')
+            </if>
+            <if test="fundCode !=null and fundCode!=''">
+                t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundCode}), '%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="delete" parameterType="java.util.List">
+        delete from SALE_BILLDATE where
+        <foreach collection="list" item="item" open="(" separator="or" close=")">
+             REGISTER_CODE=#{item.registerCode} and FUND_CODE=#{item.fundCode} and DISTRIBUTOR_CODE=#{item.distributorCode}
+        </foreach>
+    </delete>
+
+
+    <select id="getOne" parameterType="com.newtouch.structfund.entity.SaleBillDate" resultMap="BaseResultMap" >
+        select * from SALE_BILLDATE t
+        <where>
+            <if test="registerCode!=null and registerCode!=''">
+               and t.REGISTER_CODE = #{registerCode}
+            </if>
+            <if test="fundCode !=null and fundCode!=''">
+               and t.FUND_CODE =  #{fundCode}
+            </if>
+            <if test="distributorCode !=null and distributorCode!=''">
+                and t.DISTRIBUTOR_CODE =  #{distributorCode}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.newtouch.structfund.entity.SaleBillDate">
+		insert into SALE_BILLDATE
+            (REGISTER_CODE,
+            FUND_CODE,
+            DELAY_DATE_ALLOT,
+            DELAY_DATE_REDEEM,
+            CONF_REDEEM_DAYS,
+            DELAY_DATE_ADV_END,
+            DELAY_DATE_END,
+            MONEY_TYPE_ALLOT,
+            DELAY_DATE_BONUS)
+		values
+            (#{registerCode},
+            #{fundCode},
+            #{delayDateAllot},
+            #{delayDateRedeem},
+            #{confRedeemDays},
+            #{delayDateAdvEnd},
+            #{delayDateEnd},
+            #{moneyTypeAllot},
+            #{delayDateBonus})
+	</insert>
+
+    <update id="update" parameterType="com.newtouch.structfund.entity.SaleBillDate">
+		update SALE_BILLDATE set
+		DELAY_DATE_ALLOT=#{delayDateAllot},
+		DELAY_DATE_REDEEM=#{delayDateRedeem},
+		CONF_REDEEM_DAYS=#{confRedeemDays},
+		DELAY_DATE_ADV_END=#{delayDateAdvEnd},
+		DELAY_DATE_END=#{delayDateEnd},
+		MONEY_TYPE_ALLOT=#{moneyTypeAllot},
+		DELAY_DATE_BONUS=#{delayDateBonus}
+		where REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode} and DISTRIBUTOR_CODE=#{distributorCode}
+	</update>
+
+</mapper>

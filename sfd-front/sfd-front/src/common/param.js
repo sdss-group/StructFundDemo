@@ -176,6 +176,10 @@ const isCheckInvester = [// 是否校验合格投资者
   {value: '0', label: '不需要'},
   {value: '1', label: '需要'}
 ]
+const moneyTypeAllot = {
+  '1': '每天T+N到账',
+  '2': '募集结束日+N到账'
+}
 
 const param = {
   fundType,
@@ -207,7 +211,8 @@ const param = {
   clientGroup,
   cancelType,
   partRede,
-  isCheckInvester
+  isCheckInvester,
+  moneyTypeAllot
 }
 
 export default param
