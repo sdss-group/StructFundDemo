@@ -210,8 +210,3 @@ export function dateFormat (row, column) {
   return this.$moment(date).format('YYYY-MM-DD')
 }
 
-export function numberLimit (ele) {
-  if (ele > 1 || ele < 0) {
-    return 0
-  }
-}
