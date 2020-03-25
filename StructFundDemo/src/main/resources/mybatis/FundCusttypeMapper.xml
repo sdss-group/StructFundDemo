@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.newtouch.structfund.mapper.FundCusttypeMapper">
 	<resultMap type="com.newtouch.structfund.entity.FundCusttype" id="resultMap">
-	 	<result column="registerCode" property="registerCode" jdbcType="VARCHAR"/>
-	 	<result column="fundCode" property="fundCode" jdbcType="VARCHAR"/>
-		<result column="custType" property="custType" jdbcType="VARCHAR"/>
-		<result column="timestampC" property="timestampC" jdbcType="TIMESTAMP"/>
-		<result column="timestampU" property="timestampU" jdbcType="TIMESTAMP"/>
+	 	<id column="REGISTER_CODE" property="registerCode" jdbcType="VARCHAR"/>
+	 	<id column="FUND_CODE" property="fundCode" jdbcType="VARCHAR"/>
+		<id column="CUST_TYPE" property="custType" jdbcType="VARCHAR"/>
+		<result column="TIMESTAMP_C" property="timestampC" jdbcType="TIMESTAMP"/>
+		<result column="TIMESTAMP_U" property="timestampU" jdbcType="TIMESTAMP"/>
 	</resultMap>
 
-	<select id="listAll" parameterType="com.newtouch.structfund.entity.FundCusttype" resultType="com.newtouch.structfund.entity.FundCusttype">
+	<select id="listAll" parameterType="com.newtouch.structfund.entity.FundCusttype" resultMap="resultMap">
 		select * from fund_custtype
 	</select>
 </mapper>

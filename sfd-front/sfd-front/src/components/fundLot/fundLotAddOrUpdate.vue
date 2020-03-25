@@ -2,9 +2,10 @@
   <el-dialog
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
-    :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
-      <el-form-item label="登记机构" prop="registerCode">
+    :visible.sync="visible" >
+    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="100px">
+      <el-row :span="24" style="margin-top: 15px">
+        <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" :disabled="isDisabled"  filterable placeholder="请选择">
           <el-option
             v-for="item in registerCodeList"
@@ -34,6 +35,7 @@
                         value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }"
         ></el-time-picker>
       </el-form-item>
+      </el-row>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
