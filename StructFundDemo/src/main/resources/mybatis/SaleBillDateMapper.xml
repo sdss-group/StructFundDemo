@@ -24,10 +24,10 @@
         select * from SALE_BILLDATE t
         <where>
             <if test="registerCode!=null and registerCode!=''">
-                t.REGISTER_CODE LIKE CONCAT(CONCAT('%', #{registerCode}), '%')
+              and  t.REGISTER_CODE LIKE CONCAT(CONCAT('%', #{registerCode}), '%')
             </if>
             <if test="fundCode !=null and fundCode!=''">
-                t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundCode}), '%')
+              and  t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundCode}), '%')
             </if>
         </where>
     </select>
