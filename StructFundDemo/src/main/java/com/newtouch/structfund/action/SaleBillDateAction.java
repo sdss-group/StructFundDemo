@@ -41,7 +41,10 @@ public class SaleBillDateAction {
     }
     @RequestMapping("insert")
     public int insert(@RequestBody SaleBillDate item) {
-
+        item.setDistributorCode("006");
+        System.out.println("---------------------");
+        System.out.println(item);
+        System.out.println("---------------------");
         return sdm.insert(item);
     }
     @RequestMapping("update")
