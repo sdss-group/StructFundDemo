@@ -52,10 +52,10 @@
         label="认购到账天数">
       </el-table-column>
       <el-table-column
-        prop=""
+        prop="delayDatePurse"
         header-align="center"
         align="center"
-        label="申购确认天数">
+        label="申购到账天数">
       </el-table-column>
       <el-table-column
         prop="delayDateRedeem"
@@ -82,10 +82,10 @@
         label="正常终止到账天数">
       </el-table-column>
       <el-table-column
-        prop=""
+        prop="delayDateChange"
         header-align="center"
         align="center"
-        label="到期确认天数">
+        label="转换到期天数">
       </el-table-column>
       <!-- moneyTypeAllot[scope.row.moneyTypeAllot] -->
       
@@ -234,7 +234,7 @@ export default {
     addOrUpdateHandle (item) {
       // 判断什么情况下不能修改
       //todo
-      console.log(item);
+      //console.log(item);
 
 
       this.addOrUpdateVisible = true
@@ -250,9 +250,9 @@ export default {
     },
     // 判断状态如果非初始化，则不能删除
     ifDelete (item) {
-      console.log(item);
+      //console.log(item);
      
-      console.log(this.dataListSelections);
+     // console.log(this.dataListSelections);
 
       this.deleteHandle(item);
 

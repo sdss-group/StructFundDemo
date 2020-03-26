@@ -32,8 +32,8 @@
         <el-input v-model="dataForm.delayDateAllot" placeholder="认购到账天数" maxlength="2"></el-input>
       </el-form-item>
 
-      <el-form-item label="申购确认天数" prop="">
-        <el-input  placeholder="暂无字段对应" maxlength="2"></el-input>
+      <el-form-item label="申购到账天数" prop="delayDatePurse">
+        <el-input v-model="dataForm.delayDatePurse" placeholder="申购确认天数" maxlength="2"></el-input>
       </el-form-item>
 
 
@@ -52,13 +52,26 @@
         <el-input v-model="dataForm.delayDateEnd" placeholder="正常终止到账天数" maxlength="2"></el-input>
       </el-form-item>
 
-      <el-form-item label="到期确认天数" prop="">
-        <el-input  placeholder="暂无字段" maxlength="2"></el-input>
+      <el-form-item label="转换到期天数" prop="delayDateChange">
+        <el-input v-model="dataForm.delayDateChange"  placeholder="到期确认天数" maxlength="2"></el-input>
       </el-form-item>
 
-      <el-form-item label="认购到款方式" prop="moneyTypeAllot">
+      <!-- <el-form-item label="认购到款方式" prop="moneyTypeAllot">
         <el-input v-model="dataForm.moneyTypeAllot" placeholder="认购到款方式1或2" maxlength="2"></el-input>
+      </el-form-item> -->
+
+      <el-form-item label="认购到款方式" prop="moneyTypeAllot">
+        <el-select v-model="dataForm.moneyTypeAllot" >
+          <el-option :label=" moneyTypeAllot['1']" value="1">
+            <span style="float: left">每天T+N到</span>
+          </el-option>
+          <el-option :label=" moneyTypeAllot['2']" value="2">
+            <span style="float: left">募集结束日+N到账</span>
+          </el-option>
+       </el-select>
       </el-form-item>
+
+      
 
 
       <el-form-item label="分红到账天数" prop="delayDateBonus">
@@ -80,16 +93,19 @@ export default {
       visible: false,
       //是否是添加页面的标志
       isadd:1,
+      moneyTypeAllot: this.$param.moneyTypeAllot,
       dataForm: {
         
         registerCode: '',
         fundCode: '',
         distributorCode:'',
         delayDateAllot:'',
+        delayDatePurse:'',
         delayDateRedeem:'',
         confRedeemDays:'',
         delayDateAdvEnd:'',
         delayDateEnd:'',
+        delayDateChange:'',
         moneyTypeAllot:'',
         delayDateBonus:'',
         
@@ -107,6 +123,9 @@ export default {
         delayDateAllot: [
           { required: true, message: '请填写认购到账天数', trigger: 'blur' }
         ],
+        delayDatePurse: [
+          { required: true, message: '请填写转换到期天数', trigger: 'blur' }
+        ],
         delayDateRedeem: [
           { required: true, message: '请填写赎回到账天数', trigger: 'blur' }
         ],
@@ -115,6 +134,9 @@ export default {
         ],
         delayDateAdvEnd: [
           { required: true, message: '请填写提前终止到账天数', trigger: 'blur' }
+        ],
+        delayDateChange: [
+          { required: true, message: '', trigger: 'blur' }
         ],
         delayDateEnd: [
           { required: true, message: '请填写正常终止到账天数', trigger: 'blur' }
@@ -130,10 +152,7 @@ export default {
   },
   methods: {
     init (item) {
-      console.log("-------------------");
-      console.log(item);
-      console.log(this.isDisabled);
-      console.log("-------------------");
+      
     
       this.initFundCusttype()
       
@@ -151,10 +170,12 @@ export default {
             this.dataForm.registerCode = response.data.registerCode
             this.dataForm.fundCode = response.data.fundCode
             this.dataForm.delayDateAllot = response.data.delayDateAllot
+            this.dataForm.delayDatePurse = response.data.delayDatePurse
             this.dataForm.delayDateRedeem = response.data.delayDateRedeem
             this.dataForm.confRedeemDays = response.data.confRedeemDays
             this.dataForm.delayDateAdvEnd = response.data.delayDateAdvEnd
             this.dataForm.delayDateEnd = response.data.delayDateEnd
+            this.dataForm.delayDateChange = response.data.delayDateChange
             this.dataForm.moneyTypeAllot = response.data.moneyTypeAllot
             this.dataForm.delayDateBonus = response.data.delayDateBonus
             this.dataForm.distributorCode=response.data.distributorCode

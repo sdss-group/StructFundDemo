@@ -27,7 +27,9 @@ public class FundCustType {
     public int insert(String registerCode,String fundCode,String[] toAdd) {
 
 
-
+        if(toAdd.length==0){
+            return 0;
+        }
         return fm.insert(registerCode,fundCode,toAdd);
     }
 
@@ -35,7 +37,9 @@ public class FundCustType {
     @RequestMapping("deleteCustTypeList")
     public int delete(String registerCode,String fundCode,String[] toDelete) {
 
-
+        if(toDelete.length==0){
+            return 0;
+        }
 
         return fm.delete(registerCode,fundCode,toDelete);
     }
