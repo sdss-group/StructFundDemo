@@ -16,7 +16,7 @@
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
         <el-button type="primary" @click="resetForm('dataForm')">重置</el-button>
-        <el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button type="primary" @click="addOrUpdateHandle(1,null)">新增</el-button>
        <!-- <el-button type="primary" @click="addOrUpdateHandle()">修改</el-button>-->
         <el-button type="danger" @click="ifDelete(0)" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
@@ -148,7 +148,7 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="medium" @click="addOrUpdateHandle(scope.row)"><i class="el-icon-edit"></i></el-button>
+          <el-button type="text" size="medium" @click="addOrUpdateHandle(0,scope.row)"><i class="el-icon-edit"></i></el-button>
           <el-button type="text" size="medium" @click="ifDelete(scope.row)"><i class="el-icon-delete"></i></el-button>
         </template>
       </el-table-column>
@@ -231,7 +231,7 @@ export default {
       this.dataListSelections = val
     },
     // 新增 / 修改
-    addOrUpdateHandle (item) {
+    addOrUpdateHandle (isadd,item) {
       // 判断什么情况下不能修改
       //todo
       //console.log(item);
@@ -240,7 +240,7 @@ export default {
       this.addOrUpdateVisible = true
 
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(item)
+        this.$refs.addOrUpdate.init(isadd,item)
       })
     },
     // 重置

@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
+    :title="!isadd ? '新增' : '修改'"
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
@@ -93,6 +93,7 @@ export default {
       visible: false,
       //是否是添加页面的标志
       isadd:1,
+      
       moneyTypeAllot: this.$param.moneyTypeAllot,
       dataForm: {
         
@@ -151,9 +152,9 @@ export default {
     }
   },
   methods: {
-    init (item) {
+    init (isadd,item) {
       
-    
+      this.isadd=isadd
       this.initFundCusttype()
       
       this.isDisabled = false
@@ -181,7 +182,7 @@ export default {
             this.dataForm.distributorCode=response.data.distributorCode
             // 登记机构及产品代码不可更改
             this.isDisabled = true
-            this.isadd=0
+            //this.isadd=0
           }).catch((error) => {
             console.log(error)
           })
