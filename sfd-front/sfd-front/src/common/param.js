@@ -48,12 +48,12 @@ const breachRede = [// 允许违约赎回标志
   {value: '1', label: '允许'}
 ]
 
-const lotStatus = {
-  '0': {label: '初始化', type: 'info'},
-  '1': {label: '正在执行', type: 'warning'},
-  '2': {label: '执行成功', type: 'success'},
-  '3': {label: '执行失败', type: 'danger'}
-}
+const lotStatus = [
+  {value: '0', label: '初始化', type: 'info'},
+  {value: '1', label: '正在执行', type: 'warning'},
+  {value: '2', label: '执行成功', type: 'success'},
+  {value: '3', label: '执行失败', type: 'danger'}
+]
 
 const fundStatus = [// 产品状态
   {value: '0', label: '正常开放'},

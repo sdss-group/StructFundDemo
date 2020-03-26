@@ -28,13 +28,26 @@
         </el-select>
       </el-form-item>
       <el-form-item label="产品批次" prop="lotCode">
-        <el-input v-model="dataForm.lotCode" placeholder="产品批次" maxlength="2"></el-input>
+        <el-input v-model="dataForm.lotCode" :disabled="isDisabled" placeholder="产品批次" maxlength="2"></el-input>
+      </el-form-item>
+      <el-form-item label="批次优先级" prop="lotType">
+        <el-input v-model="dataForm.lotType" placeholder="批次优先级" maxlength="1"></el-input>
       </el-form-item>
       <el-form-item label="批次发起时间" prop="startTime">
         <el-time-picker v-model="dataForm.startTime" placeholder="批次发起时间" format="HH:mm:ss"
-                        value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }"
-        ></el-time-picker>
+                        value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }">
+        </el-time-picker>
       </el-form-item>
+      <el-form-item label="产品名称" prop="fundName">
+        <el-input v-model="dataForm.fundName" placeholder="产品名称"></el-input>
+      </el-form-item>
+        <el-form-item label="批次状态" prop="lotStatus">
+          <el-select v-model="dataForm.lotStatus" clearable>
+            <el-option v-for="item in this.$param.lotStatus" :key="item.value" :label="item.label"
+                       :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-row>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -54,31 +67,43 @@ export default {
         registerCode: '',
         fundCode: '',
         lotCode: '',
+        lotType: '',
         startTime: '',
-        isDisabled: false
+        fundName: '',
+        lotStatus: '0'
       },
+      isDisabled: false,
       registerCodeList: [],
       fundCodeList: [],
       dataRule: {
         registerCode: [
-          { required: true, message: '请选择登记机构', trigger: 'blur' }
+          {required: true, message: '请选择登记机构', trigger: 'blur'}
         ],
         fundCode: [
-          { required: true, message: '请选择产品代码', trigger: 'blur' }
+          {required: true, message: '请选择产品代码', trigger: 'blur'}
         ],
         lotCode: [
-          { required: true, message: '请输入产品批次', trigger: 'blur' }
+          {required: true, message: '请输入产品批次', trigger: 'blur'}
+        ],
+        lotType: [
+          {required: true, message: '请输入批次优先级', trigger: 'blur'}
         ],
         startTime: [
-          { required: true, message: '请输入批次发起时间', trigger: 'blur' }
+          {required: true, message: '请输入批次发起时间', trigger: 'blur'}
+        ],
+        fundName: [
+          {required: true, message: '请输入批次名称', trigger: 'blur'}
+        ],
+        lotStatus: [
+          {required: true, message: '请选择批次状态', trigger: 'blur'}
         ]
       }
     }
   },
   methods: {
-    init (id) {
+    init (registerCode, fundCode, lotCode) {
       this.initFundCusttype()
-      this.dataForm.id = id || 0
+      this.dataForm.id = registerCode || 0
       this.isDisabled = false
       this.visible = true
       this.$nextTick(() => {
@@ -87,16 +112,20 @@ export default {
           this.$ajax({
             method: 'post',
             url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/getOne',
-            data: this.$qs.stringify({'registerCode': this.dataForm.id})
-          }).then((response) => {
-            this.dataForm.registerCode = response.data.registerCode
-            this.dataForm.fundCode = response.data.fundCode
-            this.dataForm.lotCode = response.data.lotCode
-            this.dataForm.startTime = response.data.startTime
-            // 登记机构及产品代码不可更改
+            data: this.$qs.stringify({
+              'registerCode': registerCode,
+              'fundCode': fundCode,
+              'lotCode': lotCode
+            })
+          }).then((result) => {
+            this.dataForm.registerCode = result.data.registerCode
+            this.dataForm.fundCode = result.data.fundCode
+            this.dataForm.lotCode = result.data.lotCode
+            this.dataForm.lotType = result.data.lotType
+            this.dataForm.startTime = result.data.startTime
+            this.dataForm.fundName = result.data.fundName
+            this.dataForm.lotStatus = result.data.lotStatus
             this.isDisabled = true
-          }).catch((error) => {
-            console.log(error)
           })
         }
       })
@@ -105,9 +134,9 @@ export default {
     async initFundCusttype () {
       this.registerCodeList = []
       this.fundCodeList = []
-      let res = await this.$req.listFundCusttype()
-      this.registerCodeList = res.data
-      this.fundCodeList = res.data
+      let result = await this.$req.listFundCusttype()
+      this.registerCodeList = result.data
+      this.fundCodeList = result.data
     },
     // 表单提交
     dataFormSubmit () {
@@ -117,8 +146,8 @@ export default {
             method: 'post',
             url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/' + (!this.dataForm.id ? 'insert' : 'update'),
             data: this.$qs.stringify(this.dataForm)
-          }).then((response) => {
-            if (response.data === 1) {
+          }).then((res) => {
+            if (res.data.result === 1) {
               this.$message({
                 message: '操作成功',
                 type: 'success',
@@ -131,7 +160,7 @@ export default {
               })
             } else {
               this.$message({
-                message: '操作失败',
+                message: res.data.result,
                 type: 'error',
                 duration: 1500
               })

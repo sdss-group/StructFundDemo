@@ -68,6 +68,9 @@
         align="center"
         label="批次状态">
         <template slot-scope="scope">
+          <!--<el-tag v-if="lotStatus.get(scope.row.lotStatus)" size="medium" :type="lotStatus.get(scope.row.lotStatus).type">
+            {{ lotStatus.get(scope.row.lotStatus) }}
+          </el-tag>-->
           <el-tag v-if="lotStatus[scope.row.lotStatus]" size="medium"
                   :type='lotStatus[scope.row.lotStatus].type'>
             {{lotStatus[scope.row.lotStatus].label}}
@@ -87,20 +90,14 @@
         label="授权人">
       </el-table-column>
       <el-table-column
-        prop="operaTime"
-        header-align="center"
-        align="center"
-        label="操作时间">
-      </el-table-column>
-      <el-table-column
         fixed="right"
         header-align="center"
         align="center"
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="medium" @click="addOrUpdateHandle(scope.row.registerCode,scope.row.lotStatus)"><i class="el-icon-edit"></i></el-button>
-          <el-button type="text" size="medium" @click="ifDelete(scope.row.lotStatus,scope.row.registerCode)"><i class="el-icon-delete"></i></el-button>
+          <el-button type="text" size="medium" @click="addOrUpdateHandle(scope.row.registerCode,scope.row.fundCode,scope.row.lotCode,scope.row.lotStatus)"><i class="el-icon-edit"></i></el-button>
+          <el-button type="text" size="medium" @click="ifDelete(scope.row)"><i class="el-icon-delete"></i></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -118,7 +115,6 @@
 
 <script>
 import AddOrUpdate from './fundLotAddOrUpdate'
-
 export default {
   data () {
     return {
@@ -154,11 +150,6 @@ export default {
       }).then((result) => {
         this.dataList = result.data.dataList
         this.totalRows = result.data.totalRows
-        // this.totalPage = 10
-        //  var j = JSON.stringify(response)
-        // console.log(j.toString())
-      }).catch((error) => {
-        console.log(error)
       })
       this.dataListLoading = false
     },
@@ -171,7 +162,7 @@ export default {
       this.dataListSelections = val
     },
     // 新增 / 修改
-    addOrUpdateHandle (registerCode, lotStatus) {
+    addOrUpdateHandle (registerCode, fundCode, lotCode, lotStatus) {
       // 非初始化状态不能修改
       if (lotStatus === '1' || lotStatus === '2' || lotStatus === '3') {
         this.$message({
@@ -183,7 +174,7 @@ export default {
       }
       this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(registerCode)
+        this.$refs.addOrUpdate.init(registerCode, fundCode, lotCode)
       })
     },
     // 重置
@@ -192,13 +183,13 @@ export default {
       this.getDataList()
     },
     // 判断状态如果非初始化，则不能删除
-    ifDelete (status, id) {
-      let statuss = status ? [status] : this.dataListSelections.map(item => {
-        return item.lotStatus
+    ifDelete (row) {
+      let rows = row ? [row] : this.dataListSelections.map(item => {
+        return item
       })
       let deleteFlag = 0
-      statuss.forEach((item) => {
-        if (item === '1' || item === '2' || item === '3') {
+      rows.forEach((item) => {
+        if (item.lotStatus === '1' || item.lotStatus === '2' || item.lotStatus === '3') {
           deleteFlag++
         }
       })
@@ -210,23 +201,21 @@ export default {
         })
         return 0
       } else {
-        this.deleteHandle(id)
+        this.deleteHandle(rows)
       }
     },
     // 删除
-    deleteHandle (id) {
-      let ids = id ? [id] : this.dataListSelections.map(item => {
-        return item.registerCode
-      })
-      this.$confirm(`确定对[ 注册机构 = ${ids.join('，')} ]进行[${ids.length === 1 ? ' 删除 ' : ' 批量删除 '}]操作?`, '提示', {
+    deleteHandle (rows) {
+      this.$confirm(`确定对所选项进行[${rows.length === 1 ? ' 删除 ' : ' 批量删除 '}]操作?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         this.$ajax({
           method: 'post',
+          headers: {'Content-Type': 'application/json;charset=UTF-8'},
           url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/delete',
-          data: this.$qs.stringify({'ids': ids}, {arrayFormat: 'repeat'}),
+          data: JSON.stringify(rows),
           traditional: true
         }).then((response) => {
           this.$message({
@@ -237,8 +226,6 @@ export default {
               this.getDataList()
             }
           })
-        }).catch((error) => {
-          console.log(error)
         })
       })
     },
