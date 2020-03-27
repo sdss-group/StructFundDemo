@@ -8,6 +8,7 @@ import accountTrans from '@/components/accountTrans/accountTrans'
 import agencyTrans from '@/components/agencyTrans/agencyTrans'
 import saleBillDate from '@/components/saleBillDate/saleBillDate'
 import fundCustType from '@/components/fundCustType/fundCustType'
+import tradeDay from '@/components/wordDay/tradeDay'
 
 Vue.use(Router)
 
@@ -61,6 +62,11 @@ export default new Router({
       path: '/fundCustType',
       name: 'fundCustType',
       component: fundCustType
+    },
+    {
+      path: '/tradeDay',
+      name: 'tradeDay',
+      component: tradeDay
     }
   ]
 })
