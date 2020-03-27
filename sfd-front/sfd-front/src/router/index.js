@@ -8,7 +8,7 @@ import accountTrans from '@/components/accountTrans/accountTrans'
 import agencyTrans from '@/components/agencyTrans/agencyTrans'
 import saleBillDate from '@/components/saleBillDate/saleBillDate'
 import fundCustType from '@/components/fundCustType/fundCustType'
-import tradeDay from '@/components/wordDay/tradeDay'
+import tradeDay from '@/components/workDay/tradeDay'
 
 Vue.use(Router)
 
