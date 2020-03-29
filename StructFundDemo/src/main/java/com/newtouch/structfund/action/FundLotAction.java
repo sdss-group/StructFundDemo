@@ -1,10 +1,8 @@
 package com.newtouch.structfund.action;
 
-import com.newtouch.structfund.entity.FundCusttype;
 import com.newtouch.structfund.entity.FundLot;
 import com.newtouch.structfund.mapper.FundCusttypeMapper;
 import com.newtouch.structfund.mapper.FundLotMapper;
-import com.newtouch.structfund.mapper.FundRegMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +22,6 @@ public class FundLotAction {
     FundLotMapper fundLotMapper;
 
     @Autowired
-    FundRegMapper fundRegMapper;
-
-    @Autowired
     FundCusttypeMapper fundCusttypeMapper;
 
     @RequestMapping("queryFundLot")
@@ -40,17 +35,10 @@ public class FundLotAction {
         // Integer totalRows = fundLotMapper.count(param);
         Map<String, Object> resultMap = new HashMap();
         resultMap.put("dataList", resultList);
-        Integer totalRows = fundLotMapper.count(param);
+        int totalRows = fundLotMapper.count(param);
         resultMap.put("totalRows", totalRows);
         return resultMap;
     }
-
-    @RequestMapping("listFundCusttype")
-    public List<FundCusttype> listFundCusttype() {
-
-        return fundCusttypeMapper.listAll();
-    }
-
 
     @RequestMapping("delete")
     public int delete(@RequestBody List<FundLot> rows) {
@@ -72,7 +60,7 @@ public class FundLotAction {
         List<FundLot> resultList = fundLotMapper.selectSingleData(fundLot);
         Map<String, Object> result = new HashMap<>();
         if (!resultList.isEmpty() && resultList.size() > 0) {
-            result.put("result", "失败:已存在相同记录!");
+            result.put("result", "添加失败: 已存在相同记录!");
             return result;
         }
         String userCode = (String) session.getAttribute("user");

@@ -7,5 +7,10 @@ import java.util.List;
 @Mapper
 public interface FundRegMapper {
 
-    List<FundReg> listAll();
+    List<FundReg> queryAllAgencyAndProcode();
+
+    List<FundReg> queryFundCode(String registerCode);
+
+    String queryAgency(String fundCode);
+
 }

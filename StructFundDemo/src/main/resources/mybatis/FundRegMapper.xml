@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.newtouch.structfund.mapper.FundRegMapper">
-	<resultMap type="com.newtouch.structfund.entity.FundReg" id="resultMap">
-	 	<result column="registerCode" property="registerCode" jdbcType="VARCHAR"/>
-	 	<result column="registerName" property="registerName" jdbcType="VARCHAR"/>
-		<result column="assignFlag" property="assignFlag" jdbcType="VARCHAR"/>
-		<result column="forceOpen" property="forceOpen" jdbcType="VARCHAR"/>
-		<result column="indiOpenCerttype" property="indiOpenCerttype" jdbcType="VARCHAR"/>
-		<result column="instOpenCerttype" property="instOpenCerttype" jdbcType="VARCHAR"/>
-		<result column="minnorTrade" property="minnorTrade" jdbcType="VARCHAR"/>
-		<result column="addr" property="addr" jdbcType="VARCHAR"/>
-		<result column="postCode" property="postCode" jdbcType="VARCHAR"/>
-		<result column="tel" property="tel" jdbcType="VARCHAR"/>
-		<result column="fax" property="fax" jdbcType="VARCHAR"/>
-		<result column="linkMan" property="linkMan" jdbcType="VARCHAR"/>
-		<result column="foundDate" property="foundDate" jdbcType="VARCHAR"/>
-		<result column="flag" property="flag" jdbcType="VARCHAR"/>
-		<result column="remark" property="remark" jdbcType="VARCHAR"/>
-		<result column="operator" property="operator" jdbcType="VARCHAR"/>
-		<result column="authorizer" property="authorizer" jdbcType="VARCHAR"/>
+	<resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.FundReg">
+		<id column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
+		<result column="REGISTER_NAME" jdbcType="VARCHAR" property="registerName" />
+		<result column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+		<result column="ASSIGN_FLAG" jdbcType="CHAR" property="assignFlag" />
+		<result column="FORCE_OPEN" jdbcType="CHAR" property="forceOpen" />
+		<result column="INDI_OPEN_CERTTYPE" jdbcType="CHAR" property="indiOpenCerttype" />
+		<result column="INST_OPEN_CERTTYPE" jdbcType="CHAR" property="instOpenCerttype" />
+		<result column="MINNOR_TRADE" jdbcType="CHAR" property="minnorTrade" />
+		<result column="ADDR" jdbcType="VARCHAR" property="addr" />
+		<result column="POST_CODE" jdbcType="CHAR" property="postCode" />
+		<result column="TEL" jdbcType="VARCHAR" property="tel" />
+		<result column="FAX" jdbcType="VARCHAR" property="fax" />
+		<result column="LINK_MAN" jdbcType="VARCHAR" property="linkMan" />
+		<result column="FOUND_DATE" jdbcType="DATE" property="foundDate" />
+		<result column="FLAG" jdbcType="CHAR" property="flag" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="TIMESTAMP_C" jdbcType="TIMESTAMP" property="timestampC" />
+		<result column="TIMESTAMP_U" jdbcType="TIMESTAMP" property="timestampU" />
+		<result column="OPERATOR" jdbcType="CHAR" property="operator" />
+		<result column="AUTHORIZER" jdbcType="CHAR" property="authorizer" />
 	</resultMap>
 
-	<select id="listAll" parameterType="com.newtouch.structfund.entity.FundReg" resultType="com.newtouch.structfund.entity.FundReg">
-		select * from fund_reg
+	<select id="queryAllAgencyAndProcode" resultMap="BaseResultMap">
+		select a.REGISTER_CODE,b.REGISTER_NAME,a.FUND_CODE from FUND_SET a
+		left join FUND_REG b on a.REGISTER_CODE=b.REGISTER_CODE order by FUND_CODE
 	</select>
+
+	<select id="queryFundCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select a.FUND_CODE from FUND_SET a
+		left join FUND_INFO b on a.REGISTER_CODE=b.REGISTER_CODE and a.FUND_CODE=b.FUND_CODE where b.fund_status !='8'
+		<if test="registerCode != '' and registerCode != null">
+			and a.REGISTER_CODE=#{registerCode}
+		</if>
+		order by FUND_CODE
+	</select>
+
+
+	<select id="queryAgency" parameterType="java.lang.String" resultType="java.lang.String">
+		select REGISTER_CODE from FUND_SET where 1=1
+		<if test="fundCode != '' and fundCode != null">
+		and	FUND_CODE=#{fundCode}
+		</if>
+		order by REGISTER_CODE desc limit 1
+	</select>
+
 </mapper>

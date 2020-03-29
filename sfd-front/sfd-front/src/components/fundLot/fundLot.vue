@@ -4,7 +4,7 @@
     <el-form :inline="true" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" filterable clearable>
-          <el-option v-for="item in registerCodeList" :key="item.registerCode" :label="item.registerCode"
+          <el-option v-for="item in registerCodeList" :key="item.index" :label="item.registerCode"
                      :value="item.registerCode">
           </el-option>
         </el-select>
@@ -138,7 +138,7 @@ export default {
   },
   created () {
     this.getDataList()
-    this.initFundCusttype()
+    this.initAgencyNameAndProcode()
   },
   methods: {
     getDataList () {
@@ -180,6 +180,8 @@ export default {
     // 重置
     resetForm (formName) {
       this.$refs[formName].resetFields()
+      this.dataForm.currentPage = 1
+      this.dataForm.pageSize = 10
       this.getDataList()
     },
     // 判断状态如果非初始化，则不能删除
@@ -230,9 +232,9 @@ export default {
       })
     },
     // 登记机构
-    async initFundCusttype () {
+    async initAgencyNameAndProcode () {
       this.registerCodeList = []
-      this.registerCodeList = (await this.$req.listFundCusttype()).data
+      this.registerCodeList = (await this.$req.queryAllAgencyAndProcode()).data
     }
   }
 }

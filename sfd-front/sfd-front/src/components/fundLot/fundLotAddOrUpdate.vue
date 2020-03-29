@@ -2,14 +2,13 @@
   <el-dialog
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
-    :visible.sync="visible" >
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="100px">
-      <el-row :span="24" style="margin-top: 15px">
+    :visible.sync="visible" align="center">
+    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
         <el-form-item label="登记机构" prop="registerCode">
-        <el-select v-model="dataForm.registerCode" :disabled="isDisabled"  filterable placeholder="请选择">
+        <el-select v-model="dataForm.registerCode" :disabled="isDisabled" style="width: 100%"  filterable placeholder="请选择">
           <el-option
             v-for="item in registerCodeList"
-            :key="item.registerCode"
+            :key="item.index"
             :label="item.registerCode"
             :value="item.registerCode">
             <span style="float: left">{{ item.registerCode }}</span>
@@ -17,10 +16,10 @@
         </el-select>
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
-        <el-select v-model="dataForm.fundCode" :disabled="isDisabled" filterable placeholder="请选择" >
+        <el-select v-model="dataForm.fundCode" :disabled="isDisabled" style="width: 100%" filterable placeholder="请选择" >
           <el-option
             v-for="item in fundCodeList"
-            :key="item.fundCode"
+            :key="item.index"
             :label="item.fundCode"
             :value="item.fundCode">
             <span style="float: left">{{ item.fundCode }}</span>
@@ -28,27 +27,26 @@
         </el-select>
       </el-form-item>
       <el-form-item label="产品批次" prop="lotCode">
-        <el-input v-model="dataForm.lotCode" :disabled="isDisabled" placeholder="产品批次" maxlength="2"></el-input>
+        <el-input v-model="dataForm.lotCode" :disabled="isDisabled" maxlength="2"></el-input>
       </el-form-item>
       <el-form-item label="批次优先级" prop="lotType">
-        <el-input v-model="dataForm.lotType" placeholder="批次优先级" maxlength="1"></el-input>
+        <el-input v-model="dataForm.lotType" maxlength="1"></el-input>
       </el-form-item>
       <el-form-item label="批次发起时间" prop="startTime">
-        <el-time-picker v-model="dataForm.startTime" placeholder="批次发起时间" format="HH:mm:ss"
+        <el-time-picker v-model="dataForm.startTime" style="width: 100%" format="HH:mm:ss"
                         value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }">
         </el-time-picker>
       </el-form-item>
       <el-form-item label="产品名称" prop="fundName">
-        <el-input v-model="dataForm.fundName" placeholder="产品名称"></el-input>
+        <el-input v-model="dataForm.fundName" ></el-input>
       </el-form-item>
         <el-form-item label="批次状态" prop="lotStatus">
-          <el-select v-model="dataForm.lotStatus" clearable>
+          <el-select v-model="dataForm.lotStatus" style="width: 100%" clearable>
             <el-option v-for="item in this.$param.lotStatus" :key="item.value" :label="item.label"
                        :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
-      </el-row>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -102,7 +100,7 @@ export default {
   },
   methods: {
     init (registerCode, fundCode, lotCode) {
-      this.initFundCusttype()
+      this.initAgencyAndProcode()
       this.dataForm.id = registerCode || 0
       this.isDisabled = false
       this.visible = true
@@ -131,10 +129,10 @@ export default {
       })
     },
     // 初始化注册机构代码和产品代码
-    async initFundCusttype () {
+    async initAgencyAndProcode () {
       this.registerCodeList = []
       this.fundCodeList = []
-      let result = await this.$req.listFundCusttype()
+      let result = await this.$req.queryAllAgencyAndProcode()
       this.registerCodeList = result.data
       this.fundCodeList = result.data
     },

@@ -4,7 +4,7 @@
     <el-form :inline="true" :rules="dataRule" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" filterable clearable>
-          <el-option v-for="item in registerCodeList" :key="item.registerCode" :label="item.registerCode"
+          <el-option v-for="item in registerCodeList" :key="item.index" :label="item.registerCode"
                      :value="item.registerCode">
           </el-option>
         </el-select>
@@ -15,12 +15,11 @@
         <el-button type="primary" :disabled="isDisabled" @click="exportExcel()">导出</el-button>
       </el-form-item>
     </el-form>
-    <!--表格-->
+    <!--展示表格-->
     <el-table
       :data="dataList"
       v-loading="dataListLoading"
-      style="width: 100%;"
-      id="out-table">
+      style="width: 100%;">
       <el-table-column
         prop="registerCode"
         header-align="center"
@@ -40,19 +39,19 @@
         label="分行名称">
       </el-table-column>
       <el-table-column
-        prop=""
+        prop="transAccount"
         header-align="center"
         align="center"
         label="交易帐户开户申请笔数">
       </el-table-column>
       <el-table-column
-        prop=""
+        prop="fundAccount"
         header-align="center"
         align="center"
         label="理财账户开户申请笔数">
       </el-table-column>
       <el-table-column
-        prop=""
+        prop="aggregationDate"
         header-align="center"
         align="center"
         label="统计日期">
@@ -65,6 +64,15 @@
       layout="total, prev, pager, next, jumper"
       :total="totalRows">
     </el-pagination>
+    <!--导出表格-->
+    <el-table :data="dataListOut" v-loading="dataListLoading" style="width: 100%;" id="out-table" v-show="false">
+      <el-table-column prop="registerCode" header-align="center" align="center" label="登记机构"></el-table-column>
+      <el-table-column prop="regionCode" header-align="center" align="center" label="分行代码"></el-table-column>
+      <el-table-column prop="orgName" header-align="center" align="center" label="分行名称"></el-table-column>
+      <el-table-column prop="transAccount" header-align="center" align="center" label="交易帐户开户申请笔数"></el-table-column>
+      <el-table-column prop="fundAccount" header-align="center" align="center" label="理财账户开户申请笔数"></el-table-column>
+      <el-table-column prop="aggregationDate" header-align="center" align="center" label="统计日期"></el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -83,6 +91,7 @@ export default {
       isDisabled: true,
       totalRows: 0,
       dataList: [],
+      dataListOut: [],
       dataListLoading: false,
       registerCodeList: [],
       dataRule: {
@@ -93,7 +102,7 @@ export default {
     }
   },
   created () {
-    this.initFundCusttype()
+    this.initAgencyAndProcode()
   },
   methods: {
     getDataList () {
@@ -105,6 +114,8 @@ export default {
           data: this.$qs.stringify(this.dataForm)
         }).then((result) => {
           this.dataList = result.data.dataList
+          this.dataListOut = result.data.dataListOut
+          this.totalRows = result.data.totalRows
           if (result.data.dataList.length > 0) {
             this.isDisabled = false
           } else {
@@ -122,19 +133,24 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
       this.dataList = []
+      this.dataListOut = []
+      this.totalRows = 0
+      this.isDisabled = true
     },
     // 导出
     exportExcel () {
-      var wb = XLSX.utils.table_to_book(document.querySelector('#out-table'))
-      var wbout = XLSX.write(wb, {
+      let xlsxParam = { raw: true }
+      let wb = XLSX.utils.table_to_book(document.querySelector('#out-table'), xlsxParam)
+      let wbout = XLSX.write(wb, {
         bookType: 'xlsx',
         bookSST: true,
         type: 'array'
       })
+      let time = new Date()
       try {
         FileSaver.saveAs(
           new Blob([wbout], {type: 'application/octet-stream'}),
-          '账户交易.xlsx'
+          '账户类交易' + time.toLocaleDateString() + '.xlsx'
         )
       } catch (e) {
         if (typeof console !== 'undefined') {
@@ -144,9 +160,9 @@ export default {
       return wbout
     },
     // 登记机构
-    async initFundCusttype () {
+    async initAgencyAndProcode () {
       this.registerCodeList = []
-      this.registerCodeList = (await this.$req.listFundCusttype()).data
+      this.registerCodeList = (await this.$req.queryAllAgencyAndProcode()).data
     }
   }
 }

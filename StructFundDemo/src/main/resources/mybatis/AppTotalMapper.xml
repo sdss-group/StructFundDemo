@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.AppTotalMapper">
+    <resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.AppTotal">
+        <id column="SERIAL_NO" jdbcType="INTEGER" property="serialNo" />
+        <result column="BRANCH_CODE" jdbcType="VARCHAR" property="branchCode" />
+        <result column="REGION_CODE" jdbcType="VARCHAR" property="regionCode" />
+        <result column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
+        <result column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+        <result column="FUND_NAME" jdbcType="VARCHAR" property="fundName" />
+        <result column="BUSINESS_CODE" jdbcType="CHAR" property="businessCode" />
+        <result column="TRANS_CODE" jdbcType="CHAR" property="transCode" />
+        <result column="AGGREGATION_DATE" jdbcType="DATE" property="aggregationDate" />
+        <result column="LOT_NO" jdbcType="CHAR" property="lotNo" />
+        <result column="TOTAL_COUNT" jdbcType="DECIMAL" property="totalCount" />
+        <result column="SUCC_COUNT" jdbcType="DECIMAL" property="succCount" />
+        <result column="APPLICATION_VOL" jdbcType="DECIMAL" property="applicationVol" />
+        <result column="SUCC_APPLICATIONVOL" jdbcType="DECIMAL" property="succApplicationvol" />
+        <result column="APPLICATION_AMT" jdbcType="DECIMAL" property="applicationAmt" />
+        <result column="SUCCAPPLICATION_AMT" jdbcType="DECIMAL" property="succapplicationAmt" />
+        <result column="COMMISSION" jdbcType="DECIMAL" property="commission" />
+        <result column="SUCC_COMMISSION" jdbcType="DECIMAL" property="succCommission" />
+        <result column="SHARE_CLASS" jdbcType="CHAR" property="shareClass" />
+        <result column="FLAG" jdbcType="CHAR" property="flag" />
+        <result column="INDI_OR_INST" jdbcType="CHAR" property="indiOrInst" />
+        <result column="TIMESTAMP_C" jdbcType="TIMESTAMP" property="timestampC" />
+        <result column="TIMESTAMP_U" jdbcType="TIMESTAMP" property="timestampU" />
+        <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+        <result column="REGISTER_NAME" jdbcType="VARCHAR" property="registerName" />
+        <result column="TRANS_ACCOUNT" jdbcType="DECIMAL" property="transAccount" />
+        <result column="FUND_ACCOUNT" jdbcType="DECIMAL" property="fundAccount" />
+        <result column="RENSHEN_COUNT" jdbcType="DECIMAL" property="renshenCount" />
+        <result column="RENSHEN_AMT" jdbcType="DECIMAL" property="renshenAmt" />
+        <result column="SHUHUI_COUNT" jdbcType="DECIMAL" property="shuhuiCount" />
+        <result column="SHUHUI_VOL" jdbcType="DECIMAL" property="shuhuiVol" />
+        <result column="CURRENCY_TYPE" jdbcType="CHAR" property="currencyType" />
+    </resultMap>
+
+    <select id="queryAccountTrans" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select distinct a.REGISTER_CODE, reg.REGISTER_NAME, a.REGION_CODE, ap.ORG_NAME, a.TRANS_ACCOUNT, a.FUND_ACCOUNT,
+        a.AGGREGATION_DATE from
+        ( select REGISTER_CODE, REGION_CODE, sum(transAccount1) as TRANS_ACCOUNT, sum(fundAccount1) as FUND_ACCOUNT,AGGREGATION_DATE
+        from
+        ( select REGISTER_CODE, REGION_CODE,sum(TOTAL_COUNT) as transAccount1, sum(0) as fundAccount1, AGGREGATION_DATE
+        from APP_TOTAL
+        where BUSINESS_CODE='301'
+        group by REGISTER_CODE, REGION_CODE, AGGREGATION_DATE
+        union
+        select REGISTER_CODE, REGION_CODE, sum(0) as transAccount1, sum(TOTAL_COUNT) as fundAccount1, AGGREGATION_DATE
+        from APP_TOTAL
+        where BUSINESS_CODE='001'
+        group by REGISTER_CODE, REGION_CODE, AGGREGATION_DATE
+        ) un group by REGISTER_CODE, REGION_CODE,AGGREGATION_DATE
+        ) a
+        left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
+        left join AP_ORG ap on a.REGION_CODE=ap.ORG_CODE
+        <where>
+            a.REGISTER_CODE=#{registerCode}
+            <if test="totalOrg != null and totalOrg.size != 0">
+                and
+                (
+                <foreach collection="totalOrg" index="index" item="item" separator="or">
+                    a.REGION_CODE=#{item}
+                </foreach>
+                )
+            </if>
+        </where>
+        order by a.REGISTER_CODE, a.REGION_CODE, a.AGGREGATION_DATE
+        limit #{startRow},#{pageSize}
+    </select>
+
+    <select id="queryAccountTransOut" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select distinct a.REGISTER_CODE, reg.REGISTER_NAME, a.REGION_CODE, ap.ORG_NAME, a.TRANS_ACCOUNT, a.FUND_ACCOUNT,
+        a.AGGREGATION_DATE from
+        ( select REGISTER_CODE, REGION_CODE, sum(transAccount1) as TRANS_ACCOUNT, sum(fundAccount1) as FUND_ACCOUNT,AGGREGATION_DATE
+        from
+        ( select REGISTER_CODE, REGION_CODE,sum(TOTAL_COUNT) as transAccount1, sum(0) as fundAccount1, AGGREGATION_DATE
+        from APP_TOTAL
+        where BUSINESS_CODE='301'
+        group by REGISTER_CODE, REGION_CODE, AGGREGATION_DATE
+        union
+        select REGISTER_CODE, REGION_CODE, sum(0) as transAccount1, sum(TOTAL_COUNT) as fundAccount1, AGGREGATION_DATE
+        from APP_TOTAL
+        where BUSINESS_CODE='001'
+        group by REGISTER_CODE, REGION_CODE, AGGREGATION_DATE
+        ) un group by REGISTER_CODE, REGION_CODE,AGGREGATION_DATE
+        ) a
+        left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
+        left join AP_ORG ap on a.REGION_CODE=ap.ORG_CODE
+        <where>
+            a.REGISTER_CODE=#{registerCode}
+            <if test="totalOrg != null and totalOrg.size != 0">
+                and
+                (
+                <foreach collection="totalOrg" index="index" item="item" separator="or">
+                    a.REGION_CODE=#{item}
+                </foreach>
+                )
+            </if>
+        </where>
+        order by a.REGISTER_CODE, a.REGION_CODE, a.AGGREGATION_DATE
+    </select>
+
+    <select id="queryTransTrans" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select distinct a.REGISTER_CODE, reg.REGISTER_NAME, a.FUND_CODE, st.FUND_NAME, a.REGION_CODE, ap.ORG_NAME, a.renShen_COUNT, a.renShen_AMT,a.shuHui_COUNT, a.shuHui_VOL, st.CURRENCY_TYPE, a.AGGREGATION_DATE from (
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(renShen_COUNT1) as renShen_COUNT, sum(renShen_AMT1) as renShen_AMT, sum(shuHui_COUNT1) as shuHui_COUNT, sum(shuHui_VOL1) as shuHui_VOL, AGGREGATION_DATE from (
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(TOTAL_COUNT) as renShen_COUNT1, sum(APPLICATION_AMT) as renShen_AMT1, sum(0) as shuHui_COUNT1, sum(0) as shuHui_VOL1, AGGREGATION_DATE from APP_TOTAL
+        where BUSINESS_CODE='020' or BUSINESS_CODE='022'
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        UNION
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(0) as renShen_COUNT1, sum(0) as renShen_AMT, sum(TOTAL_COUNT) as shuHui_COUNT1, sum(APPLICATION_VOL) as shuHui_VOL1,AGGREGATION_DATE from APP_TOTAL
+        where BUSINESS_CODE='024'
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        )  un
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        ) a
+        left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
+        left join AP_ORG  ap on a.REGION_CODE=ap.ORG_CODE
+        left join FUND_SET st on a.REGISTER_CODE=st.REGISTER_CODE and a.FUND_CODE=st.FUND_CODE
+        <where>
+            a.REGISTER_CODE=#{registerCode} and a.FUND_CODE=#{fundCode}
+            <if test="totalOrg != null and totalOrg.size != 0">
+                and
+                ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
+                a.REGION_CODE=#{item}
+            </foreach>
+                )
+            </if>
+        </where>
+        order by a.REGISTER_CODE, a.FUND_CODE, a.REGION_CODE, a.AGGREGATION_DATE
+        limit #{startRow},#{pageSize}
+    </select>
+
+    <select id="queryTransTransOut" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select distinct a.REGISTER_CODE, reg.REGISTER_NAME, a.FUND_CODE, st.FUND_NAME, a.REGION_CODE, ap.ORG_NAME, a.renShen_COUNT, a.renShen_AMT,a.shuHui_COUNT, a.shuHui_VOL, st.CURRENCY_TYPE, a.AGGREGATION_DATE from (
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(renShen_COUNT1) as renShen_COUNT, sum(renShen_AMT1) as renShen_AMT, sum(shuHui_COUNT1) as shuHui_COUNT, sum(shuHui_VOL1) as shuHui_VOL, AGGREGATION_DATE from (
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(TOTAL_COUNT) as renShen_COUNT1, sum(APPLICATION_AMT) as renShen_AMT1, sum(0) as shuHui_COUNT1, sum(0) as shuHui_VOL1, AGGREGATION_DATE from APP_TOTAL
+        where BUSINESS_CODE='020' or BUSINESS_CODE='022'
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        UNION
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(0) as renShen_COUNT1, sum(0) as renShen_AMT, sum(TOTAL_COUNT) as shuHui_COUNT1, sum(APPLICATION_VOL) as shuHui_VOL1,AGGREGATION_DATE from APP_TOTAL
+        where BUSINESS_CODE='024'
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        ) un
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        ) a
+        left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
+        left join AP_ORG  ap on a.REGION_CODE=ap.ORG_CODE
+        left join FUND_SET st on a.REGISTER_CODE=st.REGISTER_CODE and a.FUND_CODE=st.FUND_CODE
+        <where>
+            a.REGISTER_CODE=#{registerCode} and a.FUND_CODE=#{fundCode}
+            <if test="totalOrg != null and totalOrg.size != 0">
+                and
+                ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
+                a.REGION_CODE=#{item}
+            </foreach>
+                )
+            </if>
+        </where>
+        order by a.REGISTER_CODE, a.FUND_CODE, a.REGION_CODE, a.AGGREGATION_DATE
+    </select>
+
+    <select id="sumAccountTrans" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM (
+        SELECT DISTINCT a.REGISTER_CODE, reg.REGISTER_NAME, a.REGION_CODE, ap.ORG_NAME, a.TRANS_ACCOUNT, a.FUND_ACCOUNT,
+        a.AGGREGATION_DATE FROM
+        (SELECT REGISTER_CODE, REGION_CODE, SUM(transAccount1) AS TRANS_ACCOUNT, SUM(fundAccount1) AS FUND_ACCOUNT, AGGREGATION_DATE FROM
+        ( SELECT  REGISTER_CODE, REGION_CODE,SUM(TOTAL_COUNT) AS transAccount1, SUM(0) AS fundAccount1, AGGREGATION_DATE FROM APP_TOTAL
+        WHERE BUSINESS_CODE='301'
+        GROUP BY REGISTER_CODE, REGION_CODE, AGGREGATION_DATE
+        UNION
+        SELECT  REGISTER_CODE, REGION_CODE, SUM(0) AS transAccount1, SUM(TOTAL_COUNT) AS fundAccount1, AGGREGATION_DATE FROM APP_TOTAL
+        WHERE BUSINESS_CODE='001'
+        GROUP BY REGISTER_CODE, REGION_CODE, AGGREGATION_DATE
+        ) un GROUP BY REGISTER_CODE, REGION_CODE,AGGREGATION_DATE) a
+        LEFT JOIN FUND_REG reg ON a.REGISTER_CODE=reg.REGISTER_CODE
+        LEFT JOIN AP_ORG ap ON a.REGION_CODE=ap.ORG_CODE
+        <where>
+            a.REGISTER_CODE=#{registerCode}
+            <if test="totalOrg != null and totalOrg.size != 0">
+                and
+                ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
+                a.REGION_CODE=#{item}
+            </foreach>
+                )
+            </if>
+        </where>
+        ORDER BY a.REGISTER_CODE, a.REGION_CODE, a.AGGREGATION_DATE) t
+    </select>
+
+    <select id="sumTransTrans" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        select count(*) from (
+        select distinct a.REGISTER_CODE, reg.REGISTER_NAME, a.FUND_CODE, st.FUND_NAME, a.REGION_CODE, ap.ORG_NAME, a.renShen_COUNT, a.renShen_AMT,a.shuHui_COUNT, a.shuHui_VOL, st.CURRENCY_TYPE, a.AGGREGATION_DATE from (
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(renShen_COUNT1) as renShen_COUNT, sum(renShen_AMT1) as renShen_AMT, sum(shuHui_COUNT1) as shuHui_COUNT, sum(shuHui_VOL1) as shuHui_VOL, AGGREGATION_DATE from (
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(TOTAL_COUNT) as renShen_COUNT1, sum(APPLICATION_AMT) as renShen_AMT1, sum(0) as shuHui_COUNT1, sum(0) as shuHui_VOL1, AGGREGATION_DATE from APP_TOTAL
+        where BUSINESS_CODE='020' or BUSINESS_CODE='022'
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        UNION
+        select REGISTER_CODE, REGION_CODE, FUND_CODE, sum(0) as renShen_COUNT1, sum(0) as renShen_AMT, sum(TOTAL_COUNT) as shuHui_COUNT1, sum(APPLICATION_VOL) as shuHui_VOL1,AGGREGATION_DATE from APP_TOTAL
+        where BUSINESS_CODE='024'
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        ) un
+        group by REGISTER_CODE, REGION_CODE, FUND_CODE, AGGREGATION_DATE
+        ) a
+        left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
+        left join AP_ORG  ap on a.REGION_CODE=ap.ORG_CODE
+        left join FUND_SET st on a.REGISTER_CODE=st.REGISTER_CODE and a.FUND_CODE=st.FUND_CODE
+        <where>
+            a.REGISTER_CODE=#{registerCode} and a.FUND_CODE=#{fundCode}
+            <if test="totalOrg != null and totalOrg.size != 0">
+                and
+                ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
+                a.REGION_CODE=#{item}
+            </foreach>
+                )
+            </if>
+        </where>
+        ) t
+    </select>
+</mapper>

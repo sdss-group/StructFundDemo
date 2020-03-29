@@ -5,6 +5,9 @@ public class FundReg {
     // 注册登记人代码
     private String registerCode;
 
+    //产品代码
+    private String fundCode;
+
     // 注册登记人名称
     private String registerName;
 
@@ -188,4 +191,8 @@ public class FundReg {
     public void setAuthorizer(String authorizer) {
         this.authorizer = authorizer;
     }
+
+    public String getFundCode() { return fundCode; }
+
+    public void setFundCode(String fundCode) { this.fundCode = fundCode; }
 }
