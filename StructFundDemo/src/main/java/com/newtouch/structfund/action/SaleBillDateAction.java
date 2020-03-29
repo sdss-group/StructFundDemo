@@ -2,6 +2,9 @@ package com.newtouch.structfund.action;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.newtouch.structfund.entity.ResponseMessage;
 import com.newtouch.structfund.entity.SaleBillDate;
 import com.newtouch.structfund.mapper.SaleBillDateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,19 @@ public class SaleBillDateAction {
 
 
     @RequestMapping("/listSaleBillDate")
-    public List<SaleBillDate> listSaleBillDate(Integer pageIndex, Integer pageSize, SaleBillDate sbd) {
+    public ResponseMessage<List<SaleBillDate>> listSaleBillDate(Integer currentPage, Integer pageSize, SaleBillDate sbd) {
 
-        //   PageHelper.startPage(pageIndex, pageSize);
-        return sdm.getList(sbd);
+
+        PageHelper.startPage(currentPage,pageSize);
+
+
+        List<SaleBillDate> list=sdm.getList(sbd);
+        PageInfo<SaleBillDate> pageInfo=new PageInfo<>(list);
+        ResponseMessage<List<SaleBillDate>> message=new ResponseMessage<>();
+        message.setTotalPieces(pageInfo.getTotal());
+        message.setContent(list);
+
+        return message;
     }
 
     @RequestMapping("delete")

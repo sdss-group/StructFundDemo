@@ -5,10 +5,10 @@ import index from '@/components/index'
 import baseinfo from '@/components/fundinfo/baseinfo'
 import fundLot from '@/components/fundLot/fundLot'
 import accountTrans from '@/components/accountTrans/accountTrans'
-import transTrans from '@/components/transTrans/transTrans'
-import orgAmt from '@/components/orgAmt/orgAmt'
+import agencyTrans from '@/components/agencyTrans/agencyTrans'
 import saleBillDate from '@/components/saleBillDate/saleBillDate'
 import fundCustType from '@/components/fundCustType/fundCustType'
+import tradeDay from '@/components/workDay/tradeDay'
 
 Vue.use(Router)
 
@@ -64,12 +64,9 @@ export default new Router({
       component: fundCustType
     },
     {
-      path: '/orgAmt',
-      name: 'orgAmt',
-      component: orgAmt,
-      meta: {
-        keepAlive: true
-      }
+      path: '/tradeDay',
+      name: 'tradeDay',
+      component: tradeDay
     }
   ]
 })
