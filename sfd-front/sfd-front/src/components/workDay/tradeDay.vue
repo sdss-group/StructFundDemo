@@ -1,19 +1,19 @@
 <template>
   <div class="mod-config">
     <!--表格菜单-->
-    <el-form :inline="true" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
+    <el-form :inline="true" @keyup.enter.native="getDataList()">
       <el-form-item label="登记机构" prop="registerCode">
-        <el-select v-model="dataForm.registerCode" filterable clearable>
+        <!-- <el-select filterable clearable>
           <el-option
             v-for="item in registerCodeList"
             :key="item.registerCode"
             :label="item.registerCode"
             :value="item.registerCode"
           ></el-option>
-        </el-select>
+        </el-select>-->
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
-        <el-input v-model="dataForm.fundCode" clearable></el-input>
+        <el-input clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -22,147 +22,186 @@
       </el-form-item>
     </el-form>
 
-    
+    <el-calendar
+      style="width: 40%;display:inline-block"
+      v-for="item in months"
+      :key="item"
+      :value="year+'-'+item"
+    >
+      <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
+      <template slot="dateCell" slot-scope="{date, data}">
+        <p
+          @click="change(data)"
+          v-data-init='data'
+          :class="{ 'redbgc':tradeDayList[data.day].isred,'greenbgc':tradeDayList[data.day].isgreen } "
+        >
+          {{ data.day.split('-').slice(1).join('-') }}
+        </p>
+      </template>
+    </el-calendar>
   </div>
 </template>
 
 <script>
+
+
 export default {
   data() {
     return {
-      dataForm: {
-        registerCode: "",
-        fundCode: ""
-      },
-      registerCodeList: [],
-      allType: this.$param.custType,
-      allTypeid: Object.keys(this.$param.custType),
-      checkList: [],
-      checkListCopy: []
-    };
-  },
-  created() {
-    this.initFundCusttype();
-  },
-  methods: {
-    //点击查询按钮,查询客户群
-    getDataList() {
-      //根据registerCode字段和fundCode字段发送查询请求,会得到一个数组,数组元素为数字?
-      // this.$ajax({
-      //   method: "post",
-      //   url:
-      //     "http://" +
-      //     this.$Config.ip +
-      //     ":" +
-      //     this.$Config.port +
-      //     "/fundCustType/getCustTypeList",
-      //   data: this.$qs.stringify(this.dataForm)
-      // })
-      //   .then(response => {
-      //     this.checkList = response.data;
-      //     this.checkListCopy = JSON.parse(JSON.stringify(this.checkList));
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
-    },
-
-    // 新增 / 删除 / 修改
-    addAndDelete() {
-      // const _arr1Set = new Set(this.checkList), //修改后的客户群
-      //   _arr2Set = new Set(this.checkListCopy); //原客户群
-      // //求交集
-      // let intersection = this.checkList.filter(item => _arr2Set.has(item));
-      // const _arr3Set = new Set(intersection);
-
-      // console.log("交集", intersection);
-      // //求新增的客户群=交集在修改后的客户群的差集
-      // //即交集中没有而修改后的客户群有的
-      // let toAdd = this.checkList.filter(item => !_arr3Set.has(item));
-
-      // //求删除的客户群=交集在修改前的客户群的差集
-      // //即交集里没有而原客户群有的
-      // let toDelete = this.checkListCopy.filter(item => !_arr3Set.has(item));
-
-      // // console.log("需要添加", toAdd);
-      // // console.log("需要删除", toDelete);
-      // //封装添加客户群参数
-      // const paramAdd = {
-      //   registerCode: this.dataForm.registerCode,
-      //   fundCode: this.dataForm.fundCode,
-      //   toAdd
-      // };
-      // //封装删除客户群参数
-      // const paramDelete = {
-      //   registerCode: this.dataForm.registerCode,
-      //   fundCode: this.dataForm.fundCode,
-      //   toDelete
-      // };
-
-      // //增加
-      // this.$ajax({
-      //   method: 'post',
-      //   url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundCustType/insertCustTypeList',
-      //   data: this.$qs.stringify(paramAdd,{ indices: false })
-        
-      // }).then((result) => {
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
-
-      // //删除
-      // this.$ajax({
-      //   method: 'post',
-      //   url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundCustType/deleteCustTypeList',
-      //   data: this.$qs.stringify(paramDelete,{ indices: false })
-        
-      // }).then((result) => {
-      //   this.getDataList();
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
-
       
 
-      // // this.$ajax({
-      // //   method: "post",
-      // //   //headers: { "Content-Type": "application/json;charset=UTF-8" },
-      // //   url:"http://" +this.$Config.ip + ":" +this.$Config.port +"/fundCustType/insertCustTypeList",
-      // //   data: JSON.stringify(paramAdd),
-      // //   traditional: true
-      // // })
-      // //   .then(response => {
-      // //     this.$message({
-      // //       message: "操作成功",
-      // //       type: "success",
-      // //       duration: 1500,
-      // //       onClose: () => {
-      // //         this.getDataList();
-      // //       }
-      // //     });
-      // //   })
-      // //   .catch(error => {
-      // //     console.log(error);
-      // //   });
+      testred: true,
+      testgreen: false,
+      year: 2019,
+      months: [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ],
+      tradeDayList: {}
+    };
+  },
+  directives: {
+    "data-init": {
+      inserted: function(el, binding) {
+        const data=binding.value
+        //el=document.createElement("p");
+        //console.log(day.type=="current-month");
+        const type=data.type
+        //console.log(type=="current-month");
+        const flag=type=="current-month";
+        if(!flag){
+          //console.log(data.day)
+          el.innerHTML='';
+          //el=document.createElement("p");
+          //el.unbind("click");
+        }
+        //console.log(binding.value);
+        
+      }
+    }
+  },
 
+  //计算属性
+  computed: {
+   
+  },
 
+  watch: {
+    //监听tradeDayList数组对象
+    tradeDayList: {
+      //开启深度监听
+      deep: true,
+      //监听到变化后的处理
+      handler: function(newValue, oldValue) {
+        this.$forceUpdate()
+      }
+    }
+  },
+
+  created() {
+    const tmpyear = this.year + 1;
+    this.initTradeList(this.year - 1 + "-11-01", this.year + 1 + "-01-01");
+    
+   // console.log(this.tradeDayList)
+    
+  },
+  methods: {
+    
+    change(item) {
+      
+      const day = item.day;
+      console.log(day);
+      const flag = this.tradeDayList[day].flag;
+      const isred = this.tradeDayList[day].isred;
+      console.log(isred);
+      
+      if (flag == 0) {
+        this.tradeDayList[day].flag = 1;
+
+        this.tradeDayList[day].isred = 1;
+        this.tradeDayList[day].isgreen = 0;
+      } else if (flag == 1) {
+        this.tradeDayList[day].flag = null;
+
+        this.tradeDayList[day].isred = 0;
+        this.tradeDayList[day].isdefault = 1;
+      } else {
+        this.tradeDayList[day].flag = 0;
+
+        this.tradeDayList[day].isdefault = 0;
+        this.tradeDayList[day].isgreen = 1;
+        
+      }
+      //this.tradeDayList=new Map(this.tradeDayList);
+      // 强制重新渲染页面---数据监听到了,但是页面依然没有重新渲染
+      this.$forceUpdate()
+      console.log("--------------------");
+      // console.log(this.tradeDayList[day].isred)
+      // console.log(this.tradeDayList[day].isgreen)
+      // console.log(this.tradeDayList[day].isdefault)
     },
-    // 重置
-    // resetForm() {
-    //   this.dataForm.registerCode='';
-    //   this.dataForm.fundCode='';
-    //   this.checkList=[];
-    //   this.checkListCopy=[]
-    // },
+    getDate(datestr) {
+      var temp = datestr.split("-");
+      var date = new Date(temp[0], temp[1], temp[2]);
+      return date;
+    },
+    initTradeList(start, end) {
+      
+      var startTime = this.getDate(start);
+      var endTime = this.getDate(end);
+      while (endTime.getTime() - startTime.getTime() >= 1) {
+        var year = startTime.getFullYear();
+        var month =
+          (startTime.getMonth() + 1).toString().length == 1
+            ? "0" + (startTime.getMonth() + 1).toString()
+            : startTime.getMonth() + 1;
+        var day =
+          startTime.getDate().toString().length == 1
+            ? "0" + startTime.getDate()
+            : startTime.getDate();
+       
+        this.tradeDayList[year + "-" + month + "-" + day] = {
+          
+          flag: null,
+          isred: 0,
+          isgreen: 0,
+          isdefault: 1
+        };
+        startTime.setDate(startTime.getDate() + 1);
+      }
+    },
+    //点击查询按钮,查询客户群
+    getDataList() {},
 
-    // // 登记机构
-    // async initFundCusttype() {
-    //   this.registerCodeList = [];
-    //   this.registerCodeList = (await this.$req.listFundCusttype()).data;
-    // }
+    // 新增 / 删除 / 修改
+    addAndDelete() {},
+    //重置
+    resetForm() {},
+
+    // 登记机构
+    async initFundCusttype() {}
   }
 };
 </script>
 
 <style scoped>
+.redbgc {
+  background: red;
+}
+.greenbgc {
+  background: green;
+}
+.defaultbgc {
+  background: grey;
+}
 </style>

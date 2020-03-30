@@ -9,7 +9,7 @@
             :key="item.registerCode"
             :label="item.registerCode"
             :value="item.registerCode"
-          ></el-option>
+          > </el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
@@ -101,7 +101,7 @@
 
 <script>
 import AddOrUpdate from "./saleBillDateAddOrUpdate";
-
+import {queryRegList} from "../../common/req"
 export default {
   data() {
     return {
@@ -249,7 +249,7 @@ export default {
     // 登记机构
     async initFundCusttype() {
       this.registerCodeList = [];
-      this.registerCodeList = (await this.$req.listFundCusttype()).data;
+      this.registerCodeList = (await queryRegList()).data;
     }
   }
 };

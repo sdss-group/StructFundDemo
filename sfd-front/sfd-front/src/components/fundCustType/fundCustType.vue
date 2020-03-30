@@ -29,6 +29,9 @@
 </template>
 
 <script>
+
+import {queryRegList} from "../../common/req"
+
 export default {
   data() {
     return {
@@ -160,7 +163,7 @@ export default {
     // 登记机构
     async initFundCusttype() {
       this.registerCodeList = [];
-      this.registerCodeList = (await this.$req.listFundCusttype()).data;
+      this.registerCodeList = (await queryRegList()).data;
     }
   }
 };
