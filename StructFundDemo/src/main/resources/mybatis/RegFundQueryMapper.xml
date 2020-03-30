@@ -15,8 +15,11 @@
 
     </select>
 
-    <select id="queryAccountTransOut" parameterType="java.util.HashMap" resultMap="BaseResultMap">
-
+    <select id="getFundList"  resultMap="BaseResultMap">
+        select
+        distinct FUND_CODE
+        from fund_reg
+        where REGISTER_CODE=#{param}
     </select>
 
 

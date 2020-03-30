@@ -1,207 +1,316 @@
 <template>
-  <div class="mod-config">
-    <!--表格菜单-->
-    <el-form :inline="true" @keyup.enter.native="getDataList()">
-      <el-form-item label="登记机构" prop="registerCode">
-        <!-- <el-select filterable clearable>
+  <div>
+    <div class="mod-config">
+      <!--表格菜单-->
+      <el-form :inline="true" >
+        <el-form-item label="登记机构"  >
+          <el-select filterable clearable v-model="registerCode">
           <el-option
             v-for="item in registerCodeList"
             :key="item.registerCode"
-            :label="item.registerCode"
+            :label="item.registerName"
             :value="item.registerCode"
+          >{{item.registerName}}</el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="产品代码">
+          <el-select filterable clearable  v-model="fundCode">
+          <el-option
+            v-for="(item,index) in fundCodeList"
+            :key="index"
+            :label="item.fundCode"
+            :value="item.fundCode"
           ></el-option>
-        </el-select>-->
-      </el-form-item>
-      <el-form-item label="产品代码" prop="fundCode">
-        <el-input clearable></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button @click="getDataList()">查询</el-button>
-        <el-button type="primary" @click="resetForm()">重置</el-button>
-        <el-button type="primary" @click="addAndDelete()">修改</el-button>
-      </el-form-item>
-    </el-form>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="年份">
+           <el-input v-model="year" clearable></el-input>
+       </el-form-item>
+      </el-form>
+      <el-form :inline="true" >
+        <el-form-item label="当前产品工作日">
+          <el-select filterable clearable  v-model="chooseFlag">
+            <el-option value=1 label="全选"></el-option>
+            <el-option value=2 label="反选"></el-option>
+            <el-option value=3 label="全不选"></el-option>
+          </el-select>
+          注：红色为非工作日
+        </el-form-item>
+        
+        <el-form-item>
+          <el-button @click="getDataList()"  icon="el-icon-search" circle>查询</el-button>
+          <el-button type="primary" @click="resetForm()">重置</el-button>
+          <el-button type="success" @click="addAndDelete()">提交</el-button>
+          <el-button type="danger" @click="addAndDelete()">删除</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
 
-    <el-calendar
-      style="width: 40%;display:inline-block"
-      v-for="item in months"
-      :key="item"
-      :value="year+'-'+item"
-    >
-      <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
-      <template slot="dateCell" slot-scope="{date, data}">
-        <p
-          @click="change(data)"
-          v-data-init='data'
-          :class="{ 'redbgc':tradeDayList[data.day].isred,'greenbgc':tradeDayList[data.day].isgreen } "
-        >
-          {{ data.day.split('-').slice(1).join('-') }}
-        </p>
-      </template>
-    </el-calendar>
+    <div v-for="(dayList,index) in arrDays" :key="index" class="calendar">
+      <div class="years">{{dayList.year}}年{{dayList.moth}} 月</div>
+      <ul class="weekdays">
+        <li>一</li>
+        <li>二</li>
+        <li>三</li>
+        <li>四</li>
+        <li>五</li>
+        <li style="color:red">六</li>
+        <li style="color:red">日</li>
+      </ul>
+      <ul class="days">
+        <li v-for="(day,index) in dayList.days" :key="index">
+          <span v-if="day!=''">
+            <span
+              v-if="day.day.getFullYear() == new Date().getFullYear() 
+                                     && day.day.getMonth() == new Date().getMonth() 
+                                     && day.day.getDate() == new Date().getDate()"
+              :class="{curDay:1,today:1,isred:day.isred,isgreen:day.isgreen}"
+            >{{day.day.getDate()}}</span>
+            <span
+              v-else-if="day.day.getTime()<new Date().getTime()"
+              class="past"
+            >{{ day.day.getDate() }}</span>
+            <span
+              v-else
+              :class="{curDay:1,isred:day.isred,isgreen:day.isgreen}"
+            >{{ day.day.getDate() }}</span>
+          </span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 
+import {queryRegList,queryfundList} from "../../common/req"
+
 
 export default {
   data() {
     return {
-      
-
-      testred: true,
-      testgreen: false,
-      year: 2019,
-      months: [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12"
-      ],
-      tradeDayList: {}
+      registerCode:'',
+      fundCode:'',
+      chooseFlag:null,
+      registerCodeList:[],
+      fundCodeList:[],
+      year: 2020,
+      arrDays: []
     };
   },
-  directives: {
-    "data-init": {
-      inserted: function(el, binding) {
-        const data=binding.value
-        //el=document.createElement("p");
-        //console.log(day.type=="current-month");
-        const type=data.type
-        //console.log(type=="current-month");
-        const flag=type=="current-month";
-        if(!flag){
-          //console.log(data.day)
-          el.innerHTML='';
-          //el=document.createElement("p");
-          //el.unbind("click");
-        }
-        //console.log(binding.value);
-        
-      }
-    }
-  },
-
-  //计算属性
-  computed: {
-   
-  },
-
-  watch: {
-    //监听tradeDayList数组对象
-    tradeDayList: {
-      //开启深度监听
-      deep: true,
-      //监听到变化后的处理
-      handler: function(newValue, oldValue) {
-        this.$forceUpdate()
-      }
-    }
-  },
-
   created() {
-    const tmpyear = this.year + 1;
-    this.initTradeList(this.year - 1 + "-11-01", this.year + 1 + "-01-01");
-    
-   // console.log(this.tradeDayList)
-    
+    this.initRegCodeList();
   },
+  mounted() {
+    this.initData();
+  },
+ watch:{
+     registerCode :async function(newValue,oldValue){
+       if(newValue==''){
+         this.fundCode=''
+         this.fundCodeList=[]
+         return;
+       }
+       const response=(await queryfundList(newValue)).data;
+       this.fundCodeList=response
+       if(!response==[]){
+         this.fundCode=response[0].fundCode
+       }
+     }
+ },
+
+
+
   methods: {
-    
-    change(item) {
-      
-      const day = item.day;
-      console.log(day);
-      const flag = this.tradeDayList[day].flag;
-      const isred = this.tradeDayList[day].isred;
-      console.log(isred);
-      
-      if (flag == 0) {
-        this.tradeDayList[day].flag = 1;
-
-        this.tradeDayList[day].isred = 1;
-        this.tradeDayList[day].isgreen = 0;
-      } else if (flag == 1) {
-        this.tradeDayList[day].flag = null;
-
-        this.tradeDayList[day].isred = 0;
-        this.tradeDayList[day].isdefault = 1;
-      } else {
-        this.tradeDayList[day].flag = 0;
-
-        this.tradeDayList[day].isdefault = 0;
-        this.tradeDayList[day].isgreen = 1;
-        
-      }
-      //this.tradeDayList=new Map(this.tradeDayList);
-      // 强制重新渲染页面---数据监听到了,但是页面依然没有重新渲染
-      this.$forceUpdate()
-      console.log("--------------------");
-      // console.log(this.tradeDayList[day].isred)
-      // console.log(this.tradeDayList[day].isgreen)
-      // console.log(this.tradeDayList[day].isdefault)
+    changeyear() {
+      this.initData();
     },
-    getDate(datestr) {
-      var temp = datestr.split("-");
-      var date = new Date(temp[0], temp[1], temp[2]);
-      return date;
-    },
-    initTradeList(start, end) {
-      
-      var startTime = this.getDate(start);
-      var endTime = this.getDate(end);
-      while (endTime.getTime() - startTime.getTime() >= 1) {
-        var year = startTime.getFullYear();
-        var month =
-          (startTime.getMonth() + 1).toString().length == 1
-            ? "0" + (startTime.getMonth() + 1).toString()
-            : startTime.getMonth() + 1;
-        var day =
-          startTime.getDate().toString().length == 1
-            ? "0" + startTime.getDate()
-            : startTime.getDate();
-       
-        this.tradeDayList[year + "-" + month + "-" + day] = {
-          
-          flag: null,
-          isred: 0,
-          isgreen: 0,
-          isdefault: 1
-        };
-        startTime.setDate(startTime.getDate() + 1);
+    initData() {
+      this.arrDays = [];
+
+      for (var i = 1; i <= 12; i++) {
+        if (i < 10) {
+          this.initMonthArr(this.year + "-0" + i + "-01");
+        } else {
+          this.initMonthArr(this.year + "-" + i + "-01");
+        }
       }
     },
-    //点击查询按钮,查询客户群
-    getDataList() {},
 
-    // 新增 / 删除 / 修改
-    addAndDelete() {},
-    //重置
-    resetForm() {},
+    //把日期传进去，从而获取该日期所属月份的各种数据，可直接用于模板遍历
+    //数据存储在this.arrDays
+    initMonthArr(cur) {
+      //cur是形如'2020-03-02'这样的字符串
+      // var self = this
+      var date = new Date(cur);
 
+      var currentDay = date.getDate();
+      var currentYear = date.getFullYear();
+      var currentMonth = date.getMonth() + 1;
+      var currentWeek = date.getDay(); // 1...6,0
+
+      if (currentWeek == 0) {
+        //星期天
+        currentWeek = 7;
+      }
+      //var str = this.formatDate(currentYear, currentMonth, currentDay);
+      var arr = [];
+
+      var str = this.formatDate(currentYear, currentMonth, currentDay);
+      //this.days.length = 0;
+      // 今天是周日，放在第一行第7个位置，前面6个
+      for (var i = currentWeek - 1; i >= 0; i--) {
+        var d = new Date(str);
+        //d.setDate(d.getDate() - i);
+        if (i == 0) {
+          arr.push({
+            day: d,
+            flag: "",
+            isred: 0,
+            isgreen: 0
+          });
+        } else {
+          arr.push("");
+        }
+      }
+
+      for (var i = 1; i <= 42 - currentWeek; i++) {
+        var d = new Date(str);
+        d.setDate(d.getDate() + i);
+        if (currentMonth == d.getMonth() + 1) {
+          arr.push({
+            day: d,
+            flag: "",
+            isred: 0,
+            isgreen: 0
+          });
+        }
+      }
+      //obj中{2020currentYear,3currentMonth,用于遍历的数组arr}
+      var obj = {};
+      obj.moth = currentMonth;
+      obj.days = arr;
+      obj.year = currentYear;
+      this.arrDays.push(obj);
+    },
+    //将数字形式的年月日，生成‘year-month-day’形式的字符串
+    formatDate(year, month, day) {
+      var y = year;
+      var m = month;
+      if (m < 10) m = "0" + m;
+      var d = day;
+      if (d < 10) d = "0" + d;
+      return y + "-" + m + "-" + d;
+    },
     // 登记机构
-    async initFundCusttype() {}
+    async initRegCodeList() {
+      this.registerCodeList = [];
+      this.registerCodeList = (await queryRegList()).data;
+    }
+    
   }
 };
 </script>
 
 <style scoped>
-.redbgc {
+.calendar {
+  display: inline-block;
+  width: 30%;
+  margin-left: 10%;
+}
+.past {
+  background: rgba(116, 113, 113, 0.116);
+}
+.today{
+  border: 1px solid rgb(8, 12, 240);
+}
+.isred {
   background: red;
 }
-.greenbgc {
+
+.isgreen {
   background: green;
 }
-.defaultbgc {
-  background: grey;
+
+
+
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background: #eef1f6;
+  display: flex;
+  flex-wrap: wrap;
+  color: #ffffff;
+  justify-content: space-around;
+  width: 100%;
+  color: #374453;
+  padding-right: 17px;
+  background: #eef1f6;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+}
+
+.days {
+  padding: 0;
+  background: #ffffff;
+  margin: 0;
+  display: flex;
+  /* display:in-line; */
+  flex-wrap: wrap;
+  height: 100%;
+  /* width: 420px; */
+  width: 100%;
+  
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 14.2%;
+  text-align: center;
+  font-size: 1rem;
+  
+}
+
+.days li span {
+  display: inline-block;
+  color: #000;
+  cursor: pointer;
+  vertical-align: middle;
+  height: 50px;
+  line-height: 50px;
+  width: 50px;
+  /* border:2px solid white; */
+  border-radius: 25px;
+  
+}
+
+
+/* .days li span .active {
+            width: 50px;
+            border-radius: 25px;
+            background: #0097FF;
+            color: #fff;
+            display: inline-block;
+
+        } */
+
+.days li span:hover {
+  /* background: #0097FF;
+            color: #FFFFFF; */
+
+  color: rgb(247, 23, 7);
+}
+
+.years {
+  height: 30px;
+  line-height: 30px;
+  text-align: left;
+  padding: 0 10px;
+  color: #0097ff;
 }
 </style>

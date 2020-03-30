@@ -14,6 +14,14 @@ export function queryRegList () {
     method: 'get'
   })
 }
+//根据registerCode查询fundCode列表
+export function queryfundList (data) {
+
+  return axios({
+    url: 'http://' + Config.ip + ':' + Config.port + '/regAndFund/getFundList/'+data,
+    method: 'get',
+  })
+}
 
 export default {
   queryAllAgencyAndProcode
