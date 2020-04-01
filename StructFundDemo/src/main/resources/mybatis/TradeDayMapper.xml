@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.TradeDayMapper">
+
+    <resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.TradeDayVo">
+        <result column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
+        <result column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+        <result column="BUSINESS_DATE" jdbcType="DATE" property="businessDate" />
+        <result column="FLAG" jdbcType="CHAR" property="flag" />
+        <result column="CONFIRMDAY_FLAG" jdbcType="CHAR" property="confirmDayFlag" />
+    </resultMap>
+
+    <select id="queryTradeDay" parameterType="com.newtouch.structfund.entity.TradeDayVo"  resultMap="BaseResultMap">
+       select
+
+        BUSINESS_DATE,
+        FLAG,
+        CONFIRMDAY_FLAG
+       from trade_day
+       where REGISTER_CODE=#{registerCode}
+       and FUND_CODE=#{fundCode}
+       and BUSINESS_DATE between #{beginDate,jdbcType=DATE} and #{endDate,jdbcType=DATE}
+    </select>
+
+    <select id="selectOne" parameterType="com.newtouch.structfund.entity.TradeDayVo"  resultMap="BaseResultMap">
+       select
+        BUSINESS_DATE,
+        FLAG,
+        CONFIRMDAY_FLAG
+       from trade_day
+       where REGISTER_CODE=#{registerCode}
+       and FUND_CODE=#{fundCode}
+       and BUSINESS_DATE =#{businessDate}
+    </select>
+
+    <insert id="insert" parameterType="com.newtouch.structfund.entity.TradeDayVo">
+		insert into trade_day
+            (REGISTER_CODE,
+            FUND_CODE,
+            BUSINESS_DATE,
+        <trim  suffixOverrides="," suffix=")">
+            <if test="flag != null and flag !=''">
+                FLAG,
+            </if>
+            <if test="confirmDayFlag != null and confirmDayFlag !=''">
+                CONFIRMDAY_FLAG,
+            </if>
+        </trim>
+		values
+            (#{registerCode},
+            #{fundCode},
+            #{businessDate},
+        <trim  suffixOverrides="," suffix=")">
+            <if test="flag != null and flag !=''">
+                #{flag},
+            </if>
+            <if test="confirmDayFlag != null and confirmDayFlag !=''">
+                #{confirmDayFlag},
+            </if>
+        </trim>
+	</insert>
+
+    <update id="update" parameterType="com.newtouch.structfund.entity.TradeDayVo">
+		update trade_day set
+        <trim  suffixOverrides="," >
+            <if test="flag != null and flag !=''">
+                FLAG=#{flag},
+            </if>
+            <if test="confirmDayFlag != null and confirmDayFlag !=''">
+                CONFIRMDAY_FLAG=#{confirmDayFlag},
+            </if>
+        </trim>
+		where REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode} and BUSINESS_DATE=#{businessDate}
+	</update>
+
+
+
+    <update id="deleteWorkDay" parameterType="com.newtouch.structfund.entity.TradeDayVo">
+        update trade_day set
+          FLAG=2
+        where REGISTER_CODE=#{registerCode}
+        and FUND_CODE=#{fundCode}
+        and BUSINESS_DATE between #{beginDate,jdbcType=DATE} and #{endDate,jdbcType=DATE}
+    </update>
+
+    <update id="deleteConfirmDay" parameterType="com.newtouch.structfund.entity.TradeDayVo">
+        update trade_day set
+          CONFIRMDAY_FLAG=2
+        where REGISTER_CODE=#{registerCode}
+        and FUND_CODE=#{fundCode}
+        and BUSINESS_DATE between #{beginDate,jdbcType=DATE} and #{endDate,jdbcType=DATE}
+    </update>
+
+</mapper>
