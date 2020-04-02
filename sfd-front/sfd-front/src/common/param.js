@@ -1,3 +1,7 @@
+const isOrNot = [
+  {value: '0', label: '否'},
+  {value: '1', label: '是'}
+]
 
 const fundType = [// 产品类型
   {value: '1', label: '现金管理类产品'},
@@ -132,15 +136,11 @@ const announcFlag = [// 公告标志
   {value: '1', label: '公告'}
 ]
 
-const breakEven = [// 本金保障标识
-  {value: '0', label: '否'},
-  {value: '1', label: '是'}
-]
+// 本金保障标识
+const breakEven = isOrNot
 
-const benefitGuarantee = [// 收益保障标识
-  {value: '0', label: '否'},
-  {value: '1', label: '是'}
-]
+// 收益保障标识
+const benefitGuarantee = isOrNot
 
 const debtFundType = [// 中债产品划分
   {value: '1', label: '普通个人产品'},
@@ -167,10 +167,8 @@ const cancelType = [// 购买（认购）撤单
   {value: '2', label: '允许撤单'}
 ]
 
-const partRede = [// 允许部分赎回
-  {value: '0', label: '否'},
-  {value: '1', label: '是'}
-]
+// 允许部分赎回
+const partRede = isOrNot
 
 const isCheckInvester = [// 是否校验合格投资者
   {value: '0', label: '不需要'},
@@ -181,7 +179,76 @@ const moneyTypeAllot = {
   '2': '募集结束日+N到账'
 }
 
+const charge = [// 是否收费
+  {value: '0', label: '不收费'},
+  {value: '1', label: '收费'}
+]
+
+const transferType = [// 转托管方式
+  {value: '0', label: '一次转'},
+  {value: '1', label: '两次转'}
+]
+
+const checkType = [// 核算方式
+  {value: '0', label: '表内'},
+  {value: '1', label: '表外'},
+  {value: '2', label: '表内结构性可拆分'}
+]
+
+// 是否延时入账
+const delayedEntry = isOrNot
+
+const periodSubsFlag = [// 是否开通“定期定额申购”交易标志
+  {value: '0', label: '不开通'},
+  {value: '1', label: '开通'}
+]
+
+const subsCapType = [// 认购期扣账方式
+  {value: '1', label: '圈存'},
+  {value: '2', label: '实时扣款'}
+]
+
+// 申购期扣账方式
+const purchCapType = subsCapType
+
+const fundLevel = [// 产品风险等级
+  {value: '1R', label: '保守型产品'},
+  {value: '2R', label: '稳健型产品'},
+  {value: '3R', label: '平衡型产品'},
+  {value: '4R', label: '增长型产品'},
+  {value: '5R', label: '进取型产品'},
+  {value: '6R', label: '激进型产品'}
+]
+
+const incomeType = [// 收益类型
+  {value: '0', label: '按净值'},
+  {value: '1', label: '按收益'},
+  {value: '2', label: '超级收益类'}
+]
+
+const amtFlag = [// 额度控制属性
+  {value: '0', label: '不需要额度控制'},
+  {value: '1', label: '需要额度控制'}
+]
+
+const fundCtrlFlag = [// 非工作日是否允许交易
+  {value: '0', label: '不允许'},
+  {value: '1', label: '允许'}
+]
+
+const fastFlag = [// 是否允许实时赎回
+  {value: '1', label: '非实时赎回'},
+  {value: '0', label: '实时赎回'}
+]
+
 const param = {
+  fastFlag,
+  amtFlag,
+  fundCtrlFlag,
+  incomeType,
+  fundLevel,
+  purchCapType,
+  subsCapType,
   fundType,
   saleObject,
   ipoType,
@@ -212,7 +279,12 @@ const param = {
   cancelType,
   partRede,
   isCheckInvester,
-  moneyTypeAllot
+  moneyTypeAllot,
+  charge,
+  transferType,
+  checkType,
+  delayedEntry,
+  periodSubsFlag
 }
 
 export default param

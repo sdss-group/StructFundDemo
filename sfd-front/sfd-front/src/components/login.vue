@@ -76,6 +76,7 @@ export default {
         this.$router.push({ path: '/index' })
       }).catch((error) => {
         console.log(error) // 请求失败返回的数据
+        this.$message.error(error)
       })
     }
   }

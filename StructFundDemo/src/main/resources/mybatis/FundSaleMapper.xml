@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.FundSaleMapper">
+
+  <resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.FundSale">
+    <id column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
+    <id column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+    <result column="TRANSFER_TYPE" jdbcType="CHAR" property="transferType" />
+    <result column="CHARGE" jdbcType="CHAR" property="charge" />
+    <result column="CHECK_TYPE" jdbcType="CHAR" property="checkType" />
+    <result column="DELAYED_ENTRY" jdbcType="CHAR" property="delayedEntry" />
+    <result column="INVEST_TERM" jdbcType="CHAR" property="investTerm" />
+    <result column="PERIOD_SUBS_FLAG" jdbcType="CHAR" property="periodSubsFlag" />
+    <result column="FAIL_TIMES_PS" jdbcType="DECIMAL" property="failTimesPs" />
+    <result column="SUBS_CAP_TYPE" jdbcType="CHAR" property="subsCapType" />
+    <result column="PURCH_CAP_TYPE" jdbcType="CHAR" property="purchCapType" />
+    <result column="FUND_LEVEL" jdbcType="CHAR" property="fundLevel" />
+    <result column="MIN_BALA" jdbcType="DECIMAL" property="minBala" />
+    <result column="MAX_BALA" jdbcType="DECIMAL" property="maxBala" />
+    <result column="SETUP_DATE" jdbcType="DATE" property="setupDate" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="START_TRADE_DATE" jdbcType="DATE" property="startTradeDate" />
+    <result column="FUND_SELL_DATE" jdbcType="DATE" property="fundSellDate" />
+    <result column="FUND_ATTR" jdbcType="DATE" property="fundAttr" />
+    <result column="FUND_TYPE" jdbcType="CHAR" property="fundType" />
+    <result column="LARGE_REDE_FLAG" jdbcType="CHAR" property="largeRedeFlag" />
+    <result column="INCOME_TYPE" jdbcType="CHAR" property="incomeType" />
+    <result column="SALE_OBJECT" jdbcType="CHAR" property="saleObject" />
+    <result column="AMT_FLAG" jdbcType="CHAR" property="amtFlag" />
+    <result column="FUND_CTRL_FLAG" jdbcType="CHAR" property="fundCtrlFlag" />
+    <result column="TRADE_START" jdbcType="CHAR" property="tradeStart" />
+    <result column="TRADE_END" jdbcType="CHAR" property="tradeEnd" />
+    <result column="UNTARGET_BALANCE" jdbcType="DECIMAL" property="untargetBalance" />
+    <result column="SALE_RATE_FEE" jdbcType="DECIMAL" property="saleRateFee" />
+    <result column="SUBS_START" jdbcType="CHAR" property="subsStart" />
+    <result column="SUBS_END" jdbcType="CHAR" property="subsEnd" />
+    <result column="PERFORM_NUM" jdbcType="VARCHAR" property="performNum" />
+    <result column="MAX_RATIO" jdbcType="DECIMAL" property="maxRatio" />
+    <result column="MIN_RATIO" jdbcType="DECIMAL" property="minRatio" />
+    <result column="FAST_FLAG" jdbcType="CHAR" property="fastFlag" />
+    <result column="OPERATOR" jdbcType="CHAR" property="operator" />
+    <result column="AUTHORIZER" jdbcType="CHAR" property="authorizer" />
+    <result column="REGISTER_NAME" jdbcType="VARCHAR" property="registerName" />
+    <result column="FUND_NAME" jdbcType="VARCHAR" property="fundName" />
+    <result column="TIMESTAMP_U" jdbcType="TIMESTAMP" property="timestampU" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    REGISTER_CODE, FUND_CODE, TRANSFER_TYPE, CHARGE, CHECK_TYPE, DELAYED_ENTRY, INVEST_TERM, 
+    PERIOD_SUBS_FLAG, FAIL_TIMES_PS, SUBS_CAP_TYPE, PURCH_CAP_TYPE, FUND_LEVEL, MIN_BALA, 
+    MAX_BALA, INCOME_TYPE, SALE_OBJECT, AMT_FLAG, FUND_CTRL_FLAG, TRADE_START, TRADE_END, 
+    UNTARGET_BALANCE, SALE_RATE_FEE, SUBS_START, SUBS_END, PERFORM_NUM, MAX_RATIO, MIN_RATIO, 
+    FAST_FLAG, OPERATOR, AUTHORIZER
+  </sql>
+  
+  <select id="queryFundSaleInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select a.*,a.timestamp_u,b.REGISTER_NAME,c.fund_name from fund_sale a
+    left join fund_reg b on a.REGISTER_CODE=b.REGISTER_CODE
+    left join fund_set c on a.REGISTER_CODE=c.REGISTER_CODE and a.FUND_CODE=c.FUND_CODE
+    <where>
+      <if test="fundCode != '' and fundCode != null"> and a.FUND_CODE = #{fundSale.fundCode} </if>
+      <if test="registerCode != '' and registerCode != null"> and a.REGISTER_CODE = #{registerCode} </if>
+      <if test="ipoStartDate != '' and ipoStartDate != null"> and c.IPO_START_DATE = #{ipoStartDate} </if>
+      <if test="ipoEndDate != '' and ipoEndDate != null"> and c.IPO_END_DATE = #{ipoEndDate} </if>
+    </where>
+    limit #{startRow},#{pageSize}
+  </select>
+  
+  <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+  	select count(1) from fund_sale
+	<where>
+      <if test="fundCode != '' and fundCode != null"> and a.FUND_CODE = #{fundSale.fundCode} </if>
+      <if test="registerCode != '' and registerCode != null"> and a.REGISTER_CODE = #{registerCode} </if>
+      <if test="ipoStartDate != '' and ipoStartDate != null"> and c.IPO_START_DATE = #{ipoStartDate} </if>
+      <if test="ipoEndDate != '' and ipoEndDate != null"> and c.IPO_END_DATE = #{ipoEndDate} </if>
+    </where>
+  </select>
+
+</mapper> 

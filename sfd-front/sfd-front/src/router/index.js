@@ -7,6 +7,7 @@ import fundLot from '@/components/fundLot/fundLot'
 import accountTrans from '@/components/accountTrans/accountTrans'
 import agencyTrans from '@/components/agencyTrans/agencyTrans'
 import saleBillDate from '@/components/saleBillDate/saleBillDate'
+import fundSale from '@/components/fundinfoset/fundSale'
 
 Vue.use(Router)
 
@@ -55,6 +56,11 @@ export default new Router({
       path: '/saleBillDate',
       name: 'saleBillDate',
       component: saleBillDate
+    },
+    {
+      path: '/fundSale',
+      name: 'fundSale',
+      component: fundSale
     }
   ]
 })
