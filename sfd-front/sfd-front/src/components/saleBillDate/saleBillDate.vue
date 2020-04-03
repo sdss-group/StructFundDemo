@@ -1,7 +1,7 @@
 <template>
   <div class="mod-config">
     <!--表格菜单-->
-    <el-form :inline="true" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
+    <el-form :inline="true"  :model="dataForm" ref="dataForm" >
       <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" filterable clearable>
           <el-option
@@ -19,7 +19,7 @@
         <el-button @click="getDataList(1)">查询</el-button>
         <el-button type="primary" @click="resetForm('dataForm')">重置</el-button>
         <el-button type="primary" @click="addOrUpdateHandle(1,null)">新增</el-button>
-        <!-- <el-button type="primary" @click="addOrUpdateHandle()">修改</el-button>-->
+        
         <el-button
           type="danger"
           @click="ifDelete(0)"
@@ -58,19 +58,7 @@
       <el-table-column prop header-align="center" align="center" label="操作人"></el-table-column>
       <el-table-column prop="timestampU" header-align="center" align="center" label="更新时间"></el-table-column>
 
-      <!-- <el-table-column
-        prop="
-        "
-        header-align="center"
-        align="center"
-        label="批次状态">
-        <template slot-scope="scope">
-          <el-tag v-if="lotStatus[scope.row.lotStatus]" size="medium"
-                  :type='lotStatus[scope.row.lotStatus].type'>
-            {{lotStatus[scope.row.lotStatus].label}}
-          </el-tag>
-        </template>
-      </el-table-column>-->
+     
 
       <el-table-column fixed="right" header-align="center" align="center" width="150" label="操作">
         <template slot-scope="scope">
@@ -101,12 +89,13 @@
 
 <script>
 import AddOrUpdate from "./saleBillDateAddOrUpdate";
-import {queryRegList} from "../../common/req"
+import {queryRegList, queryfundList} from "../../common/req"
+
 export default {
   data() {
     return {
       
-      totalPieces:42,
+      totalPieces:0,
 
       dataForm: {
         registerCode: "",
@@ -133,10 +122,12 @@ export default {
   },
   methods: {
     getDataList(uniqueQuery) {
+      
+      //如果是点击查询，不是点击分页触发的查询
       if(uniqueQuery){
         this.dataForm.currentPage=1
       }
-      this.dataListLoading = true;
+      //this.dataListLoading = true;
       this.$ajax({
         method: "post",
         url:
@@ -151,14 +142,11 @@ export default {
           this.dataList = response.data.content;
           this.totalPieces=response.data.totalPieces;
 
-          // this.totalPage = 10
-          //  var j = JSON.stringify(response)
-          // console.log(j.toString())
         })
         .catch(error => {
           console.log(error);
         });
-      this.dataListLoading = false;
+     // this.dataListLoading = false;
     },
     // 分页相关
 
@@ -205,11 +193,13 @@ export default {
     // 删除
     deleteHandle(item) {
       let items = item ? [item] : this.dataListSelections;
-
+      //提示信息
+      let tip="确认进行批量删除？"
+      if(items.length==1){
+        tip="确认对登记机构为"+items[0].registerCode+",产品代码为"+items[0].fundCode+"进行删除？"
+      }
       this.$confirm(
-        `确定对[ 注册机构 = ${items.join("，")} ]进行[${
-          items.length === 1 ? " 删除 " : " 批量删除 "
-        }]操作?`,
+        tip,
         "提示",
         {
           confirmButtonText: "确定",

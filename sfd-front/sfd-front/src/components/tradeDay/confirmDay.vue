@@ -108,6 +108,7 @@ export default {
       if (newValue == "") {
         this.fundCode = "";
         this.fundCodeList = [];
+        this.chooseFlag=""
         return;
       }
       const response = (await queryfundList(newValue)).data;

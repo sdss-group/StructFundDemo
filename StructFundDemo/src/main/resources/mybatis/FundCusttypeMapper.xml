@@ -25,16 +25,22 @@
 		FUND_CUSTTYPE
 		(REGISTER_CODE,FUND_CODE,CUST_TYPE)
 		values
-		<foreach collection="custType" item="item" open="" close="" separator=",">
+		<foreach collection="toAdd" item="item" open="" close="" separator=",">
 			(#{registerCode},#{fundCode},#{item})
 		</foreach>
 	</insert>
 
-	<delete id="delete" >
+	<delete id="delete">
 		delete from FUND_CUSTTYPE where
 		<foreach collection="toDelete" item="item" open="(" separator="or" close=")">
 			REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode} and CUST_TYPE=#{item}
 		</foreach>
+	</delete>
+	<delete id="deleteAll">
+		delete from FUND_CUSTTYPE where
+
+			REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode}
+
 	</delete>
 
 </mapper>

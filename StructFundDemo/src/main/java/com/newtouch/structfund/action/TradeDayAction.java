@@ -55,7 +55,7 @@ public class TradeDayAction {
      */
     @RequestMapping("deleteWorkDay")
     public Integer deleteWorkDay(TradeDayVo param){
-        System.out.println("----------------------------------------------------------------------------");
+
         System.out.println(param);
         Calendar cal = Calendar.getInstance();
         int day = cal.get(Calendar.DATE);
@@ -70,8 +70,7 @@ public class TradeDayAction {
             param.setBeginDate(year+"-"+monthString+"-"+dayString);
 
             param.setEndDate(param.getYear()+"-12-31");
-            System.out.println(param);
-            System.out.println("+++++++++++++++++++++++++++++++++");
+
             tm.deleteWorkDay(param);
 
         //如果>本年
