@@ -94,14 +94,16 @@ public class TradeDayAction {
         int month = cal.get(Calendar.MONTH) + 1;
         String monthString=month>9?(month+""):("0"+month);
         int year = cal.get(Calendar.YEAR);
-
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
         //如果是本年
-        if(param.getYear().equals(year)){
+        if(param.getYear().equals(year+"")){
             param.setBeginDate(year+"-"+monthString+"-"+dayString);
             param.setEndDate(param.getYear()+"-12-31");
+            System.out.println("-----------delete---------------------");
             tm.deleteConfirmDay(param);
-
+            System.out.println(param);
+            System.out.println("--------------------------------");
             //如果>本年
         }else if(Integer.parseInt(param.getYear())>year){
             param.setBeginDate(param.getYear()+"-01-01");
