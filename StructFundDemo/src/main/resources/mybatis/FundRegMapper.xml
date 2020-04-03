@@ -38,11 +38,11 @@
 		order by FUND_CODE
 	</select>
 
-
-	<select id="queryAgency" parameterType="java.lang.String" resultType="java.lang.String">
-		select REGISTER_CODE from FUND_SET where 1=1
+	<select id="queryAgency" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select a.REGISTER_CODE,b.REGISTER_NAME from FUND_SET a
+		left join FUND_REG b on a.REGISTER_CODE=b.REGISTER_CODE where 1=1
 		<if test="fundCode != '' and fundCode != null">
-		and	FUND_CODE=#{fundCode}
+			and a.FUND_CODE=#{fundCode}
 		</if>
 		order by REGISTER_CODE desc limit 1
 	</select>

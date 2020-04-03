@@ -2,21 +2,22 @@
   <el-dialog
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
-    :visible.sync="visible" align="center">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
+    :visible.sync="visible" width="700px">
+    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="110px">
         <el-form-item label="登记机构" prop="registerCode">
-        <el-select v-model="dataForm.registerCode" :disabled="isDisabled" style="width: 100%"  filterable placeholder="请选择">
-          <el-option
-            v-for="item in registerCodeList"
+        <el-select v-model="dataForm.registerCode" :disabled="isDisabled"  filterable placeholder="请选择">
+          <el-option @click.native="change(item)"
+             v-for="item in registerCodeList"
             :key="item.index"
-            :label="item.registerCode"
+            :label="item.registerName"
             :value="item.registerCode">
-            <span style="float: left">{{ item.registerCode }}</span>
+            <span style="float: left">{{ item.registerName}}</span>
           </el-option>
         </el-select>
+          <el-input v-show="false" v-model="dataForm.registerName"></el-input>
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
-        <el-select v-model="dataForm.fundCode" :disabled="isDisabled" style="width: 100%" filterable placeholder="请选择" >
+        <el-select v-model="dataForm.fundCode" :disabled="isDisabled" filterable placeholder="请选择" >
           <el-option
             v-for="item in fundCodeList"
             :key="item.index"
@@ -33,7 +34,7 @@
         <el-input v-model="dataForm.lotType" maxlength="1"></el-input>
       </el-form-item>
       <el-form-item label="批次发起时间" prop="startTime">
-        <el-time-picker v-model="dataForm.startTime" style="width: 100%" format="HH:mm:ss"
+        <el-time-picker v-model="dataForm.startTime" format="HH:mm:ss"
                         value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }">
         </el-time-picker>
       </el-form-item>
@@ -41,7 +42,7 @@
         <el-input v-model="dataForm.fundName" ></el-input>
       </el-form-item>
         <el-form-item label="批次状态" prop="lotStatus">
-          <el-select v-model="dataForm.lotStatus" style="width: 100%" clearable>
+          <el-select v-model="dataForm.lotStatus" clearable>
             <el-option v-for="item in this.$param.lotStatus" :key="item.value" :label="item.label"
                        :value="item.value">
             </el-option>
@@ -63,6 +64,7 @@ export default {
       dataForm: {
         id: 0,
         registerCode: '',
+        registerName: '',
         fundCode: '',
         lotCode: '',
         lotType: '',
@@ -123,6 +125,7 @@ export default {
             this.dataForm.startTime = result.data.startTime
             this.dataForm.fundName = result.data.fundName
             this.dataForm.lotStatus = result.data.lotStatus
+            this.dataForm.registerName = result.data.registerName
             this.isDisabled = true
           })
         }
@@ -166,7 +169,21 @@ export default {
           })
         }
       })
+    },
+    // 向隐藏input赋值
+    change (item) {
+      this.dataForm.registerName = item.registerName
     }
   }
 }
 </script>
+<style scoped>
+  .el-select{
+    width: 50%;
+    margin-left: -50%
+  }
+  .el-date-editor{
+    width: 50%;
+    margin-left: -50%
+  }
+</style>

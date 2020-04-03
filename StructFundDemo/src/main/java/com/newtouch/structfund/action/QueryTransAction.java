@@ -87,16 +87,12 @@ public class QueryTransAction {
 
     //根据产品代码查询登记机构反显展示
     @RequestMapping("queryAgencyByFundCode")
-    public String queryAgencyByFundCode(String fundCode) {
+    public List<FundReg> queryAgencyByFundCode(String fundCode) {
 
-        return fundRegMapper.queryAgency(fundCode);
+        List<FundReg> fundRegList = new ArrayList<>();
+        fundRegList.add(fundRegMapper.queryAgency(fundCode));
+        return fundRegList;
     }
-
-
-    public void exportExcel() {
-
-    }
-
 
     /**
      * 查询柜员所属机构

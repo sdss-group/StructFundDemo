@@ -4,7 +4,7 @@
     <el-form :inline="true" :rules="dataRule" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" filterable clearable>
-          <el-option v-for="item in registerCodeList" :key="item.index" :label="item.registerCode"
+          <el-option v-for="item in registerCodeList" :key="item.index" :label="item.registerName"
                      :value="item.registerCode">
           </el-option>
         </el-select>
@@ -21,7 +21,7 @@
       v-loading="dataListLoading"
       style="width: 100%;">
       <el-table-column
-        prop="registerCode"
+        prop="registerName"
         header-align="center"
         align="center"
         label="登记机构">
@@ -41,12 +41,14 @@
       <el-table-column
         prop="transAccount"
         header-align="center"
+        :formatter="amtFormat"
         align="center"
         label="交易帐户开户申请笔数">
       </el-table-column>
       <el-table-column
         prop="fundAccount"
         header-align="center"
+        :formatter="amtFormat"
         align="center"
         label="理财账户开户申请笔数">
       </el-table-column>
@@ -66,7 +68,7 @@
     </el-pagination>
     <!--导出表格-->
     <el-table :data="dataListOut" v-loading="dataListLoading" style="width: 100%;" id="out-table" v-show="false">
-      <el-table-column prop="registerCode" header-align="center" align="center" label="登记机构"></el-table-column>
+      <el-table-column prop="registerName" header-align="center" align="center" label="登记机构"></el-table-column>
       <el-table-column prop="regionCode" header-align="center" align="center" label="分行代码"></el-table-column>
       <el-table-column prop="orgName" header-align="center" align="center" label="分行名称"></el-table-column>
       <el-table-column prop="transAccount" header-align="center" align="center" label="交易帐户开户申请笔数"></el-table-column>
@@ -106,6 +108,12 @@ export default {
   },
   methods: {
     getDataList () {
+      if (this.dataForm.currentPage > 1 && this.dataForm.registerCode !== '') {
+        this.dataForm.currentPage = 1
+      }
+      this.getDataListPage()
+    },
+    getDataListPage () {
       this.$refs['dataForm'].validate((valid) => {
         this.dataListLoading = true
         this.$ajax({
@@ -127,13 +135,15 @@ export default {
     },
     handleCurrentChange (current) {
       this.dataForm.currentPage = current
-      this.getDataList()
+      this.getDataListPage()
     },
     // 重置
     resetForm (formName) {
       this.$refs[formName].resetFields()
       this.dataList = []
       this.dataListOut = []
+      this.dataForm.currentPage = 1
+      this.dataForm.pageSize = 10
       this.totalRows = 0
       this.isDisabled = true
     },
@@ -163,6 +173,15 @@ export default {
     async initAgencyAndProcode () {
       this.registerCodeList = []
       this.registerCodeList = (await this.$req.queryAllAgencyAndProcode()).data
+    },
+    amtFormat (row, column, cellValue) {
+      if (cellValue !== '' && cellValue !== null) {
+        cellValue += ''
+        if (!cellValue.includes('.')) cellValue += '.'
+        return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+          return $1 + ','
+        }).replace(/\.$/, '')
+      }
     }
   }
 }

@@ -12,6 +12,7 @@
 		<result column="LOT_STATUS" property="lotStatus" jdbcType="VARCHAR"/>
 		<result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
 		<result column="AUTHORIZER" property="authorizer" jdbcType="VARCHAR"/>
+		<result column="REGISTER_NAME" jdbcType="VARCHAR" property="registerName" />
 	</resultMap>
 
 	<select id="queryFundLot" parameterType="java.util.Map" resultMap="BaseResultMap">
@@ -72,7 +73,7 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.newtouch.structfund.entity.FundLot">
-		insert into fund_lot(REGISTER_CODE,FUND_CODE,LOT_CODE,LOT_TYPE,START_TIME,FUND_NAME,LOT_STATUS,OPERATOR,AUTHORIZER) values(#{registerCode},#{fundCode},#{lotCode},#{lotType},#{startTime},#{fundName},#{lotStatus},#{operator},#{authorizer})
+		insert into fund_lot(REGISTER_CODE,FUND_CODE,LOT_CODE,LOT_TYPE,START_TIME,FUND_NAME,LOT_STATUS,OPERATOR,AUTHORIZER,REGISTER_NAME) values(#{registerCode},#{fundCode},#{lotCode},#{lotType},#{startTime},#{fundName},#{lotStatus},#{operator},#{authorizer},#{registerName})
 	</insert>
 
 	<update id="update" parameterType="com.newtouch.structfund.entity.FundLot">

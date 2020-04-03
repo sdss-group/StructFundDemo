@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.OrgAmtMapper">
+    <resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.OrgAmt">
+        <id column="ORG_CODE" jdbcType="VARCHAR" property="orgCode" />
+        <id column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
+        <id column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+        <result column="LEVEL" jdbcType="CHAR" property="level" />
+        <result column="ORG_SUPE_RBR" jdbcType="VARCHAR" property="orgSupeRbr" />
+        <result column="type" jdbcType="CHAR" property="type" />
+        <result column="TOTAL_AMT" jdbcType="DECIMAL" property="totalAmt" />
+        <result column="RESV_AMT" jdbcType="DECIMAL" property="resvAmt" />
+        <result column="EFFECT_FLAG" jdbcType="CHAR" property="effectFlag" />
+        <result column="USER_CODE" jdbcType="CHAR" property="userCode" />
+        <result column="CHANNEL_VOL_FLAG" jdbcType="CHAR" property="channelVolFlag" />
+        <result column="CHANNEL_VOL_AMT" jdbcType="DECIMAL" property="channelVolAmt" />
+        <result column="BANKVOL_FLAG" jdbcType="CHAR" property="bankvolFlag" />
+        <result column="BANKVOL_AMT" jdbcType="DECIMAL" property="bankvolAmt" />
+        <result column="REGISTER_NAME" jdbcType="VARCHAR" property="registerName" />
+        <result column="FUND_NAME" jdbcType="VARCHAR" property="fundName" />
+        <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+        <result column="TIMESTAMP_C" jdbcType="TIMESTAMP" property="timestampC" />
+        <result column="TIMESTAMP_U" jdbcType="TIMESTAMP" property="timestampU" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ORG_CODE, REGISTER_CODE, FUND_CODE, LEVEL, ORG_SUPE_RBR, type, TOTAL_AMT, RESV_AMT,
+    EFFECT_FLAG, USER_CODE, CHANNEL_VOL_FLAG, CHANNEL_VOL_AMT, BANKVOL_FLAG, BANKVOL_AMT,
+    TIMESTAMP_C, TIMESTAMP_U
+   </sql>
+
+    <select id="selectByPrimaryKey" parameterType="com.newtouch.structfund.entity.OrgAmt" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ORG_AMT
+        where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+        and REGISTER_CODE = #{registerCode,jdbcType=CHAR}
+        and FUND_CODE = #{fundCode,jdbcType=VARCHAR}
+    </select>
+
+    <select id="querySaledAmt" parameterType="com.newtouch.structfund.entity.OrgAmt" resultType="java.util.Map">
+        select AMOUNT from credit_log where 1=1
+        <if test="registerCode!=null and registerCode!=''">
+            and register_code=#{registerCode}
+        </if>
+        <if test="fundCode!=null and fundCode!=''">
+            and fund_code=#{fundCode}
+        </if>
+    </select>
+
+    <select id="querySaleAmtInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select t1.register_code,t1.fund_code,t1.total_amt,t1.level,t1.org_code,t2.register_name,t3.fund_name,t4.org_name
+        from org_amt t1 left join fund_reg t2 on t1.register_code=t2.register_code
+        left join fund_set t3 on t1.fund_code=t3.fund_code and t1.register_code=t3.register_code
+        left join regnt t4 on t1.org_code=t4.org_br
+        where 1=1
+        <if test="orgAmt.registerCode!=null and orgAmt.registerCode!=''">
+            and t1.register_code=#{orgAmt.registerCode}
+        </if>
+        <if test="orgAmt.fundCode!=null and orgAmt.fundCode!=''">
+            and t1.fund_code=#{orgAmt.fundCode}
+        </if>
+        ORDER BY register_code,fund_code limit #{startRow},#{pageSize}
+    </select>
+
+    <select id="countOrgAmt" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) from org_amt where 1=1
+        <if test="registerCode!=null and registerCode!=''">
+            and register_code=#{registerCode}
+        </if>
+        <if test="fundCode!=null and fundCode!=''">
+            and fund_code=#{fundCode}
+        </if>
+    </select>
+
+    <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) from fund_sale where 1=1
+        <if test="orgAmt.registerCode!=null and orgAmt.registerCode!=''">
+            and register_code=#{orgAmt.registerCode}
+        </if>
+        <if test="orgAmt.fundCode!=null and orgAmt.fundCode!=''">
+            and fund_code=#{orgAmt.fundCode}
+        </if>
+        with ur
+    </select>
+
+    <update id="update" parameterType="com.newtouch.structfund.entity.OrgAmt">
+	  update org_amt set total_amt=#{totalAmt} where fund_code=#{fundCode}
+	  and register_code=#{registerCode} and org_code='01315999999'
+	</update>
+</mapper>

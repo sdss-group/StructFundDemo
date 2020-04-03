@@ -11,6 +11,7 @@ public interface FundRegMapper {
 
     List<FundReg> queryFundCode(String registerCode);
 
-    String queryAgency(String fundCode);
+    FundReg queryAgency(String fundCode);
+
 
 }

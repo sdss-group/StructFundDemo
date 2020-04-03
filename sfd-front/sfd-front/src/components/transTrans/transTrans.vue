@@ -3,14 +3,14 @@
     <!--表格菜单-->
     <el-form :inline="true" :rules="dataRule" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item label="登记机构" prop="registerCode">
-        <el-select v-model="dataForm.registerCode" @change="queryFundCode(dataForm.registerCode)" clearable>
-          <el-option v-for="item in registerCodeList" :key="item.index" :label="item.registerCode"
+        <el-select v-model="dataForm.registerCode" @change="queryFundCode()">
+          <el-option v-for="item in registerCodeList" :key="item.index" :label="item.registerName"
                      :value="item.registerCode">
           </el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
-        <el-select v-model="dataForm.fundCode" @change="queryAgency(dataForm.fundCode)" clearable>
+        <el-select v-model="dataForm.fundCode" @change="queryAgency()">
           <el-option v-for="item in fundCodeList" :key="item.index" :label="item.fundCode"
                      :value="item.fundCode">
           </el-option>
@@ -28,7 +28,7 @@
       v-loading="dataListLoading"
       style="width: 100%;">
       <el-table-column
-        prop="registerCode"
+        prop="registerName"
         header-align="center"
         align="center"
         label="登记机构">
@@ -54,24 +54,28 @@
       <el-table-column
         prop="renshenCount"
         header-align="center"
+        :formatter="amtFormat"
         align="center"
         label="认（申）购申请笔数">
       </el-table-column>
       <el-table-column
         prop="renshenAmt"
         header-align="center"
+        :formatter="amtFormat"
         align="center"
         label="认（申）购申请金额">
       </el-table-column>
       <el-table-column
         prop="shuhuiCount"
         header-align="center"
+        :formatter="amtFormat"
         align="center"
         label="赎回申请笔数">
       </el-table-column>
       <el-table-column
         prop="shuhuiVol"
         header-align="center"
+        :formatter="amtFormat"
         align="center"
         label="赎回申请份额">
       </el-table-column>
@@ -97,7 +101,7 @@
     </el-pagination>
     <!--导出表格-->
     <el-table :data="dataListOut" v-loading="dataListLoading" style="width: 100%;" id="out-table" v-show="false">
-      <el-table-column prop="registerCode" header-align="center" align="center" label="登记机构"></el-table-column>
+      <el-table-column prop="registerName" header-align="center" align="center" label="登记机构"></el-table-column>
       <el-table-column prop="fundCode" header-align="center" align="center" label="产品代码"></el-table-column>
       <el-table-column prop="regionCode" header-align="center" align="center" label="分行代码"></el-table-column>
       <el-table-column prop="orgName" header-align="center" align="center" label="分行名称"></el-table-column>
@@ -146,6 +150,12 @@ export default {
   },
   methods: {
     getDataList () {
+      if (this.dataForm.currentPage > 1 && (this.dataForm.registerCode !== '' || this.dataForm.fundCode !== '')) {
+        this.dataForm.currentPage = 1
+      }
+      this.getDataListPage()
+    },
+    getDataListPage () {
       this.$refs['dataForm'].validate((valid) => {
         this.dataListLoading = true
         this.$ajax({
@@ -167,13 +177,16 @@ export default {
     },
     handleCurrentChange (current) {
       this.dataForm.currentPage = current
-      this.getDataList()
+      this.getDataListPage()
     },
     // 重置
     resetForm (formName) {
       this.$refs[formName].resetFields()
+      this.initAgencyAndProcode()
       this.dataList = []
       this.dataListOut = []
+      this.dataForm.currentPage = 1
+      this.dataForm.pageSize = 10
       this.totalRows = 0
       this.isDisabled = true
     },
@@ -207,16 +220,17 @@ export default {
       this.registerCodeList = result.data
       this.fundCodeList = result.data
     },
-    queryAgency (fundCode) {
+    queryAgency () {
       this.$ajax({
         method: 'post',
         url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/queryTrans/queryAgencyByFundCode',
         data: this.$qs.stringify({'fundCode': this.dataForm.fundCode})
       }).then((result) => {
-        this.dataForm.registerCode = result.data
+        this.dataForm.registerCode = result.data[0].registerCode
+        this.registerCodeList = result.data
       })
     },
-    queryFundCode (registerCode) {
+    queryFundCode () {
       this.$ajax({
         method: 'post',
         url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/queryTrans/queryFundCodeByAgency',
@@ -225,6 +239,13 @@ export default {
         this.dataForm.fundCode = result.data[0].fundCode
         this.fundCodeList = result.data
       })
+    },
+    amtFormat (row, column, cellValue) {
+      cellValue += ''
+      if (!cellValue.includes('.')) cellValue += '.'
+      return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+        return $1 + ','
+      }).replace(/\.$/, '')
     }
   }
 }
