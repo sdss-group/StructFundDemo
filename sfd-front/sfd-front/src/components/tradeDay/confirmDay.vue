@@ -24,7 +24,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="年份">
-          <el-input v-model="year" clearable></el-input>
+          <el-input v-model="year"  @blur="validateYear()"></el-input>
         </el-form-item>
       </el-form>
       <el-form :inline="true">
@@ -180,6 +180,31 @@ export default {
   },
 
   methods: {
+    //验证年份是否正确
+    validateYear() {
+      let tips=''
+
+      let tmp = Number(this.year);
+
+      if (typeof tmp === "number" && !isNaN(tmp)) {
+        if (this.year < 1000 || this.year>3000) {
+          tips='年份数据有误'
+        } else {
+          return;
+        }
+      } else {
+        tips='年份必须为数字'
+      }
+
+      this.year=new Date().getFullYear();
+      
+        this.$alert(tips, "提示", {
+          confirmButtonText: "确定"
+        });
+        
+      
+      
+    },
     //给可以修改的日期添加点击事件，点击修改
     changeOne(item) {
       

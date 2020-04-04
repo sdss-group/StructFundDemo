@@ -24,7 +24,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="年份">
-          <el-input v-model="year" clearable></el-input>
+          <el-input v-model="year"  @blur="validateYear()"></el-input>
         </el-form-item>
       </el-form>
       <el-form :inline="true">
@@ -108,7 +108,7 @@ export default {
       if (newValue == "") {
         this.fundCode = "";
         this.fundCodeList = [];
-        this.chooseFlag=""
+        this.chooseFlag = "";
         return;
       }
       const response = (await queryfundList(newValue)).data;
@@ -180,28 +180,51 @@ export default {
   },
 
   methods: {
-    //给可以修改的日期添加点击事件，点击修改
-    changeOne(item) {
-      
-      if(item.flag==0){
-        item.flag=1
-        item.isred=1;
-        item.isgreen=0;
-      }else if(item.flag==1){
-        item.flag=2
-        item.isred=0;
-        item.isgreen=0;
-      }else if(item.flag==2){
-        item.flag=0
-        item.isred=0;
-        item.isgreen=1;
+    //验证年份是否正确
+    validateYear() {
+      let tips=''
+
+      let tmp = Number(this.year);
+
+      if (typeof tmp === "number" && !isNaN(tmp)) {
+        if (this.year < 1000 || this.year>3000) {
+          tips='年份数据有误'
+        } else {
+          return;
+        }
+      } else {
+        tips='年份必须为数字'
       }
+
+      this.year=new Date().getFullYear();
+      
+        this.$alert(tips, "提示", {
+          confirmButtonText: "确定"
+        });
+        
+      
       
     },
+    //给可以修改的日期添加点击事件，点击修改
+    changeOne(item) {
+      if (item.flag == 0) {
+        item.flag = 1;
+        item.isred = 1;
+        item.isgreen = 0;
+      } else if (item.flag == 1) {
+        item.flag = 2;
+        item.isred = 0;
+        item.isgreen = 0;
+      } else if (item.flag == 2) {
+        item.flag = 0;
+        item.isred = 0;
+        item.isgreen = 1;
+      }
+    },
     //本日及本年后续日期工作日信息全部删除(假删除)
-    deleteWorkDay(){
+    deleteWorkDay() {
       //弹窗，如果year<本年，提示不能修改历史数据
-      if (this.year>new Date().getFullYear) {
+      if (this.year > new Date().getFullYear) {
         this.$alert("不能删除历史数据", "提示", {
           confirmButtonText: "确定"
         });
@@ -216,13 +239,16 @@ export default {
       }
 
       //todo,弹出提示框：是否要删除从。。。到。。。全部的工作日信息？
-       this.$confirm("此操作将删除"+this.year+"年所有的非历史数据, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      this.$confirm(
+        "此操作将删除" + this.year + "年所有的非历史数据, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      )
         .then(() => {
-          
           //发送请求
           this.$ajax({
             method: "post",
@@ -233,18 +259,18 @@ export default {
               ":" +
               this.$Config.port +
               "/tradeDay/deleteWorkDay",
-           
+
             data: this.$qs.stringify({
-                    registerCode: this.registerCode,
-                    fundCode: this.fundCode,
-                    year: this.year
-                 })
+              registerCode: this.registerCode,
+              fundCode: this.fundCode,
+              year: this.year
+            })
           })
             .then(response => {
               //刷新查询
               this.initData();
               this.initTradeDay();
-              this.chooseFlag="";
+              this.chooseFlag = "";
               this.$message({
                 type: "success",
                 message: "删除成功!"
@@ -265,8 +291,6 @@ export default {
             message: "已取消"
           });
         });
-
-
     },
     //提交数据
     submit() {
@@ -312,7 +336,7 @@ export default {
               //刷新查询
               this.initData();
               this.initTradeDay();
-              this.chooseFlag="";
+              this.chooseFlag = "";
               this.$message({
                 type: "success",
                 message: "提交成功!"
@@ -446,7 +470,6 @@ export default {
               } else {
               }
             }
-            
           }
         }
       }
@@ -622,8 +645,6 @@ export default {
   /* border:2px solid white; */
   border-radius: 25px;
 }
-
-
 
 .days li span:hover {
   /* background: #0097FF;

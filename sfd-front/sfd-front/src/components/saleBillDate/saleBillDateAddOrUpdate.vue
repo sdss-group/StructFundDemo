@@ -3,26 +3,27 @@
     :title="isadd ? '新增' : '修改'"
     :close-on-click-modal="false"
     :visible.sync="visible">
-    <el-form  :model="dataForm" :rules="dataRule" ref="dataForm" label-width="120px">
-      <el-form-item label="登记机构" prop="registerCode">
-        <el-select v-model="registerCode" :disabled="isDisabled"  filterable placeholder="请选择">
+    <el-form  :model="dataForm" :rules="dataRule" ref="dataForm" label-width="auto">
+      <el-form-item label="登记机构" prop="registerCode" >
+        <el-select v-model="registerCode" :disabled="isDisabled"  filterable placeholder="请选择"  style="float: left">
           <el-option
             v-for="item in registerCodeList"
             :key="item.registerCode"
             :label="item.registerCode"
             :value="item.registerCode">
-            <span style="float: left">{{ item.registerCode }}</span>
+            <span >{{ item.registerCode }}</span>
           </el-option>
         </el-select>
+        
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
-        <el-select v-model="fundCode" :disabled="isDisabled" filterable placeholder="请选择" >
+        <el-select v-model="fundCode" :disabled="isDisabled" filterable placeholder="请选择"  style="float: left">
           <el-option
             v-for="item in fundCodeList"
             :key="item.fundCode"
             :label="item.fundCode"
             :value="item.fundCode">
-            <span style="float: left">{{ item.fundCode }}</span>
+            <span >{{ item.fundCode }}</span>
           </el-option>
         </el-select>
       </el-form-item>
@@ -53,7 +54,7 @@
       </el-form-item>
 
       <el-form-item label="转换到期天数" prop="delayDateChange">
-        <el-input v-model="dataForm.delayDateChange"  placeholder="到期确认天数" maxlength="2"></el-input>
+        <el-input v-model="dataForm.delayDateChange"  placeholder="转换到期天数" maxlength="2"></el-input>
       </el-form-item>
 
       <!-- <el-form-item label="认购到款方式" prop="moneyTypeAllot">
@@ -61,7 +62,7 @@
       </el-form-item> -->
 
       <el-form-item label="认购到款方式" prop="moneyTypeAllot">
-        <el-select v-model="dataForm.moneyTypeAllot" >
+        <el-select v-model="dataForm.moneyTypeAllot"  style="float: left">
           <el-option :label=" moneyTypeAllot['1']" value="1">
             <span style="float: left">每天T+N到</span>
           </el-option>
@@ -89,7 +90,23 @@
 <script>
 import {queryRegList, queryfundList} from "../../common/req"
 
+const validateAcquaintance = (rule, value, callback) => {
+  
+  let tmp = Number(value)
+  if (typeof tmp === 'number' && !isNaN(tmp)) {
+    if (value < 1 ) {
+      callback(new Error('数据格式错误'))
+    } else {
+      callback()
+    }
+  } else {
+    callback(new Error('必须为数字'))
+  }
+}
+
 export default {
+  
+
   data () {
     return {
       visible: false,
@@ -127,31 +144,39 @@ export default {
           { required: true, message: '请选择产品代码', trigger: 'blur' }
         ],
         delayDateAllot: [
-          { required: true, message: '请填写认购到账天数', trigger: 'blur' }
+          { required: true, message: '请填写认购到账天数', trigger: 'blur' },
+          { validator: validateAcquaintance, trigger: 'blur' }
         ],
         delayDatePurse: [
-          { required: true, message: '请填写转换到期天数', trigger: 'blur' }
+          { required: true, message: '请填写转换到期天数', trigger: 'blur' },
+          { validator: validateAcquaintance, trigger: 'blur' }
         ],
         delayDateRedeem: [
-          { required: true, message: '请填写赎回到账天数', trigger: 'blur' }
+          { required: true, message: '请填写赎回到账天数', trigger: 'blur' },
+          { validator: validateAcquaintance, trigger: 'blur' }
         ],
         confRedeemDays: [
-          { required: true, message: '请填写赎回确认天数', trigger: 'blur' }
+          { required: true, message: '请填写赎回确认天数', trigger: 'blur' },
+          { validator: validateAcquaintance, trigger: 'blur' }
         ],
         delayDateAdvEnd: [
-          { required: true, message: '请填写提前终止到账天数', trigger: 'blur' }
+          { required: true, message: '请填写提前终止到账天数', trigger: 'blur' },
+          { validator: validateAcquaintance, trigger: 'blur' }
         ],
         delayDateChange: [
-          { required: true, message: '', trigger: 'blur' }
+          { required: true, message: '转换到期天数', trigger: 'blur' },
+          { validator: validateAcquaintance, trigger: 'blur' }
         ],
         delayDateEnd: [
-          { required: true, message: '请填写正常终止到账天数', trigger: 'blur' }
+          { required: true, message: '请填写正常终止到账天数', trigger: 'blur' },
+          { validator: validateAcquaintance, trigger: 'blur' }
         ],
         moneyTypeAllot: [
           { required: true, message: '请填写认购到款方式', trigger: 'blur' }
         ],
         delayDateBonus: [
-          { required: true, message: '请填写分红到账天数', trigger: 'blur' }
+          { required: true, message: '请填写分红到账天数', trigger: 'blur' },
+          { validator: validateAcquaintance, trigger: 'blur' }
         ]
       }
     }
