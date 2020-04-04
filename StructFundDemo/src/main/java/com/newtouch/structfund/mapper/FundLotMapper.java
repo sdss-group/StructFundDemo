@@ -10,9 +10,11 @@ public interface FundLotMapper {
 
     List<FundLot> queryFundLot(Map param);
 
+    List<FundLot> selectSingleData(FundLot fundLot);
+
     Integer count(Map param);
 
-    int delete(List<String> ids);
+    int delete(List<FundLot> rows);
 
     FundLot getOne(FundLot fundLot);
 

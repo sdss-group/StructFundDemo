@@ -5,12 +5,15 @@ import index from '@/components/index'
 import baseinfo from '@/components/fundinfo/baseinfo'
 import fundLot from '@/components/fundLot/fundLot'
 import accountTrans from '@/components/accountTrans/accountTrans'
-import agencyTrans from '@/components/agencyTrans/agencyTrans'
+import transTrans from '@/components/transTrans/transTrans'
+import orgAmt from '@/components/orgAmt/orgAmt'
 import saleBillDate from '@/components/saleBillDate/saleBillDate'
 import fundSale from '@/components/fundinfoset/fundSale'
 
+import fundCustType from '@/components/fundCustType/fundCustType'
+import workDay from '@/components/tradeDay/workDay'
+import confirmDay from '@/components/tradeDay/confirmDay'
 Vue.use(Router)
-
 export default new Router({
   routes: [
     {
@@ -45,9 +48,17 @@ export default new Router({
       }
     },
     {
-      path: '/agencyTrans',
-      name: 'agencyTrans',
-      component: agencyTrans,
+      path: '/transTrans',
+      name: 'transTrans',
+      component: transTrans,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/orgAmt',
+      name: 'orgAmt',
+      component: orgAmt,
       meta: {
         keepAlive: true
       }
@@ -61,6 +72,21 @@ export default new Router({
       path: '/fundSale',
       name: 'fundSale',
       component: fundSale
+    },
+    {
+      path: '/fundCustType',
+      name: 'fundCustType',
+      component: fundCustType
+    },
+    {
+      path: '/workDay',
+      name: 'workDay',
+      component: workDay
+    },
+    {
+      path: '/confirmDay',
+      name: 'confirmDay',
+      component: confirmDay
     }
   ]
 })

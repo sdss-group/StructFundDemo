@@ -24,10 +24,10 @@
         select * from SALE_BILLDATE t
         <where>
             <if test="registerCode!=null and registerCode!=''">
-                t.REGISTER_CODE LIKE CONCAT(CONCAT('%', #{registerCode}), '%')
+              and  t.REGISTER_CODE LIKE CONCAT(CONCAT('%', #{registerCode}), '%')
             </if>
             <if test="fundCode !=null and fundCode!=''">
-                t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundCode}), '%')
+              and  t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundCode}), '%')
             </if>
         </where>
     </select>
@@ -57,22 +57,29 @@
 
     <insert id="insert" parameterType="com.newtouch.structfund.entity.SaleBillDate">
 		insert into SALE_BILLDATE
+
             (REGISTER_CODE,
             FUND_CODE,
+            DISTRIBUTOR_CODE,
             DELAY_DATE_ALLOT,
+            DELAY_DATE_PURSE,
             DELAY_DATE_REDEEM,
             CONF_REDEEM_DAYS,
             DELAY_DATE_ADV_END,
+            DELAY_DATE_CHANGE,
             DELAY_DATE_END,
             MONEY_TYPE_ALLOT,
             DELAY_DATE_BONUS)
 		values
             (#{registerCode},
             #{fundCode},
+            #{distributorCode},
             #{delayDateAllot},
+            #{delayDatePurse},
             #{delayDateRedeem},
             #{confRedeemDays},
             #{delayDateAdvEnd},
+            #{delayDateChange},
             #{delayDateEnd},
             #{moneyTypeAllot},
             #{delayDateBonus})
@@ -81,9 +88,11 @@
     <update id="update" parameterType="com.newtouch.structfund.entity.SaleBillDate">
 		update SALE_BILLDATE set
 		DELAY_DATE_ALLOT=#{delayDateAllot},
+		DELAY_DATE_PURSE=#{delayDatePurse},
 		DELAY_DATE_REDEEM=#{delayDateRedeem},
 		CONF_REDEEM_DAYS=#{confRedeemDays},
 		DELAY_DATE_ADV_END=#{delayDateAdvEnd},
+		DELAY_DATE_CHANGE=#{delayDateChange},
 		DELAY_DATE_END=#{delayDateEnd},
 		MONEY_TYPE_ALLOT=#{moneyTypeAllot},
 		DELAY_DATE_BONUS=#{delayDateBonus}

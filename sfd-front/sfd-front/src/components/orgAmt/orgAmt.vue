@@ -15,8 +15,6 @@
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
         <el-button type="primary" @click="resetForm('dataForm')">重置</el-button>
-        <el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button type="danger" @click="ifDelete()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
     <!--表格-->
@@ -32,12 +30,6 @@
         width="50">
       </el-table-column>
       <el-table-column
-        prop="registerName"
-        header-align="center"
-        align="center"
-        label="登记机构">
-      </el-table-column>
-      <el-table-column
         prop="fundCode"
         header-align="center"
         align="center"
@@ -50,43 +42,51 @@
         label="产品名称">
       </el-table-column>
       <el-table-column
-        prop="lotCode"
+        prop="registerName"
         header-align="center"
         align="center"
-        label="产品批次">
+        label="管理人名称">
       </el-table-column>
       <el-table-column
-        prop="startTime"
+        v-if="false"
+        prop="level"
         header-align="center"
         align="center"
-        label="批次发起时间">
+        label="级别">
       </el-table-column>
       <el-table-column
-        prop="lotStatus"
+        v-if="false"
+        prop="orgCode"
         header-align="center"
         align="center"
-        label="批次状态">
-        <template slot-scope="scope">
-          <!--<el-tag v-if="lotStatus.get(scope.row.lotStatus)" size="medium" :type="lotStatus.get(scope.row.lotStatus).type">
-            {{ lotStatus.get(scope.row.lotStatus) }}
-          </el-tag>-->
-          <el-tag v-if="lotStatus[scope.row.lotStatus]" size="medium"
-                  :type='lotStatus[scope.row.lotStatus].type'>
-            {{lotStatus[scope.row.lotStatus].label}}
-          </el-tag>
-        </template>
+        label="分行代码">
       </el-table-column>
       <el-table-column
-        prop="operator"
+        prop="registerCode"
         header-align="center"
         align="center"
-        label="操作人">
+        label="中登登记代码">
       </el-table-column>
       <el-table-column
-        prop="authorizer"
+        prop="totalAmt"
         header-align="center"
+        :formatter="amtFormat"
         align="center"
-        label="授权人">
+        label="全行额度">
+      </el-table-column>
+      <el-table-column
+        prop="saledAmt"
+        header-align="center"
+        :formatter="amtFormat"
+        align="center"
+        label="全行已售额度">
+      </el-table-column>
+      <el-table-column
+        prop="restAmt"
+        header-align="center"
+        :formatter="amtFormat"
+        align="center"
+        label="全行未售额度">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -95,8 +95,7 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="medium" @click="addOrUpdateHandle(scope.row.registerCode,scope.row.fundCode,scope.row.lotCode,scope.row.lotStatus)"><i class="el-icon-edit"></i></el-button>
-          <el-button type="text" size="medium" @click="ifDelete(scope.row)"><i class="el-icon-delete"></i></el-button>
+          <el-button type="text" size="medium" @click="addOrUpdateHandle(scope.row)"><i class="el-icon-edit"></i></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -113,7 +112,8 @@
 </template>
 
 <script>
-import AddOrUpdate from './fundLotAddOrUpdate'
+import AddOrUpdate from './orgAmtAddOrUpdate'
+
 export default {
   data () {
     return {
@@ -150,7 +150,7 @@ export default {
       this.dataListLoading = true
       this.$ajax({
         method: 'post',
-        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/queryFundLot',
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/orgAmt/queryOrgAmt',
         data: this.$qs.stringify(this.dataForm)
       }).then((result) => {
         this.dataList = result.data.dataList
@@ -166,20 +166,11 @@ export default {
     selectionChangeHandle (val) {
       this.dataListSelections = val
     },
-    // 新增 / 修改
-    addOrUpdateHandle (registerCode, fundCode, lotCode, lotStatus) {
-      // 非初始化状态不能修改
-      if (lotStatus === '1' || lotStatus === '2' || lotStatus === '3') {
-        this.$message({
-          showClose: true,
-          message: '非初始化状态不允许修改!',
-          type: 'error'
-        })
-        return 0
-      }
+    // 修改
+    addOrUpdateHandle (row) {
       this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(registerCode, fundCode, lotCode)
+        this.$refs.addOrUpdate.init(row)
       })
     },
     // 重置
@@ -189,57 +180,19 @@ export default {
       this.dataForm.pageSize = 10
       this.getDataListPage()
     },
-    // 判断状态如果非初始化，则不能删除
-    ifDelete (row) {
-      let rows = row ? [row] : this.dataListSelections.map(item => {
-        return item
-      })
-      let deleteFlag = 0
-      rows.forEach((item) => {
-        if (item.lotStatus === '1' || item.lotStatus === '2' || item.lotStatus === '3') {
-          deleteFlag++
-        }
-      })
-      if (deleteFlag > 0) {
-        this.$message({
-          showClose: true,
-          message: '非初始化状态，不允许删除!',
-          type: 'error'
-        })
-        return 0
-      } else {
-        this.deleteHandle(rows)
-      }
-    },
-    // 删除
-    deleteHandle (rows) {
-      this.$confirm(`确定对所选项进行[${rows.length === 1 ? ' 删除 ' : ' 批量删除 '}]操作?`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$ajax({
-          method: 'post',
-          headers: {'Content-Type': 'application/json;charset=UTF-8'},
-          url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/delete',
-          data: JSON.stringify(rows),
-          traditional: true
-        }).then((response) => {
-          this.$message({
-            message: '操作成功',
-            type: 'success',
-            duration: 1500,
-            onClose: () => {
-              this.getDataList()
-            }
-          })
-        })
-      })
-    },
     // 登记机构
     async initAgencyNameAndProcode () {
       this.registerCodeList = []
       this.registerCodeList = (await this.$req.queryAllAgencyAndProcode()).data
+    },
+    amtFormat (row, column, cellValue) {
+      if (cellValue !== '' && cellValue !== null) {
+        cellValue += ''
+        if (!cellValue.includes('.')) cellValue += '.'
+        return cellValue.replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
+          return $1 + ','
+        }).replace(/\.$/, '')
+      }
     }
   }
 }

@@ -2,25 +2,25 @@
   <el-dialog
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
-    :visible.sync="visible" >
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="100px">
-      <el-row :span="24" style="margin-top: 15px">
+    :visible.sync="visible" width="700px">
+    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="110px">
         <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" :disabled="isDisabled"  filterable placeholder="请选择">
-          <el-option
-            v-for="item in registerCodeList"
-            :key="item.registerCode"
-            :label="item.registerCode"
+          <el-option @click.native="change(item)"
+             v-for="item in registerCodeList"
+            :key="item.index"
+            :label="item.registerName"
             :value="item.registerCode">
-            <span style="float: left">{{ item.registerCode }}</span>
+            <span style="float: left">{{ item.registerName}}</span>
           </el-option>
         </el-select>
+          <el-input v-show="false" v-model="dataForm.registerName"></el-input>
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
         <el-select v-model="dataForm.fundCode" :disabled="isDisabled" filterable placeholder="请选择" >
           <el-option
             v-for="item in fundCodeList"
-            :key="item.fundCode"
+            :key="item.index"
             :label="item.fundCode"
             :value="item.fundCode">
             <span style="float: left">{{ item.fundCode }}</span>
@@ -28,14 +28,26 @@
         </el-select>
       </el-form-item>
       <el-form-item label="产品批次" prop="lotCode">
-        <el-input v-model="dataForm.lotCode" placeholder="产品批次" maxlength="2"></el-input>
+        <el-input v-model="dataForm.lotCode" :disabled="isDisabled" maxlength="2"></el-input>
+      </el-form-item>
+      <el-form-item label="批次优先级" prop="lotType">
+        <el-input v-model="dataForm.lotType" maxlength="1"></el-input>
       </el-form-item>
       <el-form-item label="批次发起时间" prop="startTime">
-        <el-time-picker v-model="dataForm.startTime" placeholder="批次发起时间" format="HH:mm:ss"
-                        value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }"
-        ></el-time-picker>
+        <el-time-picker v-model="dataForm.startTime" format="HH:mm:ss"
+                        value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }">
+        </el-time-picker>
       </el-form-item>
-      </el-row>
+      <el-form-item label="产品名称" prop="fundName">
+        <el-input v-model="dataForm.fundName" ></el-input>
+      </el-form-item>
+        <el-form-item label="批次状态" prop="lotStatus">
+          <el-select v-model="dataForm.lotStatus" clearable>
+            <el-option v-for="item in this.$param.lotStatus" :key="item.value" :label="item.label"
+                       :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -52,33 +64,46 @@ export default {
       dataForm: {
         id: 0,
         registerCode: '',
+        registerName: '',
         fundCode: '',
         lotCode: '',
+        lotType: '',
         startTime: '',
-        isDisabled: false
+        fundName: '',
+        lotStatus: '0'
       },
+      isDisabled: false,
       registerCodeList: [],
       fundCodeList: [],
       dataRule: {
         registerCode: [
-          { required: true, message: '请选择登记机构', trigger: 'blur' }
+          {required: true, message: '请选择登记机构', trigger: 'blur'}
         ],
         fundCode: [
-          { required: true, message: '请选择产品代码', trigger: 'blur' }
+          {required: true, message: '请选择产品代码', trigger: 'blur'}
         ],
         lotCode: [
-          { required: true, message: '请输入产品批次', trigger: 'blur' }
+          {required: true, message: '请输入产品批次', trigger: 'blur'}
+        ],
+        lotType: [
+          {required: true, message: '请输入批次优先级', trigger: 'blur'}
         ],
         startTime: [
-          { required: true, message: '请输入批次发起时间', trigger: 'blur' }
+          {required: true, message: '请输入批次发起时间', trigger: 'blur'}
+        ],
+        fundName: [
+          {required: true, message: '请输入批次名称', trigger: 'blur'}
+        ],
+        lotStatus: [
+          {required: true, message: '请选择批次状态', trigger: 'blur'}
         ]
       }
     }
   },
   methods: {
-    init (id) {
-      this.initFundCusttype()
-      this.dataForm.id = id || 0
+    init (registerCode, fundCode, lotCode) {
+      this.initAgencyAndProcode()
+      this.dataForm.id = registerCode || 0
       this.isDisabled = false
       this.visible = true
       this.$nextTick(() => {
@@ -87,27 +112,32 @@ export default {
           this.$ajax({
             method: 'post',
             url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/getOne',
-            data: this.$qs.stringify({'registerCode': this.dataForm.id})
-          }).then((response) => {
-            this.dataForm.registerCode = response.data.registerCode
-            this.dataForm.fundCode = response.data.fundCode
-            this.dataForm.lotCode = response.data.lotCode
-            this.dataForm.startTime = response.data.startTime
-            // 登记机构及产品代码不可更改
+            data: this.$qs.stringify({
+              'registerCode': registerCode,
+              'fundCode': fundCode,
+              'lotCode': lotCode
+            })
+          }).then((result) => {
+            this.dataForm.registerCode = result.data.registerCode
+            this.dataForm.fundCode = result.data.fundCode
+            this.dataForm.lotCode = result.data.lotCode
+            this.dataForm.lotType = result.data.lotType
+            this.dataForm.startTime = result.data.startTime
+            this.dataForm.fundName = result.data.fundName
+            this.dataForm.lotStatus = result.data.lotStatus
+            this.dataForm.registerName = result.data.registerName
             this.isDisabled = true
-          }).catch((error) => {
-            console.log(error)
           })
         }
       })
     },
     // 初始化注册机构代码和产品代码
-    async initFundCusttype () {
+    async initAgencyAndProcode () {
       this.registerCodeList = []
       this.fundCodeList = []
-      let res = await this.$req.listFundCusttype()
-      this.registerCodeList = res.data
-      this.fundCodeList = res.data
+      let result = await this.$req.queryAllAgencyAndProcode()
+      this.registerCodeList = result.data
+      this.fundCodeList = result.data
     },
     // 表单提交
     dataFormSubmit () {
@@ -117,8 +147,8 @@ export default {
             method: 'post',
             url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/' + (!this.dataForm.id ? 'insert' : 'update'),
             data: this.$qs.stringify(this.dataForm)
-          }).then((response) => {
-            if (response.data === 1) {
+          }).then((res) => {
+            if (res.data.result === 1) {
               this.$message({
                 message: '操作成功',
                 type: 'success',
@@ -131,7 +161,7 @@ export default {
               })
             } else {
               this.$message({
-                message: '操作失败',
+                message: res.data.result,
                 type: 'error',
                 duration: 1500
               })
@@ -139,7 +169,21 @@ export default {
           })
         }
       })
+    },
+    // 向隐藏input赋值
+    change (item) {
+      this.dataForm.registerName = item.registerName
     }
   }
 }
 </script>
+<style scoped>
+  .el-select{
+    width: 50%;
+    margin-left: -50%
+  }
+  .el-date-editor{
+    width: 50%;
+    margin-left: -50%
+  }
+</style>

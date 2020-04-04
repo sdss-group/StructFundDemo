@@ -1,11 +1,11 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
+    :title="isadd ? '新增' : '修改'"
     :close-on-click-modal="false"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="120px">
+    <el-form  :model="dataForm" :rules="dataRule" ref="dataForm" label-width="120px">
       <el-form-item label="登记机构" prop="registerCode">
-        <el-select v-model="dataForm.registerCode" :disabled="isDisabled"  filterable placeholder="请选择">
+        <el-select v-model="registerCode" :disabled="isDisabled"  filterable placeholder="请选择">
           <el-option
             v-for="item in registerCodeList"
             :key="item.registerCode"
@@ -16,7 +16,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
-        <el-select v-model="dataForm.fundCode" :disabled="isDisabled" filterable placeholder="请选择" >
+        <el-select v-model="fundCode" :disabled="isDisabled" filterable placeholder="请选择" >
           <el-option
             v-for="item in fundCodeList"
             :key="item.fundCode"
@@ -32,8 +32,8 @@
         <el-input v-model="dataForm.delayDateAllot" placeholder="认购到账天数" maxlength="2"></el-input>
       </el-form-item>
 
-      <el-form-item label="申购确认天数" prop="">
-        <el-input  placeholder="暂无字段对应" maxlength="2"></el-input>
+      <el-form-item label="申购到账天数" prop="delayDatePurse">
+        <el-input v-model="dataForm.delayDatePurse" placeholder="申购确认天数" maxlength="2"></el-input>
       </el-form-item>
 
 
@@ -52,13 +52,26 @@
         <el-input v-model="dataForm.delayDateEnd" placeholder="正常终止到账天数" maxlength="2"></el-input>
       </el-form-item>
 
-      <el-form-item label="到期确认天数" prop="">
-        <el-input  placeholder="暂无字段" maxlength="2"></el-input>
+      <el-form-item label="转换到期天数" prop="delayDateChange">
+        <el-input v-model="dataForm.delayDateChange"  placeholder="到期确认天数" maxlength="2"></el-input>
       </el-form-item>
 
-      <el-form-item label="认购到款方式" prop="moneyTypeAllot">
+      <!-- <el-form-item label="认购到款方式" prop="moneyTypeAllot">
         <el-input v-model="dataForm.moneyTypeAllot" placeholder="认购到款方式1或2" maxlength="2"></el-input>
+      </el-form-item> -->
+
+      <el-form-item label="认购到款方式" prop="moneyTypeAllot">
+        <el-select v-model="dataForm.moneyTypeAllot" >
+          <el-option :label=" moneyTypeAllot['1']" value="1">
+            <span style="float: left">每天T+N到</span>
+          </el-option>
+          <el-option :label=" moneyTypeAllot['2']" value="2">
+            <span style="float: left">募集结束日+N到账</span>
+          </el-option>
+       </el-select>
       </el-form-item>
+
+      
 
 
       <el-form-item label="分红到账天数" prop="delayDateBonus">
@@ -74,22 +87,31 @@
 </template>
 
 <script>
+import {queryRegList, queryfundList} from "../../common/req"
+
 export default {
   data () {
     return {
       visible: false,
       //是否是添加页面的标志
       isadd:1,
+      
+      moneyTypeAllot: this.$param.moneyTypeAllot,
+
+      fundCode: '',
+      registerCode:'',
+
       dataForm: {
-        
         registerCode: '',
         fundCode: '',
         distributorCode:'',
         delayDateAllot:'',
+        delayDatePurse:'',
         delayDateRedeem:'',
         confRedeemDays:'',
         delayDateAdvEnd:'',
         delayDateEnd:'',
+        delayDateChange:'',
         moneyTypeAllot:'',
         delayDateBonus:'',
         
@@ -107,6 +129,9 @@ export default {
         delayDateAllot: [
           { required: true, message: '请填写认购到账天数', trigger: 'blur' }
         ],
+        delayDatePurse: [
+          { required: true, message: '请填写转换到期天数', trigger: 'blur' }
+        ],
         delayDateRedeem: [
           { required: true, message: '请填写赎回到账天数', trigger: 'blur' }
         ],
@@ -115,6 +140,9 @@ export default {
         ],
         delayDateAdvEnd: [
           { required: true, message: '请填写提前终止到账天数', trigger: 'blur' }
+        ],
+        delayDateChange: [
+          { required: true, message: '', trigger: 'blur' }
         ],
         delayDateEnd: [
           { required: true, message: '请填写正常终止到账天数', trigger: 'blur' }
@@ -128,19 +156,55 @@ export default {
       }
     }
   },
-  methods: {
-    init (item) {
-      console.log("-------------------");
-      console.log(item);
-      console.log(this.isDisabled);
-      console.log("-------------------");
+  watch:{
+     //监听registerCode
+    registerCode: async function(newValue, oldValue) {
+      this.dataForm.registerCode=newValue
+      if (newValue == "") {
+        this.fundCode = "";
+        this.fundCodeList = [];
+        return;
+      }
+      const response = (await queryfundList(newValue)).data;
+      this.fundCodeList = response;
+     
+      if (!response == []) {
+        this.fundCode = response[0].fundCode;
+      }
+    },
+     //监听registerCode
+    fundCode: async function(newValue, oldValue) {
+      this.dataForm.fundCode=this.fundCode
+     
+    },
     
-      this.initFundCusttype()
+  },
+  methods: {
+    
+    init (isadd,item) {
+      
+
+      this.isadd=isadd
+      this.initRegList()
       
       this.isDisabled = false
       this.visible = true
+
+      //清空之前的添加记录
+      this.registerCode="",
+      this.fundCode="",
+      this.dataForm.distributorCode='',
+        this.dataForm.delayDateAllot="",
+       this.dataForm.delayDatePurse="",
+        this.dataForm.delayDateRedeem="",
+        this.dataForm.confRedeemDays="",
+        this.dataForm.delayDateAdvEnd="",
+        this.dataForm.delayDateEnd="",
+        this.dataForm.delayDateChange="",
+        this.dataForm.moneyTypeAllot="",
+        this.dataForm.delayDateBonus="",
       this.$nextTick(() => {
-        this.$refs['dataForm'].resetFields()
+        
         if (item) {
           this.$ajax({
             method: 'post',
@@ -148,19 +212,23 @@ export default {
             url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/saleBillDate/getOne',
             data:JSON.stringify(item)
           }).then((response) => {
+            this.registerCode=response.data.registerCode
+            this.fundCode=response.data.fundCode
             this.dataForm.registerCode = response.data.registerCode
             this.dataForm.fundCode = response.data.fundCode
             this.dataForm.delayDateAllot = response.data.delayDateAllot
+            this.dataForm.delayDatePurse = response.data.delayDatePurse
             this.dataForm.delayDateRedeem = response.data.delayDateRedeem
             this.dataForm.confRedeemDays = response.data.confRedeemDays
             this.dataForm.delayDateAdvEnd = response.data.delayDateAdvEnd
             this.dataForm.delayDateEnd = response.data.delayDateEnd
+            this.dataForm.delayDateChange = response.data.delayDateChange
             this.dataForm.moneyTypeAllot = response.data.moneyTypeAllot
             this.dataForm.delayDateBonus = response.data.delayDateBonus
             this.dataForm.distributorCode=response.data.distributorCode
             // 登记机构及产品代码不可更改
             this.isDisabled = true
-            this.isadd=0
+            //this.isadd=0
           }).catch((error) => {
             console.log(error)
           })
@@ -168,12 +236,12 @@ export default {
       })
     },
     // 初始化注册机构代码和产品代码
-    async initFundCusttype () {
+    async initRegList () {
       this.registerCodeList = []
       this.fundCodeList = []
-      let res = await this.$req.listFundCusttype()
+      let res = await queryRegList()
       this.registerCodeList = res.data
-      this.fundCodeList = res.data
+      //this.fundCodeList = res.data
     },
     // 表单提交
     dataFormSubmit () {

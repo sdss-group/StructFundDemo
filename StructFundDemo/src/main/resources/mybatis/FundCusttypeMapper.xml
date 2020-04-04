@@ -12,4 +12,35 @@
 	<select id="listAll" parameterType="com.newtouch.structfund.entity.FundCusttype" resultMap="resultMap">
 		select * from fund_custtype
 	</select>
+
+	<select id="listTypeByReCodeAndFuCode"  resultType="string">
+		select
+		CUST_TYPE
+		from fund_custtype
+		where REGISTER_CODE= #{registerCode} and FUND_CODE=#{fundCode}
+	</select>
+
+	<insert id="insert" >
+		insert into
+		FUND_CUSTTYPE
+		(REGISTER_CODE,FUND_CODE,CUST_TYPE)
+		values
+		<foreach collection="toAdd" item="item" open="" close="" separator=",">
+			(#{registerCode},#{fundCode},#{item})
+		</foreach>
+	</insert>
+
+	<delete id="delete">
+		delete from FUND_CUSTTYPE where
+		<foreach collection="toDelete" item="item" open="(" separator="or" close=")">
+			REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode} and CUST_TYPE=#{item}
+		</foreach>
+	</delete>
+	<delete id="deleteAll">
+		delete from FUND_CUSTTYPE where
+
+			REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode}
+
+	</delete>
+
 </mapper>

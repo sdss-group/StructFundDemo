@@ -12,6 +12,7 @@
 		<result column="LOT_STATUS" property="lotStatus" jdbcType="VARCHAR"/>
 		<result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
 		<result column="AUTHORIZER" property="authorizer" jdbcType="VARCHAR"/>
+		<result column="REGISTER_NAME" jdbcType="VARCHAR" property="registerName" />
 	</resultMap>
 
 	<select id="queryFundLot" parameterType="java.util.Map" resultMap="BaseResultMap">
@@ -21,28 +22,61 @@
 				t.REGISTER_CODE = #{fundLot.registerCode}
 			</if>
 			<if test="fundLot.fundCode !=null and fundLot.fundCode!=''">
-				t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundLot.fundCode}), '%')
+			and	t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundLot.fundCode}), '%')
+			</if>
+			<if test="fundLot.lotCode!=null and fundLot.lotCode!=''">
+			and	t.LOT_CODE = #{fundLot.lotCode}
 			</if>
 		</where>
 		limit #{startRow},#{pageSize}
 	</select>
 
+	<select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(1) from fund_lot t where 1=1
+			<if test="fundLot.registerCode!=null and fundLot.registerCode!=''">
+				and t.REGISTER_CODE = #{fundLot.registerCode}
+			</if>
+			<if test="fundLot.fundCode !=null and fundLot.fundCode!=''">
+				and	t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundLot.fundCode}), '%')
+			</if>
+			<if test="fundLot.lotCode!=null and fundLot.lotCode!=''">
+				and	t.LOT_CODE = #{fundLot.lotCode}
+			</if>
+	</select>
+
+	<select id="selectSingleData" parameterType="com.newtouch.structfund.entity.FundLot" resultMap="BaseResultMap">
+		select * from fund_lot
+		<where>
+			<if test="registerCode!=null and registerCode!=''">
+				REGISTER_CODE = #{registerCode}
+			</if>
+			<if test="fundCode !=null and fundCode!=''">
+			 and   FUND_CODE = #{fundCode}
+			</if>
+			<if test="lotCode!=null and lotCode!=''">
+			 and  	LOT_CODE = #{lotCode}
+			</if>
+		</where>
+	</select>
+
 	<delete id="delete" parameterType="java.util.List">
-		delete from fund_lot where registerCode in
-		<foreach collection="list" item="id" open="(" separator="," close=")">
-			#{id}
+		delete from fund_lot where
+		<foreach collection="list" item="item" index="index" separator="or">
+			(register_code=#{item.registerCode}
+			and fund_code=#{item.fundCode}
+			and lot_code=#{item.lotCode})
 		</foreach>
 	</delete>
 
-	<select id="getOne" parameterType="com.newtouch.structfund.entity.FundLot" resultType="com.newtouch.structfund.entity.FundLot">
-		select * from fund_lot t where t.registerCode = #{registerCode}
+	<select id="getOne" parameterType="com.newtouch.structfund.entity.FundLot" resultMap="BaseResultMap">
+		select * from fund_lot  where REGISTER_CODE = #{registerCode} and FUND_CODE = #{fundCode} and LOT_CODE = #{lotCode}
 	</select>
 	
 	<insert id="insert" parameterType="com.newtouch.structfund.entity.FundLot">
-		insert into fund_lot(registerCode,fundCode,lotCode,startTime) values(#{registerCode},#{fundCode},#{lotCode},#{startTime})
+		insert into fund_lot(REGISTER_CODE,FUND_CODE,LOT_CODE,LOT_TYPE,START_TIME,FUND_NAME,LOT_STATUS,OPERATOR,AUTHORIZER,REGISTER_NAME) values(#{registerCode},#{fundCode},#{lotCode},#{lotType},#{startTime},#{fundName},#{lotStatus},#{operator},#{authorizer},#{registerName})
 	</insert>
 
 	<update id="update" parameterType="com.newtouch.structfund.entity.FundLot">
-		update fund_lot set lotCode=#{lotCode},startTime=#{startTime} where registerCode=#{registerCode} and fundCode=#{fundCode}
+		update fund_lot set LOT_TYPE=#{lotType},START_TIME=#{startTime},FUND_NAME=#{fundName},LOT_STATUS=#{lotStatus} where REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode} and LOT_CODE = #{lotCode}
 	</update>
 </mapper>
