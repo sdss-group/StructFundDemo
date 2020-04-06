@@ -8,8 +8,11 @@ import accountTrans from '@/components/accountTrans/accountTrans'
 import transTrans from '@/components/transTrans/transTrans'
 import orgAmt from '@/components/orgAmt/orgAmt'
 import saleBillDate from '@/components/saleBillDate/saleBillDate'
+import fundSale from '@/components/fundinfoset/fundSale'
+
 import fundCustType from '@/components/fundCustType/fundCustType'
-import tradeDay from '@/components/workDay/tradeDay'
+import workDay from '@/components/tradeDay/workDay'
+import confirmDay from '@/components/tradeDay/confirmDay'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -66,14 +69,24 @@ export default new Router({
       component: saleBillDate
     },
     {
+      path: '/fundSale',
+      name: 'fundSale',
+      component: fundSale
+    },
+    {
       path: '/fundCustType',
       name: 'fundCustType',
       component: fundCustType
     },
     {
-      path: '/tradeDay',
-      name: 'tradeDay',
-      component: tradeDay
+      path: '/workDay',
+      name: 'workDay',
+      component: workDay
+    },
+    {
+      path: '/confirmDay',
+      name: 'confirmDay',
+      component: confirmDay
     }
   ]
 })

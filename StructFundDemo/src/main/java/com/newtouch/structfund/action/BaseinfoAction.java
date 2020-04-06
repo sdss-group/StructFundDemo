@@ -40,13 +40,9 @@ public class BaseinfoAction {
 		param.put("startRow", (currentPage-1)*pageSize);
 		param.put("pageSize", pageSize);
 		List<FundSet> resultList=fundSetMapper.queryBaseinfo(param);
-		for (FundSet fundSet : resultList) {
-			System.out.println(fundSet.getFundCode()+":"+ fundSet.getFundStatus());
-		}
 		Integer totalRows=fundSetMapper.count(param);
 		Map resultMap=new HashMap();
 		resultMap.put("dataList", resultList);
-		System.out.println("fundstatus:"+resultList.get(0).getFundStatus());
 		resultMap.put("totalRows", totalRows);
 		return resultMap;
 	}

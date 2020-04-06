@@ -5,15 +5,18 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface FundCusttypeMapper {
 
     List<FundCusttype> listAll();
 
-    List<String> listTypeByReCodeAndFuCode(@Param("registerCode") String registerCode, @Param("fundCode")String fundCode);
+    Set<String> listTypeByReCodeAndFuCode(@Param("registerCode") String registerCode, @Param("fundCode")String fundCode);
 
-    int insert(@Param("registerCode") String registerCode, @Param("fundCode")String fundCode,@Param("custType")String[] custType );
+    int insert(@Param("registerCode") String registerCode, @Param("fundCode")String fundCode,@Param("toAdd")Set<String> toAdd );
 
-    int delete(@Param("registerCode") String registerCode, @Param("fundCode")String fundCode,@Param("toDelete")String[] toDelete );
+    int delete(@Param("registerCode") String registerCode, @Param("fundCode")String fundCode,@Param("toDelete")Set<String> toDelete );
+
+    int deleteAll(@Param("registerCode") String registerCode, @Param("fundCode")String fundCode );
 }

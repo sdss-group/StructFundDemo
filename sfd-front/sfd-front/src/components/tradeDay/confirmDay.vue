@@ -24,23 +24,23 @@
           </el-select>
         </el-form-item>
         <el-form-item label="年份">
-          <el-input v-model="year" clearable></el-input>
+          <el-input v-model="year"  @blur="validateYear()"></el-input>
         </el-form-item>
       </el-form>
       <el-form :inline="true">
-        <el-form-item label="当前产品工作日">
+        <el-form-item label="当前产品确认日">
           <el-select filterable clearable v-model="chooseFlag">
             <el-option value="1" label="全选"></el-option>
             <el-option value="2" label="反选"></el-option>
             <el-option value="3" label="全不选"></el-option>
-          </el-select>注：红色为非工作日
+          </el-select>注：红色为非确认日
         </el-form-item>
 
         <el-form-item>
           <el-button @click="initTradeDay()" icon="el-icon-search" circle>查询</el-button>
           <el-button @click="resetQuery()" type="primary">重置</el-button>
           <el-button @click="submit()" type="success">提交</el-button>
-          <el-button @click="deleteWorkDay()" type="danger">删除</el-button>
+          <el-button @click="deleteConfirmDay()" type="danger">删除</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -108,6 +108,7 @@ export default {
       if (newValue == "") {
         this.fundCode = "";
         this.fundCodeList = [];
+        this.chooseFlag=""
         return;
       }
       const response = (await queryfundList(newValue)).data;
@@ -127,14 +128,14 @@ export default {
         this.chooseFlag = "";
         return;
       }
-      //全选，全部设置为工作日 0-------此处修改了历史数据，但是历史数据并不会提交
+      //全选
       if (this.chooseFlag == 1) {
         for (let monthInfo of this.arrDays) {
           for (let dayInfo of monthInfo.days) {
             if (dayInfo == "") {
               continue;
             }
-            dayInfo.flag = 0;
+            dayInfo.confirmDayFlag = 0;
             dayInfo.isgreen = 1;
             dayInfo.isred = 0;
           }
@@ -148,12 +149,12 @@ export default {
             if (dayInfo == "" || dayInfo.flag == 2) {
               continue;
             }
-            if (dayInfo.flag == 0) {
-              dayInfo.flag = 1;
+            if (dayInfo.confirmDayFlag == 0) {
+              dayInfo.confirmDayFlag = 1;
               dayInfo.isgreen = 0;
               dayInfo.isred = 1;
             } else {
-              dayInfo.flag = 0;
+              dayInfo.confirmDayFlag = 0;
               dayInfo.isgreen = 1;
               dayInfo.isred = 0;
             }
@@ -168,7 +169,7 @@ export default {
             if (dayInfo == "") {
               continue;
             }
-            dayInfo.flag = 1;
+            dayInfo.confirmDayFlag = 1;
             dayInfo.isgreen = 0;
             dayInfo.isred = 1;
           }
@@ -179,26 +180,51 @@ export default {
   },
 
   methods: {
+    //验证年份是否正确
+    validateYear() {
+      let tips=''
+
+      let tmp = Number(this.year);
+
+      if (typeof tmp === "number" && !isNaN(tmp)) {
+        if (this.year < 1000 || this.year>3000) {
+          tips='年份数据有误'
+        } else {
+          return;
+        }
+      } else {
+        tips='年份必须为数字'
+      }
+
+      this.year=new Date().getFullYear();
+      
+        this.$alert(tips, "提示", {
+          confirmButtonText: "确定"
+        });
+        
+      
+      
+    },
     //给可以修改的日期添加点击事件，点击修改
     changeOne(item) {
       
-      if(item.flag==0){
-        item.flag=1
+      if(item.confirmDayFlag==0){
+        item.confirmDayFlag=1
         item.isred=1;
         item.isgreen=0;
-      }else if(item.flag==1){
-        item.flag=2
+      }else if(item.confirmDayFlag==1){
+        item.confirmDayFlag=2
         item.isred=0;
         item.isgreen=0;
-      }else if(item.flag==2){
-        item.flag=0
+      }else if(item.confirmDayFlag==2){
+        item.confirmDayFlag=0
         item.isred=0;
         item.isgreen=1;
       }
       
     },
     //本日及本年后续日期工作日信息全部删除(假删除)
-    deleteWorkDay(){
+    deleteConfirmDay(){
       //弹窗，如果year<本年，提示不能修改历史数据
       if (this.year>new Date().getFullYear) {
         this.$alert("不能删除历史数据", "提示", {
@@ -231,7 +257,7 @@ export default {
               this.$Config.ip +
               ":" +
               this.$Config.port +
-              "/tradeDay/deleteWorkDay",
+              "/tradeDay/deleteConfirmDay",
            
             data: this.$qs.stringify({
                     registerCode: this.registerCode,
@@ -360,7 +386,7 @@ export default {
               registerCode: this.registerCode,
               fundCode: this.fundCode,
               businessDate: dayInfo.businessDate,
-              flag: dayInfo.flag
+              confirmDayFlag: dayInfo.confirmDayFlag
             });
           }
         }
@@ -437,10 +463,10 @@ export default {
               continue;
             }
             if (dayInfo.businessDate == responseDateInfo.businessDate) {
-              dayInfo.flag = responseDateInfo.flag;
-              if (dayInfo.flag == 0) {
+              dayInfo.confirmDayFlag = responseDateInfo.confirmDayFlag;
+              if (dayInfo.confirmDayFlag == 0) {
                 dayInfo.isgreen = 1;
-              } else if (dayInfo.flag == 1) {
+              } else if (dayInfo.confirmDayFlag == 1) {
                 dayInfo.isred = 1;
               } else {
               }
@@ -498,7 +524,7 @@ export default {
               d.getDate()
             ),
 
-            flag: 2,
+            confirmDayFlag: 2,
             isred: 0,
             isgreen: 0
           });
@@ -519,7 +545,7 @@ export default {
               d.getDate()
             ),
 
-            flag: 2,
+            confirmDayFlag: 2,
             isred: 0,
             isgreen: 0
           });

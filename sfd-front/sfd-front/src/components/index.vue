@@ -34,7 +34,8 @@ export default {
   data () {
     return {
       baseinfoNavList: [
-        {name: '管理人产品基本信息', index: '/baseinfo'}
+        {name: '管理人产品基本信息', index: '/baseinfo'},
+        {name: '产品销售参数信息维护', index: '/fundsale'}
 
       ]
 
