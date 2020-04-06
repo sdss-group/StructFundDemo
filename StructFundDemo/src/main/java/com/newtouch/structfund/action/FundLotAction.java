@@ -69,9 +69,11 @@ public class FundLotAction {
             return result;
         }
         FundSet fundSet = new FundSet();
+        fundSet.setRegisterCode(fundLot.getRegisterCode());
+        fundSet.setFundCode(fundLot.getFundCode());
         FundSet entity = fundSetMapper.selectByPrimaryKey(fundSet);
         if (entity != null) {
-            fundLot.setFundName(fundSet.getFundName());
+            fundLot.setFundName(entity.getFundName());
         }
         String userCode = (String) session.getAttribute("user");
         fundLot.setLotStatus("0");//新建产品批次信息默认为初始化状态
