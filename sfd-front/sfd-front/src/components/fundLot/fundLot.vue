@@ -56,6 +56,12 @@
         label="产品批次">
       </el-table-column>
       <el-table-column
+        prop="lotType"
+        header-align="center"
+        align="center"
+        label="批次优先级">
+      </el-table-column>
+      <el-table-column
         prop="startTime"
         header-align="center"
         align="center"
@@ -95,7 +101,7 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="medium" @click="addOrUpdateHandle(scope.row.registerCode,scope.row.fundCode,scope.row.lotCode,scope.row.lotStatus)"><i class="el-icon-edit"></i></el-button>
+          <el-button type="text" size="medium" @click="addOrUpdateHandle(scope.row)"><i class="el-icon-edit"></i></el-button>
           <el-button type="text" size="medium" @click="ifDelete(scope.row)"><i class="el-icon-delete"></i></el-button>
         </template>
       </el-table-column>
@@ -167,9 +173,9 @@ export default {
       this.dataListSelections = val
     },
     // 新增 / 修改
-    addOrUpdateHandle (registerCode, fundCode, lotCode, lotStatus) {
+    addOrUpdateHandle (item) {
       // 非初始化状态不能修改
-      if (lotStatus === '1' || lotStatus === '2' || lotStatus === '3') {
+      if (typeof item !== 'undefined' && (item.lotStatus !== '0')) {
         this.$message({
           showClose: true,
           message: '非初始化状态不允许修改!',
@@ -179,7 +185,7 @@ export default {
       }
       this.addOrUpdateVisible = true
       this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(registerCode, fundCode, lotCode)
+        this.$refs.addOrUpdate.init(item)
       })
     },
     // 重置

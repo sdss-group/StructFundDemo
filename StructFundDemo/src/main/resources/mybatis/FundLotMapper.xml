@@ -16,47 +16,33 @@
 	</resultMap>
 
 	<select id="queryFundLot" parameterType="java.util.Map" resultMap="BaseResultMap">
-		select * from fund_lot t
-		<where>
-			<if test="fundLot.registerCode!=null and fundLot.registerCode!=''">
-				t.REGISTER_CODE = #{fundLot.registerCode}
-			</if>
-			<if test="fundLot.fundCode !=null and fundLot.fundCode!=''">
-			and	t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundLot.fundCode}), '%')
-			</if>
-			<if test="fundLot.lotCode!=null and fundLot.lotCode!=''">
-			and	t.LOT_CODE = #{fundLot.lotCode}
-			</if>
-		</where>
-		limit #{startRow},#{pageSize}
+		select t1.REGISTER_CODE, t1.FUND_CODE, t1.LOT_CODE, t1.LOT_TYPE, t1.START_TIME, t1.LOT_STATUS,
+		t1.OPERATOR, t1.AUTHORIZER, t2.REGISTER_NAME,t3.FUND_NAME
+		from fund_lot t1 left join fund_reg t2 on t1.register_code=t2.register_code
+		left join fund_set t3 on t1.fund_code=t3.fund_code and t1.register_code=t3.register_code where 1=1
+		<if test="fundLot.registerCode!=null and fundLot.registerCode!=''">
+			and t1.register_code=#{fundLot.registerCode}
+		</if>
+		<if test="fundLot.fundCode !=null and fundLot.fundCode!=''">
+			and t1.fund_code=#{fundLot.fundCode}
+		</if>
+	    order by register_code,fund_code
+	    limit #{startRow},#{pageSize}
 	</select>
 
 	<select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
-		select count(1) from fund_lot t where 1=1
-			<if test="fundLot.registerCode!=null and fundLot.registerCode!=''">
-				and t.REGISTER_CODE = #{fundLot.registerCode}
-			</if>
-			<if test="fundLot.fundCode !=null and fundLot.fundCode!=''">
-				and	t.FUND_CODE LIKE CONCAT(CONCAT('%', #{fundLot.fundCode}), '%')
-			</if>
-			<if test="fundLot.lotCode!=null and fundLot.lotCode!=''">
-				and	t.LOT_CODE = #{fundLot.lotCode}
-			</if>
+		select count(1) from fund_lot where 1=1
+		<if test="fundLot.registerCode!=null and fundLot.registerCode!=''">
+			and register_code=#{fundLot.registerCode}
+		</if>
+		<if test="fundLot.fundCode!=null and fundLot.fundCode!=''">
+			and fund_code=#{fundLot.fundCode}
+		</if>
 	</select>
 
 	<select id="selectSingleData" parameterType="com.newtouch.structfund.entity.FundLot" resultMap="BaseResultMap">
-		select * from fund_lot
-		<where>
-			<if test="registerCode!=null and registerCode!=''">
-				REGISTER_CODE = #{registerCode}
-			</if>
-			<if test="fundCode !=null and fundCode!=''">
-			 and   FUND_CODE = #{fundCode}
-			</if>
-			<if test="lotCode!=null and lotCode!=''">
-			 and  	LOT_CODE = #{lotCode}
-			</if>
-		</where>
+		select 1 from fund_lot where register_code=#{registerCode}
+		and fund_code=#{fundCode} and lot_code=#{lotCode}
 	</select>
 
 	<delete id="delete" parameterType="java.util.List">
@@ -67,16 +53,73 @@
 			and lot_code=#{item.lotCode})
 		</foreach>
 	</delete>
-
-	<select id="getOne" parameterType="com.newtouch.structfund.entity.FundLot" resultMap="BaseResultMap">
-		select * from fund_lot  where REGISTER_CODE = #{registerCode} and FUND_CODE = #{fundCode} and LOT_CODE = #{lotCode}
-	</select>
 	
-	<insert id="insert" parameterType="com.newtouch.structfund.entity.FundLot">
-		insert into fund_lot(REGISTER_CODE,FUND_CODE,LOT_CODE,LOT_TYPE,START_TIME,FUND_NAME,LOT_STATUS,OPERATOR,AUTHORIZER,REGISTER_NAME) values(#{registerCode},#{fundCode},#{lotCode},#{lotType},#{startTime},#{fundName},#{lotStatus},#{operator},#{authorizer},#{registerName})
+	<insert id="insertSelective" parameterType="com.newtouch.structfund.entity.FundLot">
+		insert into FUND_LOT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="registerCode != null">
+				REGISTER_CODE,
+			</if>
+			<if test="fundCode != null">
+				FUND_CODE,
+			</if>
+			<if test="lotCode != null">
+				LOT_CODE,
+			</if>
+			<if test="lotType != null">
+				LOT_TYPE,
+			</if>
+			<if test="startTime != null">
+				START_TIME,
+			</if>
+			<if test="fundName != null">
+				FUND_NAME,
+			</if>
+			<if test="lotStatus != null">
+				LOT_STATUS,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="authorizer != null">
+				AUTHORIZER,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="registerCode != null">
+				#{registerCode,jdbcType=CHAR},
+			</if>
+			<if test="fundCode != null">
+				#{fundCode,jdbcType=VARCHAR},
+			</if>
+			<if test="lotCode != null">
+				#{lotCode,jdbcType=CHAR},
+			</if>
+			<if test="lotType != null">
+				#{lotType,jdbcType=CHAR},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=CHAR},
+			</if>
+			<if test="fundName != null">
+				#{fundName,jdbcType=VARCHAR},
+			</if>
+			<if test="lotStatus != null">
+				#{lotStatus,jdbcType=CHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=CHAR},
+			</if>
+			<if test="authorizer != null">
+				#{authorizer,jdbcType=CHAR},
+			</if>
+		</trim>
 	</insert>
 
 	<update id="update" parameterType="com.newtouch.structfund.entity.FundLot">
-		update fund_lot set LOT_TYPE=#{lotType},START_TIME=#{startTime},FUND_NAME=#{fundName},LOT_STATUS=#{lotStatus} where REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode} and LOT_CODE = #{lotCode}
+        update fund_lot set start_time=#{startTime},lot_type=#{lotType}
+  		where register_code=#{registerCode}
+  		and fund_code=#{fundCode}
+  		and lot_code=#{lotCode}
 	</update>
 </mapper>

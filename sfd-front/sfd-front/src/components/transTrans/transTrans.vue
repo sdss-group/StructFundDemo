@@ -134,18 +134,11 @@ export default {
       dataListOut: [],
       dataListLoading: false,
       registerCodeList: [],
-      fundCodeList: [],
-      dataRule: {
-        registerCode: [
-          { required: true, message: '请选择登记机构', trigger: 'blur' }
-        ],
-        fundCode: [
-          { required: true, message: '请选择产品代码', trigger: 'blur' }
-        ]
-      }
+      fundCodeList: []
     }
   },
   created () {
+    this.getDataList()
     this.initAgencyAndProcode()
   },
   methods: {
@@ -156,24 +149,22 @@ export default {
       this.getDataListPage()
     },
     getDataListPage () {
-      this.$refs['dataForm'].validate((valid) => {
-        this.dataListLoading = true
-        this.$ajax({
-          method: 'post',
-          url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/queryTrans/transTrans',
-          data: this.$qs.stringify(this.dataForm)
-        }).then((result) => {
-          this.dataList = result.data.dataList
-          this.dataListOut = result.data.dataListOut
-          this.totalRows = result.data.totalRows
-          if (result.data.dataList.length > 0) {
-            this.isDisabled = false
-          } else {
-            this.isDisabled = true
-          }
-        })
-        this.dataListLoading = false
+      this.dataListLoading = true
+      this.$ajax({
+        method: 'post',
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/queryTrans/transTrans',
+        data: this.$qs.stringify(this.dataForm)
+      }).then((result) => {
+        this.dataList = result.data.dataList
+        this.dataListOut = result.data.dataListOut
+        this.totalRows = result.data.totalRows
+        if (result.data.dataList.length > 0) {
+          this.isDisabled = false
+        } else {
+          this.isDisabled = true
+        }
       })
+      this.dataListLoading = false
     },
     handleCurrentChange (current) {
       this.dataForm.currentPage = current

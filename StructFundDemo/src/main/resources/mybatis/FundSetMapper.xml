@@ -175,4 +175,8 @@
 			and IPO_END_DATE = #{baseinfo.ipoEndDate}
 		</if>
 	</select>
+
+    <select id="selectByPrimaryKey" parameterType="com.newtouch.structfund.entity.FundSet" resultMap="BaseResultMap">
+        select * from fund_set where REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode}
+    </select>
 </mapper> 

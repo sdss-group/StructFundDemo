@@ -10,6 +10,8 @@ import com.newtouch.structfund.entity.FundSet;
 public interface FundSetMapper {
 
 	public List<FundSet> queryBaseinfo(Map param);
-	
+
 	public Integer count(Map param);
+
+	FundSet selectByPrimaryKey(FundSet fundSet);
 }

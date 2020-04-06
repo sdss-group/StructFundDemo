@@ -6,20 +6,17 @@
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="110px">
         <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" :disabled="isDisabled"  filterable placeholder="请选择">
-          <el-option @click.native="change(item)"
-             v-for="item in registerCodeList"
+          <el-option v-for="item in registerCodeList"
             :key="item.index"
             :label="item.registerName"
             :value="item.registerCode">
             <span style="float: left">{{ item.registerName}}</span>
           </el-option>
         </el-select>
-          <el-input v-show="false" v-model="dataForm.registerName"></el-input>
       </el-form-item>
       <el-form-item label="产品代码" prop="fundCode">
         <el-select v-model="dataForm.fundCode" :disabled="isDisabled" filterable placeholder="请选择" >
-          <el-option
-            v-for="item in fundCodeList"
+          <el-option v-for="item in fundCodeList"
             :key="item.index"
             :label="item.fundCode"
             :value="item.fundCode">
@@ -34,20 +31,15 @@
         <el-input v-model="dataForm.lotType" maxlength="1"></el-input>
       </el-form-item>
       <el-form-item label="批次发起时间" prop="startTime">
-        <el-time-picker v-model="dataForm.startTime" format="HH:mm:ss"
-                        value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }">
+        <el-time-picker v-model="dataForm.startTime" format="HH:mm:ss" value-format="HH:mm:ss" :picker-options="{  selectableRange: '00:00:00 - 23:59:59' }">
         </el-time-picker>
       </el-form-item>
-      <el-form-item label="产品名称" prop="fundName">
-        <el-input v-model="dataForm.fundName" ></el-input>
-      </el-form-item>
-        <el-form-item label="批次状态" prop="lotStatus">
-          <el-select v-model="dataForm.lotStatus" clearable>
-            <el-option v-for="item in this.$param.lotStatus" :key="item.value" :label="item.label"
-                       :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
+      <el-input v-show="false" v-model="dataForm.registerName"></el-input>
+      <!--<el-form-item label="批次状态" prop="lotStatus">
+        <el-select v-model="dataForm.lotStatus" clearable>
+          <el-option v-for="item in this.$param.lotStatus" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        </el-select>
+      </el-form-item>-->
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -64,13 +56,10 @@ export default {
       dataForm: {
         id: 0,
         registerCode: '',
-        registerName: '',
         fundCode: '',
         lotCode: '',
         lotType: '',
-        startTime: '',
-        fundName: '',
-        lotStatus: '0'
+        startTime: ''
       },
       isDisabled: false,
       registerCodeList: [],
@@ -83,55 +72,57 @@ export default {
           {required: true, message: '请选择产品代码', trigger: 'blur'}
         ],
         lotCode: [
-          {required: true, message: '请输入产品批次', trigger: 'blur'}
+          {required: true, message: '请输入产品批次', trigger: 'blur'},
+          {
+            validator: (rule, value, callback) => {
+              if (/^\d{1,2}$/.test(value) === false) {
+                callback(new Error('请输入正确产品批次'))
+              } else {
+                callback()
+              }
+            },
+            trigger: 'change'
+          }
         ],
         lotType: [
-          {required: true, message: '请输入批次优先级', trigger: 'blur'}
+          {required: true, message: '请输入批次优先级', trigger: 'blur'},
+          {
+            validator: (rule, value, callback) => {
+              if (/^\d{1}$/.test(value) === false) {
+                callback(new Error('请输入正确批次优先级'))
+              } else {
+                callback()
+              }
+            },
+            trigger: 'change'
+          }
         ],
         startTime: [
           {required: true, message: '请输入批次发起时间', trigger: 'blur'}
-        ],
-        fundName: [
-          {required: true, message: '请输入批次名称', trigger: 'blur'}
-        ],
-        lotStatus: [
-          {required: true, message: '请选择批次状态', trigger: 'blur'}
         ]
       }
     }
   },
   methods: {
-    init (registerCode, fundCode, lotCode) {
+    init (item) {
       this.initAgencyAndProcode()
-      this.dataForm.id = registerCode || 0
+      this.dataForm.id = typeof item !== 'undefined' ? 1 : 0
       this.isDisabled = false
       this.visible = true
       this.$nextTick(() => {
         this.$refs['dataForm'].resetFields()
         if (this.dataForm.id) {
-          this.$ajax({
-            method: 'post',
-            url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundLot/getOne',
-            data: this.$qs.stringify({
-              'registerCode': registerCode,
-              'fundCode': fundCode,
-              'lotCode': lotCode
-            })
-          }).then((result) => {
-            this.dataForm.registerCode = result.data.registerCode
-            this.dataForm.fundCode = result.data.fundCode
-            this.dataForm.lotCode = result.data.lotCode
-            this.dataForm.lotType = result.data.lotType
-            this.dataForm.startTime = result.data.startTime
-            this.dataForm.fundName = result.data.fundName
-            this.dataForm.lotStatus = result.data.lotStatus
-            this.dataForm.registerName = result.data.registerName
-            this.isDisabled = true
-          })
+          this.dataForm.registerCode = item.registerCode
+          this.dataForm.fundCode = item.fundCode
+          this.dataForm.lotCode = item.lotCode
+          this.dataForm.lotType = item.lotType
+          this.dataForm.startTime = item.startTime
+          this.dataForm.registerName = item.registerName
+          this.isDisabled = true
         }
       })
     },
-    // 初始化注册机构代码和产品代码
+    // 初始化注册机构和产品代码
     async initAgencyAndProcode () {
       this.registerCodeList = []
       this.fundCodeList = []
@@ -169,10 +160,6 @@ export default {
           })
         }
       })
-    },
-    // 向隐藏input赋值
-    change (item) {
-      this.dataForm.registerName = item.registerName
     }
   }
 }

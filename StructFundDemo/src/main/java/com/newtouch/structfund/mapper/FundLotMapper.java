@@ -16,9 +16,7 @@ public interface FundLotMapper {
 
     int delete(List<FundLot> rows);
 
-    FundLot getOne(FundLot fundLot);
-
-    int insert(FundLot fundLot);
+    int insertSelective(FundLot fundLot);
 
     int update(FundLot fundLot);
 }
