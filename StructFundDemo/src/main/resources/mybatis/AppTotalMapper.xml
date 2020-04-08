@@ -54,17 +54,18 @@
         ) a
         left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
         left join AP_ORG ap on a.REGION_CODE=ap.ORG_CODE
-        <where>
-            a.REGISTER_CODE=#{registerCode}
-            <if test="totalOrg != null and totalOrg.size != 0">
-                and
-                (
-                <foreach collection="totalOrg" index="index" item="item" separator="or">
-                    a.REGION_CODE=#{item}
-                </foreach>
-                )
-            </if>
-        </where>
+        where 1=1
+        <if test="registerCode != null and registerCode != 0">
+          and  a.REGISTER_CODE=#{registerCode}
+        </if>
+        <if test="totalOrg != null and totalOrg.size != 0">
+            and
+            (
+            <foreach collection="totalOrg" index="index" item="item" separator="or">
+                a.REGION_CODE=#{item}
+            </foreach>
+            )
+        </if>
         order by a.REGISTER_CODE, a.REGION_CODE, a.AGGREGATION_DATE
         limit #{startRow},#{pageSize}
     </select>
@@ -87,17 +88,18 @@
         ) a
         left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
         left join AP_ORG ap on a.REGION_CODE=ap.ORG_CODE
-        <where>
-            a.REGISTER_CODE=#{registerCode}
-            <if test="totalOrg != null and totalOrg.size != 0">
-                and
-                (
-                <foreach collection="totalOrg" index="index" item="item" separator="or">
-                    a.REGION_CODE=#{item}
-                </foreach>
-                )
-            </if>
-        </where>
+        where 1=1
+        <if test="registerCode != null and registerCode != 0">
+            and  a.REGISTER_CODE=#{registerCode}
+        </if>
+        <if test="totalOrg != null and totalOrg.size != 0">
+            and
+            (
+            <foreach collection="totalOrg" index="index" item="item" separator="or">
+                a.REGION_CODE=#{item}
+            </foreach>
+            )
+        </if>
         order by a.REGISTER_CODE, a.REGION_CODE, a.AGGREGATION_DATE
     </select>
 
@@ -117,16 +119,20 @@
         left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
         left join AP_ORG  ap on a.REGION_CODE=ap.ORG_CODE
         left join FUND_SET st on a.REGISTER_CODE=st.REGISTER_CODE and a.FUND_CODE=st.FUND_CODE
-        <where>
-            a.REGISTER_CODE=#{registerCode} and a.FUND_CODE=#{fundCode}
-            <if test="totalOrg != null and totalOrg.size != 0">
-                and
-                ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
-                a.REGION_CODE=#{item}
-            </foreach>
-                )
-            </if>
-        </where>
+        where 1=1
+        <if test="registerCode != null and registerCode != 0">
+            and  a.REGISTER_CODE=#{registerCode}
+        </if>
+        <if test="fundCode != null and fundCode != 0">
+            and  a.FUND_CODE=#{fundCode}
+        </if>
+        <if test="totalOrg != null and totalOrg.size != 0">
+            and
+            ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
+            a.REGION_CODE=#{item}
+        </foreach>
+            )
+        </if>
         order by a.REGISTER_CODE, a.FUND_CODE, a.REGION_CODE, a.AGGREGATION_DATE
         limit #{startRow},#{pageSize}
     </select>
@@ -147,16 +153,20 @@
         left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
         left join AP_ORG  ap on a.REGION_CODE=ap.ORG_CODE
         left join FUND_SET st on a.REGISTER_CODE=st.REGISTER_CODE and a.FUND_CODE=st.FUND_CODE
-        <where>
-            a.REGISTER_CODE=#{registerCode} and a.FUND_CODE=#{fundCode}
-            <if test="totalOrg != null and totalOrg.size != 0">
-                and
-                ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
-                a.REGION_CODE=#{item}
-            </foreach>
-                )
-            </if>
-        </where>
+        where 1=1
+        <if test="registerCode != null and registerCode != 0">
+            and  a.REGISTER_CODE=#{registerCode}
+        </if>
+        <if test="fundCode != null and fundCode != 0">
+            and  a.FUND_CODE=#{fundCode}
+        </if>
+        <if test="totalOrg != null and totalOrg.size != 0">
+            and
+            ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
+            a.REGION_CODE=#{item}
+        </foreach>
+            )
+        </if>
         order by a.REGISTER_CODE, a.FUND_CODE, a.REGION_CODE, a.AGGREGATION_DATE
     </select>
 
@@ -175,16 +185,17 @@
         ) un GROUP BY REGISTER_CODE, REGION_CODE,AGGREGATION_DATE) a
         LEFT JOIN FUND_REG reg ON a.REGISTER_CODE=reg.REGISTER_CODE
         LEFT JOIN AP_ORG ap ON a.REGION_CODE=ap.ORG_CODE
-        <where>
-            a.REGISTER_CODE=#{registerCode}
-            <if test="totalOrg != null and totalOrg.size != 0">
-                and
-                ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
-                a.REGION_CODE=#{item}
-            </foreach>
-                )
-            </if>
-        </where>
+        where 1=1
+        <if test="registerCode != null and registerCode != 0">
+            and  a.REGISTER_CODE=#{registerCode}
+        </if>
+        <if test="totalOrg != null and totalOrg.size != 0">
+            and
+            ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
+            a.REGION_CODE=#{item}
+        </foreach>
+            )
+        </if>
         ORDER BY a.REGISTER_CODE, a.REGION_CODE, a.AGGREGATION_DATE) t
     </select>
 
@@ -205,16 +216,20 @@
         left join FUND_REG reg on a.REGISTER_CODE=reg.REGISTER_CODE
         left join AP_ORG  ap on a.REGION_CODE=ap.ORG_CODE
         left join FUND_SET st on a.REGISTER_CODE=st.REGISTER_CODE and a.FUND_CODE=st.FUND_CODE
-        <where>
-            a.REGISTER_CODE=#{registerCode} and a.FUND_CODE=#{fundCode}
-            <if test="totalOrg != null and totalOrg.size != 0">
-                and
-                ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
-                a.REGION_CODE=#{item}
-            </foreach>
-                )
-            </if>
-        </where>
+        where 1=1
+        <if test="registerCode != null and registerCode != 0">
+            and  a.REGISTER_CODE=#{registerCode}
+        </if>
+        <if test="fundCode != null and fundCode != 0">
+            and  a.FUND_CODE=#{fundCode}
+        </if>
+        <if test="totalOrg != null and totalOrg.size != 0">
+            and
+            ( <foreach collection="totalOrg" index="index" item="item" separator="or" >
+            a.REGION_CODE=#{item}
+        </foreach>
+            )
+        </if>
         ) t
     </select>
 </mapper>
