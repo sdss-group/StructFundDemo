@@ -178,7 +178,7 @@ export default {
       this.dataListOut = []
       this.dataForm.currentPage = 1
       this.dataForm.pageSize = 10
-      this.totalRows = 0
+      this.getDataListPage()
       this.isDisabled = true
     },
     // 导出
