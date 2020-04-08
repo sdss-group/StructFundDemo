@@ -218,7 +218,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="8">
-      <el-form-item label="交易结束时间" prop="tradeEnd" 
+      <el-form-item label="交易结束时间" prop="tradeEnd"
       :rules="{ required: true, message: '请输入交易结束时间', trigger: 'blur'}">
         <el-time-picker v-model="data.tradeEnd"
         style="width:203px" value-format="HHmmss">
@@ -242,7 +242,7 @@
         </el-form-item>
       </el-col>
       <el-col :span="8">
-      <el-form-item label="认购结束时间" prop="subsEnd" 
+      <el-form-item label="认购结束时间" prop="subsEnd"
       :rules="{ required: true, message: '请输入认购结束时间', trigger: 'blur'}">
         <el-time-picker v-model="data.subsEnd" value-format="HHmmss"
         style="width:203px">
@@ -346,20 +346,61 @@ export default {
       })
     },
     addFundSale () {
-      alert(this.data.subsStart)
       this.$ajax({
         method: 'post',
         url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundSale/addFundSaleInfo',
         data: this.$qs.stringify(this.data)
       }).then((response) => {
-        this.$message.success('cg')
+        if (response) {
+          this.$message({
+            showClose: true,
+            message: '操作成功',
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            message: '操作异常',
+            type: 'error'
+          })
+        }
       }).catch((error) => {
         console.log(error) // 请求失败返回的数据
-        this.$message.error(error)
+        this.$message({
+          showClose: true,
+          message: error,
+          type: 'error'
+        })
       })
     },
     modifyFundSale () {
-      alert('modifyFundSale')
+      console.log(this.$qs.stringify(this.data))
+      this.$ajax({
+        method: 'post',
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundSale/modifyFundSaleInfo',
+        data: this.$qs.stringify(this.data)
+      }).then((response) => {
+        if (response) {
+          this.$message({
+            showClose: true,
+            message: '操作成功',
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            message: '操作异常',
+            type: 'error'
+          })
+        }
+      }).catch((error) => {
+        console.log(error) // 请求失败返回的数据
+        this.$message({
+          showClose: true,
+          message: error,
+          type: 'error'
+        })
+      })
     },
     checkInvestTerm () {
       if (isNaN(this.data.investTerm)) {

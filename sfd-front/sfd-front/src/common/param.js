@@ -5,7 +5,7 @@ const isOrNot = [
 
 const fundType = [// 产品类型
   {value: '1', label: '现金管理类产品'},
-  {value: '2', label: '净值性开放产品'},
+  {value: '2', label: '净值型开放产品'},
   {value: '3', label: '固定期限产品'}
 ]
 const saleObject = [// 销售对象

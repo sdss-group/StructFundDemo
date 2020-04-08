@@ -1,25 +1,30 @@
 package com.newtouch.structfund.action;
 
+import java.sql.Timestamp;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.newtouch.structfund.entity.FundSale;
+import com.newtouch.structfund.entity.User;
 import com.newtouch.structfund.mapper.FundSaleMapper;
 
 @RestController
-@RequestMapping("/fundSale")
+@RequestMapping("fundSale")
 @SuppressWarnings("all")
 @Transactional
 public class FundSaleAction {
@@ -27,7 +32,7 @@ public class FundSaleAction {
 	@Autowired
 	FundSaleMapper fundSaleMapper;
 	
-	@PostMapping("/queryFundSaleInfo")
+	@PostMapping("queryFundSaleInfo")
 	public Map queryFundSaleInfo(HttpServletRequest req,Integer currentPage,Integer pageSize){
 		Map param=new HashMap();
 		String registerCode=req.getParameter("registerCode");
@@ -51,11 +56,30 @@ public class FundSaleAction {
 	}
 	
 	@PostMapping("addFundSaleInfo")
-	public Map addFundSaleInfo(FundSale fundSale ) {
-		System.out.println(fundSale.getTradeEnd());
-		return null;
+	public String addFundSaleInfo(FundSale fundSale,HttpSession session) {
+		User loginUser=(User) session.getAttribute("userInfo");
+//		String userName=loginUser.getUsername();
+//		fundSale.setOperator(userName);
+		Integer result = fundSaleMapper.insertSelective(fundSale);
+		
+		return result==1 ? "success":"failed";
 		
 		
+	}
+	
+	@PostMapping("modifyFundSaleInfo")
+	public String modifyFundSaleInfo(FundSale fundSale,HttpSession session) {
+		fundSale.setTimestampU(new Timestamp(System.currentTimeMillis()));
+		Integer result=fundSaleMapper.updateByPrimaryKeySelective(fundSale);
+		
+		return result==1 ? "success":"failed";
+	}
+	
+	@PostMapping("deleteFundSale")
+	public String deleteFundSale(@RequestBody List<FundSale> params) {
+		Integer result=fundSaleMapper.deleteFundSale(params);
+		
+		return result==params.size() ? "success":"failed";
 	}
 
 }

@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class FundSale{
 	
 	private String registerCode;
@@ -40,12 +44,16 @@ public class FundSale{
 
     private String amtFlag;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date setupDate;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTradeDate;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fundSellDate;
     
     private String fundAttr;
@@ -140,6 +148,7 @@ public class FundSale{
     
     private String fundName;
     
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp timestampU;
     
     public String getFundName() {
@@ -150,15 +159,11 @@ public class FundSale{
         this.fundName = fundName;
     }
 
-    public void setregisterName(String registerName) {
-        this.registerName = registerName;
-    }
-
     public String getRegisterName() {
-        return registerName;
-    }
+		return registerName;
+	}
 
-    public String getTransferType() {
+	public String getTransferType() {
         return transferType;
     }
 

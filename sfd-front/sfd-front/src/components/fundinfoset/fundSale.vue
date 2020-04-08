@@ -71,29 +71,29 @@
     <el-table-column prop="fundName" label="产品名称"  align="center"></el-table-column>
     <el-table-column prop="charge" label="是否收费"  align="center">
       <template slot-scope="scope">
-        <span v-if="$param.charge[scope.row.charge]" >{{ $param.charge[scope.row.charge].label }}</span>
+        <span v-if="arrToMap($param.charge).get(scope.row.charge)">{{arrToMap($param.charge).get(scope.row.charge)}}</span>
       </template>
     </el-table-column>
     <el-table-column prop="delayedEntry" label="是否延时入账"  align="center">
       <template slot-scope="scope">
-        <span v-if="$param.delayedEntry[scope.row.delayedEntry]" >{{ $param.delayedEntry[scope.row.delayedEntry].label }}</span>
+        <span v-if="arrToMap($param.delayedEntry).get(scope.row.delayedEntry)">{{arrToMap($param.delayedEntry).get(scope.row.delayedEntry)}}</span>
       </template>
     </el-table-column>
     <el-table-column prop="subsCapType" label="认购期扣账方式"  align="center">
       <template slot-scope="scope">
-        <span v-if="$param.subsCapType[scope.row.subsCapType]" >{{ $param.subsCapType[scope.row.subsCapType].label }}</span>
+        <span v-if="arrToMap($param.subsCapType).get(scope.row.subsCapType)">{{arrToMap($param.subsCapType).get(scope.row.subsCapType)}}</span>
       </template>
     </el-table-column>
     <el-table-column prop="purchCapType" label="申购期扣账方式"  align="center">
     <template slot-scope="scope">
-      <span v-if="$param.purchCapType[scope.row.purchCapType]" >{{ $param.purchCapType[scope.row.purchCapType].label }}</span>
+      <span v-if="arrToMap($param.purchCapType).get(scope.row.purchCapType)">{{arrToMap($param.purchCapType).get(scope.row.purchCapType)}}</span>
     </template>
     </el-table-column>
     <el-table-column prop="minBala" label="最低募集金额"  align="center"></el-table-column>
     <el-table-column prop="maxBala" label="最高募集金额"  align="center"></el-table-column>
     <el-table-column prop="incomeType" label="收益类型"  align="center">
     <template slot-scope="scope">
-      <span v-if="$param.incomeType[scope.row.incomeType]" >{{ $param.incomeType[scope.row.incomeType].label }}</span>
+      <span v-if="arrToMap($param.incomeType).get(scope.row.incomeType)">{{arrToMap($param.incomeType).get(scope.row.incomeType)}}</span>
     </template>
     </el-table-column>
     <el-table-column prop="operator" label="操作人"  align="center"></el-table-column>
@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import {dateFormat} from '@/utils/commonUtil'
+import {arrToMap, dateFormat} from '@/utils/commonUtil'
 import fundSaleDetailForm from './fundSaleDetailForm'
 
 export default {
@@ -177,10 +177,11 @@ export default {
       this.$ajax({
         method: 'post',
         url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/fundSale/deleteFundSale',
-        data: this.$qs.stringify(this.form)
+        data: this.multipleSelection
       }).then((result) => {
         _this.fundList = result.data.dataList
         _this.totalRows = result.data.totalRows
+        _this.query()
       }).catch((error) => {
         console.log(error)
       })
@@ -197,7 +198,8 @@ export default {
         this.allowEdit = true
         this.allowDelete = true
       }
-    }
+    },
+    arrToMap: arrToMap
   },
   components: {
     fundSaleDetailForm

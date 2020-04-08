@@ -144,7 +144,7 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="巨额赎回比例" prop="maxRedeem">
-                <el-input-number v-model="data.maxRedeem" controls-position="right" :min="0" :max="1" :step=0.0001 style="width:203px" step-strictly></el-input-number>
+                <el-input-number v-model="data.maxRedeem" :min="0" :max="1" :controls="false" :step=0.0001 style="width:203px" step-strictly></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="8">

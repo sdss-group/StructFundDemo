@@ -75,5 +75,356 @@
       <if test="ipoEndDate != '' and ipoEndDate != null"> and c.IPO_END_DATE = #{ipoEndDate} </if>
     </where>
   </select>
+  
+  <insert id="insertSelective" parameterType="com.newtouch.structfund.entity.FundSale">
+    insert into FUND_SALE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="registerCode != null">
+        REGISTER_CODE,
+      </if>
+      <if test="fundCode != null">
+        FUND_CODE,
+      </if>
+      <if test="transferType != null">
+        TRANSFER_TYPE,
+      </if>
+      <if test="charge != null">
+        CHARGE,
+      </if>
+      <if test="checkType != null">
+        CHECK_TYPE,
+      </if>
+      <if test="delayedEntry != null">
+        DELAYED_ENTRY,
+      </if>
+      <if test="investTerm != null">
+        INVEST_TERM,
+      </if>
+      <if test="periodSubsFlag != null">
+        PERIOD_SUBS_FLAG,
+      </if>
+      <if test="failTimesPs != null">
+        FAIL_TIMES_PS,
+      </if>
+      <if test="subsCapType != null">
+        SUBS_CAP_TYPE,
+      </if>
+      <if test="purchCapType != null">
+        PURCH_CAP_TYPE,
+      </if>
+      <if test="fundLevel != null">
+        FUND_LEVEL,
+      </if>
+      <if test="minBala != null">
+        MIN_BALA,
+      </if>
+      <if test="maxBala != null">
+        MAX_BALA,
+      </if>
+      <if test="incomeType != null">
+        INCOME_TYPE,
+      </if>
+      <if test="saleObject != null">
+        SALE_OBJECT,
+      </if>
+      <if test="amtFlag != null">
+        AMT_FLAG,
+      </if>
+      <if test="fundCtrlFlag != null">
+        FUND_CTRL_FLAG,
+      </if>
+      <if test="tradeStart != null">
+        TRADE_START,
+      </if>
+      <if test="tradeEnd != null">
+        TRADE_END,
+      </if>
+      <if test="untargetBalance != null">
+        UNTARGET_BALANCE,
+      </if>
+      <if test="saleRateFee != null">
+        SALE_RATE_FEE,
+      </if>
+      <if test="subsStart != null">
+        SUBS_START,
+      </if>
+      <if test="subsEnd != null">
+        SUBS_END,
+      </if>
+      <if test="performNum != null">
+        PERFORM_NUM,
+      </if>
+      <if test="maxRatio != null">
+        MAX_RATIO,
+      </if>
+      <if test="minRatio != null">
+        MIN_RATIO,
+      </if>
+      <if test="fastFlag != null">
+        FAST_FLAG,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+      <if test="authorizer != null">
+        AUTHORIZER,
+      </if>
+      <if test="setupDate != null">
+        SETUP_DATE,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="startTradeDate != null">
+        START_TRADE_DATE,
+      </if>
+      <if test="fundSellDate != null">
+        FUND_SELL_DATE,
+      </if>
+      <if test="fundAttr != null">
+        FUND_ATTR,
+      </if>
+      <if test="fundType != null">
+        FUND_TYPE,
+      </if>
+      <if test="largeRedeFlag != null">
+        LARGE_REDE_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="registerCode != null">
+        #{registerCode,jdbcType=CHAR},
+      </if>
+      <if test="fundCode != null">
+        #{fundCode,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null">
+        #{transferType,jdbcType=CHAR},
+      </if>
+      <if test="charge != null">
+        #{charge,jdbcType=CHAR},
+      </if>
+      <if test="checkType != null">
+        #{checkType,jdbcType=CHAR},
+      </if>
+      <if test="delayedEntry != null">
+        #{delayedEntry,jdbcType=CHAR},
+      </if>
+      <if test="investTerm != null">
+        #{investTerm,jdbcType=CHAR},
+      </if>
+      <if test="periodSubsFlag != null">
+        #{periodSubsFlag,jdbcType=CHAR},
+      </if>
+      <if test="failTimesPs != null">
+        #{failTimesPs,jdbcType=DECIMAL},
+      </if>
+      <if test="subsCapType != null">
+        #{subsCapType,jdbcType=CHAR},
+      </if>
+      <if test="purchCapType != null">
+        #{purchCapType,jdbcType=CHAR},
+      </if>
+      <if test="fundLevel != null">
+        #{fundLevel,jdbcType=CHAR},
+      </if>
+      <if test="minBala != null">
+        #{minBala,jdbcType=DECIMAL},
+      </if>
+      <if test="maxBala != null">
+        #{maxBala,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeType != null">
+        #{incomeType,jdbcType=CHAR},
+      </if>
+      <if test="saleObject != null">
+        #{saleObject,jdbcType=CHAR},
+      </if>
+      <if test="amtFlag != null">
+        #{amtFlag,jdbcType=CHAR},
+      </if>
+      <if test="fundCtrlFlag != null">
+        #{fundCtrlFlag,jdbcType=CHAR},
+      </if>
+      <if test="tradeStart != null">
+        #{tradeStart,jdbcType=CHAR},
+      </if>
+      <if test="tradeEnd != null">
+        #{tradeEnd,jdbcType=CHAR},
+      </if>
+      <if test="untargetBalance != null">
+        #{untargetBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="saleRateFee != null">
+        #{saleRateFee,jdbcType=DECIMAL},
+      </if>
+      <if test="subsStart != null">
+        #{subsStart,jdbcType=CHAR},
+      </if>
+      <if test="subsEnd != null">
+        #{subsEnd,jdbcType=CHAR},
+      </if>
+      <if test="performNum != null">
+        #{performNum,jdbcType=VARCHAR},
+      </if>
+      <if test="maxRatio != null">
+        #{maxRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="minRatio != null">
+        #{minRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="fastFlag != null">
+        #{fastFlag,jdbcType=CHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=CHAR},
+      </if>
+      <if test="authorizer != null">
+        #{authorizer,jdbcType=CHAR},
+      </if>
+      <if test="setupDate != null">
+        #{setupDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="startTradeDate != null">
+        #{startTradeDate,jdbcType=DATE},
+      </if>
+      <if test="fundSellDate != null">
+        #{fundSellDate,jdbcType=DATE},
+      </if>
+      <if test="fundAttr != null">
+        #{fundAttr,jdbcType=CHAR},
+      </if>
+      <if test="fundType != null">
+        #{fundType,jdbcType=CHAR},
+      </if>
+      <if test="largeRedeFlag != null">
+        #{largeRedeFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.newtouch.structfund.entity.FundSale">
+    update FUND_SALE
+    <set>
+      <if test="transferType != null">
+        TRANSFER_TYPE = #{transferType,jdbcType=CHAR},
+      </if>
+      <if test="charge != null">
+        CHARGE = #{charge,jdbcType=CHAR},
+      </if>
+      <if test="checkType != null">
+        CHECK_TYPE = #{checkType,jdbcType=CHAR},
+      </if>
+      <if test="delayedEntry != null">
+        DELAYED_ENTRY = #{delayedEntry,jdbcType=CHAR},
+      </if>
+      <if test="investTerm != null">
+        INVEST_TERM = #{investTerm,jdbcType=CHAR},
+      </if>
+      <if test="periodSubsFlag != null">
+        PERIOD_SUBS_FLAG = #{periodSubsFlag,jdbcType=CHAR},
+      </if>
+      <if test="failTimesPs != null">
+        FAIL_TIMES_PS = #{failTimesPs,jdbcType=DECIMAL},
+      </if>
+      <if test="subsCapType != null">
+        SUBS_CAP_TYPE = #{subsCapType,jdbcType=CHAR},
+      </if>
+      <if test="purchCapType != null">
+        PURCH_CAP_TYPE = #{purchCapType,jdbcType=CHAR},
+      </if>
+      <if test="fundLevel != null">
+        FUND_LEVEL = #{fundLevel,jdbcType=CHAR},
+      </if>
+      <if test="minBala != null">
+        MIN_BALA = #{minBala,jdbcType=DECIMAL},
+      </if>
+      <if test="maxBala != null">
+        MAX_BALA = #{maxBala,jdbcType=DECIMAL},
+      </if>
+      <if test="setupDate != null">
+        SETUP_DATE = #{setupDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        END_DATE = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="startTradeDate != null">
+        START_TRADE_DATE = #{startTradeDate,jdbcType=DATE},
+      </if>
+      <if test="fundSellDate != null">
+        FUND_SELL_DATE = #{fundSellDate,jdbcType=DATE},
+      </if>
+      <if test="fundAttr != null">
+        FUND_ATTR = #{fundAttr,jdbcType=DATE},
+      </if>
+      <if test="fundType != null">
+        FUND_TYPE = #{fundType,jdbcType=DATE},
+      </if>
+      <if test="largeRedeFlag != null">
+        LARGE_REDE_FLAG = #{largeRedeFlag,jdbcType=DATE},
+      </if>
+      <if test="incomeType != null">
+        INCOME_TYPE = #{incomeType,jdbcType=CHAR},
+      </if>
+      <if test="saleObject != null">
+        SALE_OBJECT = #{saleObject,jdbcType=CHAR},
+      </if>
+      <if test="amtFlag != null">
+        AMT_FLAG = #{amtFlag,jdbcType=CHAR},
+      </if>
+      <if test="fundCtrlFlag != null">
+        FUND_CTRL_FLAG = #{fundCtrlFlag,jdbcType=CHAR},
+      </if>
+      <if test="tradeStart != null">
+        TRADE_START = #{tradeStart,jdbcType=CHAR},
+      </if>
+      <if test="tradeEnd != null">
+        TRADE_END = #{tradeEnd,jdbcType=CHAR},
+      </if>
+      <if test="untargetBalance != null">
+        UNTARGET_BALANCE = #{untargetBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="saleRateFee != null">
+        SALE_RATE_FEE = #{saleRateFee,jdbcType=DECIMAL},
+      </if>
+      <if test="subsStart != null">
+        SUBS_START = #{subsStart,jdbcType=CHAR},
+      </if>
+      <if test="subsEnd != null">
+        SUBS_END = #{subsEnd,jdbcType=CHAR},
+      </if>
+      <if test="performNum != null">
+        PERFORM_NUM = #{performNum,jdbcType=VARCHAR},
+      </if>
+      <if test="maxRatio != null">
+        MAX_RATIO = #{maxRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="minRatio != null">
+        MIN_RATIO = #{minRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="fastFlag != null">
+        FAST_FLAG = #{fastFlag,jdbcType=CHAR},
+      </if>
+      <if test="operator != null">
+        OPERATOR = #{operator,jdbcType=CHAR},
+      </if>
+      <if test="authorizer != null">
+        AUTHORIZER = #{authorizer,jdbcType=CHAR},
+      </if>
+    </set>
+    where REGISTER_CODE = #{registerCode,jdbcType=CHAR}
+      and FUND_CODE = #{fundCode,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <delete id="deleteFundSale" parameterType="java.util.List">
+    delete from fund_sale where 
+    <foreach collection="list" item="item" separator=" or " index="index">
+      (register_code=#{item.registerCode} and fund_code=#{item.fundCode})
+    </foreach>
+  </delete>
 
 </mapper> 

@@ -60,7 +60,7 @@
     <el-table-column prop="fundName" label="产品名称"  align="center"></el-table-column>
     <el-table-column prop="fundType" label="产品类型"  align="center">
       <template slot-scope="scope">
-        <span v-if="$param.fundType[scope.row.fundType]" >{{ $param.fundType[scope.row.fundType].label }}</span>
+        <span v-if="arrToMap($param.fundType).get(scope.row.fundType)">{{arrToMap($param.fundType).get(scope.row.fundType)}}</span>
       </template>
     </el-table-column>
     <el-table-column prop="nav" label="产品单位净值"  align="center"></el-table-column>
@@ -74,12 +74,12 @@
     <el-table-column prop="setupDate" label="成立日期"  align="center" :formatter="dateFormat"></el-table-column>
     <el-table-column prop="shareClass" label="收费方式"  align="center">
       <template slot-scope="scope">
-        <span v-if="$param.shareClass[scope.row.shareClass]" >{{ $param.shareClass[scope.row.shareClass].label }}</span>
+        <span v-if="arrToMap($param.shareClass).get(scope.row.shareClass)">{{arrToMap($param.shareClass).get(scope.row.shareClass)}}</span>
       </template>
     </el-table-column>
     <el-table-column prop="tradeType" label="交易方式"  align="center">
       <template slot-scope="scope">
-        <span v-if="$param.tradeType[scope.row.tradeType]" >{{ $param.tradeType[scope.row.tradeType].label }}</span>
+        <span v-if="arrToMap($param.tradeType).get(scope.row.tradeType)">{{arrToMap($param.tradeType).get(scope.row.tradeType)}}</span>
       </template>
     </el-table-column>
   </el-table>
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import {dateFormat} from '@/utils/commonUtil'
+import {arrToMap, dateFormat} from '@/utils/commonUtil'
 import baseinfoDetail from './baseinfoDetail'
 
 export default {
@@ -143,7 +143,8 @@ export default {
     },
     openDetail (row, column, event) {
       this.$refs.baseinfoDetail.show(row, '产品信息查看')
-    }
+    },
+    arrToMap: arrToMap
   },
   components: {
     baseinfoDetail
