@@ -53,10 +53,13 @@ public class SaleBillDateAction {
     }
     @RequestMapping("insert")
     public int insert(@RequestBody SaleBillDate item) {
+        //验证是否已经存在此条registerCode和fundCode
+
+        if(sdm.getOne(item)!=null){
+            return 0;
+        }
         item.setDistributorCode("006");
-        System.out.println("---------------------");
-        System.out.println(item);
-        System.out.println("---------------------");
+
         return sdm.insert(item);
     }
     @RequestMapping("update")
