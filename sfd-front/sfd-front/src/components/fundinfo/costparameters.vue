@@ -37,6 +37,7 @@
                  <el-button @click="costParamAdd()" type="primary">新增</el-button>
                 <el-button @click="modifyCostParam()" type="primary" v-bind:disabled="allowEdit">修改</el-button>
                 
+                
              <el-popconfirm
                 icon="el-icon-info"
                 iconColor="red"

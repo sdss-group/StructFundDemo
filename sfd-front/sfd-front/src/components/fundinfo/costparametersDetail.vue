@@ -3,6 +3,7 @@
   <el-form ref='dataForm' :model="data" :inline="true" v-bind:disabled="isDisabled" label-width="180px">
     <el-row style="margin-top: 15px">
       <el-col :span="8" >
+      
         <el-form-item label="登记机构" prop="registerCode"
         :rules="{ required: true, message: '登记机构不能为空', trigger: 'blur'}">
             <!-- <el-input  v-model="data.registerCode" v-bind:disabled="!(type=='add')" /> -->

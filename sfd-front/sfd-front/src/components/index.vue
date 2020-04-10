@@ -10,6 +10,7 @@
                   {{ item.name }}
                 </el-menu-item>
             </el-submenu>
+            
             <el-submenu index="2">
                 <template slot="title"><i class="el-icon-menu"></i>导航二</template>
                 <el-menu-item index="/costparameters">费用参数维护</el-menu-item>
