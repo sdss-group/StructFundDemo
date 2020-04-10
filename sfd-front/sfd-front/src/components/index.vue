@@ -12,7 +12,7 @@
             </el-submenu>
             <el-submenu index="2">
                 <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-                <el-menu-item index="1-1">选项1</el-menu-item>
+                <el-menu-item index="/costparameters">费用参数维护</el-menu-item>
                 <el-menu-item index="1-2">选项2</el-menu-item>
                 <el-menu-item index="1-3">选项3</el-menu-item>
             </el-submenu>

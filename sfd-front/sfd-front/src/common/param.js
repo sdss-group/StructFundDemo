@@ -5,7 +5,7 @@ const isOrNot = [
 
 const fundType = [// 产品类型
   {value: '1', label: '现金管理类产品'},
-  {value: '2', label: '净值型开放产品'},
+  {value: '2', label: '净值性开放产品'},
   {value: '3', label: '固定期限产品'}
 ]
 const saleObject = [// 销售对象
@@ -302,6 +302,33 @@ const fastFlag = [// 是否允许实时赎回
   {value: '1', label: '非实时赎回'},
   {value: '0', label: '实时赎回'}
 ]
+const managementFeePayment=[//管理费支付方式
+  {value: '2', label: '按季支付'},
+  {value: '1', label: '按月支付'},
+  {value: '0', label: '到期支付'}
+]
+const salesFee=[//销售费支付方式
+  {value: '2', label: '按季支付'},
+  {value: '1', label: '按月支付'},
+  {value: '0', label: '到期支付'}
+]
+const registerCode=[//登录机构代码
+  {value: 'ZX', label: '新致'},
+]
+const fundCode=[//登录机构代码
+  {value: '001', label: '第一产品代码'},
+  {value: '002', label: '第二产品代码'},
+  {value: '003', label: '第三产品代码'},
+  {value: '004', label: '第四产品代码'},
+  {value: '005', label: '第五产品代码'},
+  {value: '006', label: '第六产品代码'},
+  {value: '007', label: '第七产品代码'},
+  {value: '008', label: '第八产品代码'},
+  {value: '009', label: '第九产品代码'},
+  {value: '010', label: '第十产品代码'}
+  
+]
+
 
 const param = {
   fastFlag,
@@ -347,7 +374,11 @@ const param = {
   checkType,
   delayedEntry,
   periodSubsFlag,
-  custType
+  custType,
+  managementFeePayment,
+  salesFee,
+  registerCode,
+  fundCode
 }
 
 export default param
