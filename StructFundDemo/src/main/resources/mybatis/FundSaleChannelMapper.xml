@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.FundSaleChannelMapper">
+
+    <resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.FundSaleChannel" >
+        <id column="fund_code" property="fundCode" />
+        <result column="register_code" property="registerCode" />
+        <result column="fund_name" property="fundName" />
+        <result column="personal_bank" property="personalBank" />
+        <result column="telephone_bank" property="telephoneBank" />
+        <result column="mobilephone_bank" property="mobilephoneBank" />
+        <result column="counter" property="counter" />
+        <result column="low_cabinet" property="lowCabinet" />
+        <result column="jiayitong" property="jiayitong" />
+        <result column="web_portal" property="webPortal" />
+        <result column="multi_media" property="multiMedia" />
+        <result column="itm" property="itm" />
+        <result column="zizhutong" property="zizhutong" />
+        <result column="intelligence_cabinet" property="intelligenceCabinet" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="user_id" property="userId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        fund_code,
+        register_code,
+        fund_name,
+        personal_bank,
+        telephone_bank,
+        mobilephone_bank,
+        counter,
+        low_cabinet,
+        jiayitong,
+        web_portal,
+        multi_media,
+        itm,
+        zizhutong,
+        intelligence_cabinet,
+        create_date,
+        update_date,
+        user_id
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.newtouch.structfund.entity.FundSaleChannel">
+        INSERT INTO fund_sale_channel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test ='null != fundCode'>
+                fund_code,
+            </if>
+            <if test ='null != registerCode'>
+                register_code,
+            </if>
+            <if test ='null != fundName'>
+                fund_name,
+            </if>
+            <if test ='null != personalBank'>
+                personal_bank,
+            </if>
+            <if test ='null != telephoneBank'>
+                telephone_bank,
+            </if>
+            <if test ='null != mobilephoneBank'>
+                mobilephone_bank,
+            </if>
+            <if test ='null != counter'>
+                counter,
+            </if>
+            <if test ='null != lowCabinet'>
+                low_cabinet,
+            </if>
+            <if test ='null != jiayitong'>
+                jiayitong,
+            </if>
+            <if test ='null != webPortal'>
+                web_portal,
+            </if>
+            <if test ='null != multiMedia'>
+                multi_media,
+            </if>
+            <if test ='null != itm'>
+                itm,
+            </if>
+            <if test ='null != zizhutong'>
+                zizhutong,
+            </if>
+            <if test ='null != intelligenceCabinet'>
+                intelligence_cabinet,
+            </if>
+            <if test ='null != createDate'>
+                create_date,
+            </if>
+            <if test ='null != updateDate'>
+                update_date,
+            </if>
+            <if test ='null != userId'>
+                user_id
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test ='null != fundCode'>
+                #{fundCode},
+            </if>
+            <if test ='null != registerCode'>
+                #{registerCode},
+            </if>
+            <if test ='null != fundName'>
+                #{fundName},
+            </if>
+            <if test ='null != personalBank'>
+                #{personalBank},
+            </if>
+            <if test ='null != telephoneBank'>
+                #{telephoneBank},
+            </if>
+            <if test ='null != mobilephoneBank'>
+                #{mobilephoneBank},
+            </if>
+            <if test ='null != counter'>
+                #{counter},
+            </if>
+            <if test ='null != lowCabinet'>
+                #{lowCabinet},
+            </if>
+            <if test ='null != jiayitong'>
+                #{jiayitong},
+            </if>
+            <if test ='null != webPortal'>
+                #{webPortal},
+            </if>
+            <if test ='null != multiMedia'>
+                #{multiMedia},
+            </if>
+            <if test ='null != itm'>
+                #{itm},
+            </if>
+            <if test ='null != zizhutong'>
+                #{zizhutong},
+            </if>
+            <if test ='null != intelligenceCabinet'>
+                #{intelligenceCabinet},
+            </if>
+            <if test ='null != createDate'>
+                #{createDate},
+            </if>
+            <if test ='null != updateDate'>
+                #{updateDate},
+            </if>
+            <if test ='null != userId'>
+                #{userId}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM fund_sale_channel
+        WHERE fund_code = #{fundCode}
+    </delete>
+
+    <update id="update" parameterType="com.newtouch.structfund.entity.FundSaleChannel">
+        UPDATE fund_sale_channel
+        <set>
+            <if test ='null != fundCode'>fund_code = #{fundCode},</if>
+            <if test ='null != fundCode'>fund_name = #{fundName},</if>
+            <if test ='null != registerCode'>register_code = #{registerCode},</if>
+            <if test ='null != personalBank'>personal_bank = #{personalBank},</if>
+            <if test ='null != telephoneBank'>telephone_bank = #{telephoneBank},</if>
+            <if test ='null != mobilephoneBank'>mobilephone_bank = #{mobilephoneBank},</if>
+            <if test ='null != counter'>counter = #{counter},</if>
+            <if test ='null != lowCabinet'>low_cabinet = #{lowCabinet},</if>
+            <if test ='null != jiayitong'>jiayitong = #{jiayitong},</if>
+            <if test ='null != webPortal'>web_portal = #{webPortal},</if>
+            <if test ='null != multiMedia'>multi_media = #{multiMedia},</if>
+            <if test ='null != itm'>itm = #{itm},</if>
+            <if test ='null != zizhutong'>zizhutong = #{zizhutong},</if>
+            <if test ='null != intelligenceCabinet'>intelligence_cabinet = #{intelligenceCabinet}</if>
+            <if test ='null != createDate'>
+                #{createDate}
+            </if>
+            <if test ='null != updateDate'>
+                #{updateDate}
+            </if>
+            <if test ='null != userId'>
+                #{userId}
+            </if>
+        </set>
+        WHERE fund_code = #{fundCode}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM fund_sale_channel
+        WHERE fund_code = #{fundCode}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM fund_sale_channel as c
+        <where>
+            <if test="fundCode != '' and fundCode != null">
+                and c.fund_code like concat('%', #{fundCode}, '%')
+            </if>
+            <if test="registerCode != '' and registerCode != null">
+                and c.register_code like concat('%', #{registerCode}, '%')
+            </if>
+        </where>
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM fund_sale_channel
+    </select>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from fund_sale_channel where
+        <foreach collection="list" item="item" index="index" separator="or">
+            fund_code = #{item.fundCode}
+        </foreach>
+    </delete>
+
+</mapper>

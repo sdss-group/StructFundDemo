@@ -1,20 +1,13 @@
 package com.newtouch.structfund.action;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.newtouch.structfund.entity.User;
+import com.newtouch.structfund.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.newtouch.structfund.entity.User;
-import com.newtouch.structfund.mapper.UserMapper;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @ResponseBody
