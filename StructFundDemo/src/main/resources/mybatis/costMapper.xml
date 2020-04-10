@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.CostMapper">
+ <resultMap id="CostMap" type="com.newtouch.structfund.entity.CostParameters">
+        <result column="REGISTER_CODE" jdbcType="VARCHAR" property="registerCode" />
+        <result column="REGISTRATION" jdbcType="VARCHAR" property="registration" />
+        <result column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+         <result column="PAYMENT_METHOD" jdbcType="VARCHAR" property="paymentMethod" />
+        <result column="SUBSCRIPTION_RATES" jdbcType="DECIMAL" property="subscriptionRates" />
+        <result column="SUBSCRIPTION_FEE" jdbcType="VARCHAR" property="subscriptionFee" />
+         <result column="SUBSCRIPTION_RATE" jdbcType="DECIMAL" property="subscriptionRate" />
+         <result column="REDEMPTION_FEE" jdbcType="VARCHAR" property="redemptionFee" />
+        <result column="REDEMPTION_RATE" jdbcType="DECIMAL" property="redemptionRate" />
+        <result column="SALES_FEE" jdbcType="VARCHAR" property="salesFee" />
+        <result column="SALES_PROCEDURE_RATE" jdbcType="DECIMAL" property="salesProcedureRate" />
+        <result column="MANAGEMENT_FEE_PAYMENT" jdbcType="VARCHAR" property="managementFeePayment" />
+         <result column="MANAGEMENT_FEE_RATE" jdbcType="DECIMAL" property="managementFeeRate" />
+         <result column="EXCESS_PERFORMANCE_COMPENSTATION" jdbcType="VARCHAR" property="excessPerformanceCompenstation" />
+        <result column="PROPORTION" jdbcType="DECIMAL" property="proportion" />
+        <result column="FINAL_MAINTAINER" jdbcType="VARCHAR" property="finalMaintainer" />
+        <result column="FINAL_UPDATE_TIME" jdbcType="VARCHAR" property="finalUpdateTime" />  
+    </resultMap>
+	<select id="costSelect" parameterType="java.util.Map" resultMap="CostMap">
+		select REGISTER_CODE,REGISTRATION,FUND_CODE,PAYMENT_METHOD,SUBSCRIPTION_RATES,SUBSCRIPTION_FEE,SUBSCRIPTION_RATE,
+		REDEMPTION_FEE,REDEMPTION_RATE,SALES_FEE,SALES_PROCEDURE_RATE,MANAGEMENT_FEE_PAYMENT,MANAGEMENT_FEE_RATE,
+		EXCESS_PERFORMANCE_COMPENSTATION,PROPORTION,FINAL_MAINTAINER,FINAL_UPDATE_TIME from cost_parameters 
+		where 1=1 <if test="costParameters.registerCode !=null and costParameters.registerCode!=''">and  REGISTER_CODE like concat(concat('%',#{costParameters.registerCode}),'%')</if>
+		<if test="costParameters.fundCode!=null and costParameters.fundCode!=''">and FUND_CODE like concat(concat('%',#{costParameters.fundCode}),'%')</if> 
+			limit #{startRow},#{pageSize}
+	</select>
+	<select id="costSelectBy" parameterType="com.newtouch.structfund.entity.CostParameters" resultMap="CostMap">
+		select REGISTER_CODE,REGISTRATION,FUND_CODE,PAYMENT_METHOD,SUBSCRIPTION_RATES,SUBSCRIPTION_FEE,SUBSCRIPTION_RATE,
+		REDEMPTION_FEE,REDEMPTION_RATE,SALES_FEE,SALES_PROCEDURE_RATE,MANAGEMENT_FEE_PAYMENT,MANAGEMENT_FEE_RATE,
+		EXCESS_PERFORMANCE_COMPENSTATION,PROPORTION,FINAL_MAINTAINER,FINAL_UPDATE_TIME from cost_parameters where 1=1 <if test="registerCode !=null and registerCode!=''">and  REGISTER_CODE = #{registerCode}</if>
+		<if test="fundCode!=null and fundCode!=''">and FUND_CODE = #{fundCode}</if> 
+	</select>
+	<insert id="costAdd" parameterType="com.newtouch.structfund.entity.CostParameters">
+	insert into cost_parameters(REGISTER_CODE,REGISTRATION,FUND_CODE,PAYMENT_METHOD,SUBSCRIPTION_RATES,SUBSCRIPTION_FEE,SUBSCRIPTION_RATE,
+		REDEMPTION_FEE,REDEMPTION_RATE,SALES_FEE,SALES_PROCEDURE_RATE,MANAGEMENT_FEE_PAYMENT,MANAGEMENT_FEE_RATE,
+		EXCESS_PERFORMANCE_COMPENSTATION,PROPORTION,FINAL_MAINTAINER,FINAL_UPDATE_TIME)
+	values(#{registerCode},#{registration},#{fundCode},#{paymentMethod},#{subscriptionRates},#{subscriptionFee},#{subscriptionRate},#{redemptionFee},#{redemptionRate},#{salesFee},#{salesProcedureRate},#{managementFeePayment},#{managementFeeRate},#{excessPerformanceCompenstation},#{proportion},#{finalMaintainer},#{finalUpdateTime})
+	</insert>
+	<update id="costUpdate" parameterType="com.newtouch.structfund.entity.CostParameters">
+	update cost_parameters set REGISTER_CODE=#{registerCode},REGISTRATION=#{registration},FUND_CODE=#{fundCode},PAYMENT_METHOD=#{paymentMethod},SUBSCRIPTION_RATES=#{subscriptionRates},
+	SUBSCRIPTION_FEE=#{subscriptionFee},SUBSCRIPTION_RATE=#{subscriptionRate},REDEMPTION_FEE=#{redemptionFee},REDEMPTION_RATE=#{redemptionRate},
+	SALES_FEE=#{salesFee},SALES_PROCEDURE_RATE=#{salesProcedureRate},MANAGEMENT_FEE_PAYMENT=#{managementFeePayment},
+	MANAGEMENT_FEE_RATE=#{managementFeeRate},EXCESS_PERFORMANCE_COMPENSTATION=#{excessPerformanceCompenstation},PROPORTION=#{proportion},FINAL_MAINTAINER=#{finalMaintainer},
+	FINAL_UPDATE_TIME=#{finalUpdateTime} where REGISTER_CODE=#{registerCode}and FUND_CODE=#{fundCode}
+	</update>
+	<delete id="costDelete" parameterType="com.newtouch.structfund.entity.CostParameters">
+	 delete from cost_parameters where REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode}
+	</delete>
+	<select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(1) from cost_parameters  where 1=1 <if test="costParameters.registerCode !=null and costParameters.registerCode!=''">and  REGISTER_CODE like concat(concat('%',#{costParameters.registerCode}),'%')</if>	
+		<if test="fundCode!=null and fundCode!=''">and FUND_CODE = #{fundCode}</if> 
+	</select>
+</mapper> 
