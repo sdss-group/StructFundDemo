@@ -324,8 +324,7 @@ const fundCode=[//登录机构代码
   {value: '006', label: '第六产品代码'},
   {value: '007', label: '第七产品代码'},
   {value: '008', label: '第八产品代码'},
-  {value: '009', label: '第九产品代码'},
-  {value: '010', label: '第十产品代码'}
+  {value: '009', label: '第九产品代码'}
   
 ]
 
