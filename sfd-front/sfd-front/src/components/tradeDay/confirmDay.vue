@@ -329,7 +329,7 @@ export default {
               this.$Config.ip +
               ":" +
               this.$Config.port +
-              "/tradeDay/updateWorkDay",
+              "/tradeDay/updateConfirmDay",
             headers: { "Content-Type": "application/json;charset=UTF-8" },
             data: JSON.stringify(paramList)
           })

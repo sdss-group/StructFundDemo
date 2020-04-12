@@ -33,7 +33,7 @@ public class TradeDayAction {
     工作日维护页面提交数据
      */
     @RequestMapping("updateWorkDay")
-    public Integer updateTradeDay(@RequestBody List<TradeDayVo> param){
+    public Integer updateWorkDay(@RequestBody List<TradeDayVo> param){
         for(TradeDayVo tradeDay:param){
             TradeDayVo tradeDayVo = tm.selectOne(tradeDay);
             if(tradeDayVo==null){
@@ -49,6 +49,25 @@ public class TradeDayAction {
         return 0;
     }
 
+    /*
+确认日维护页面提交数据
+ */
+    @RequestMapping("updateConfirmDay")
+    public Integer updateConfirmDay(@RequestBody List<TradeDayVo> param){
+        for(TradeDayVo tradeDay:param){
+            TradeDayVo tradeDayVo = tm.selectOne(tradeDay);
+            if(tradeDayVo==null){
+                if(!tradeDay.getConfirmDayFlag().equals("2")){
+                    tm.insert(tradeDay);
+                }
+            }else {
+                if(!tradeDayVo.getConfirmDayFlag().equals(tradeDay.getConfirmDayFlag())) {
+                    tm.update(tradeDay);
+                }
+            }
+        }
+        return 0;
+    }
 
     /*
     工作日信息批量删除
