@@ -9,7 +9,7 @@ import transTrans from '@/components/transTrans/transTrans'
 import orgAmt from '@/components/orgAmt/orgAmt'
 import saleBillDate from '@/components/saleBillDate/saleBillDate'
 import fundSale from '@/components/fundinfoset/fundSale'
-
+import costparameters from '@/components/fundinfo/costparameters'
 import fundCustType from '@/components/fundCustType/fundCustType'
 import workDay from '@/components/tradeDay/workDay'
 import confirmDay from '@/components/tradeDay/confirmDay'
@@ -30,6 +30,11 @@ export default new Router({
       path: '/baseinfo',
       name: 'baseinfo',
       component: baseinfo
+    },
+    {
+      path: '/costparameters',
+      name: 'costparameters',
+      component: costparameters
     },
     {
       path: '/fundLot',
