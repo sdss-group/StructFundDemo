@@ -121,7 +121,7 @@ export default {
       this.findFundSaleChannelPage()
     },
     openDetail (row, column, event) {
-      this.$refs.fundSaleDetailForm.show(row, 'detail')
+      this.$refs.fundSaleChannelDetail.show(row, 'detail')
     },
     addFundSaleChannel () {
       this.$refs.fundSaleChannelDetail.show({}, 'add')
