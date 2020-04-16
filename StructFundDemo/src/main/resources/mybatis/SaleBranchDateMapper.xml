@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newtouch.structfund.mapper.SaleBranchDateMapper">
+    <resultMap id="BaseResultMap" type="com.newtouch.structfund.entity.SaleBranchDate">
+        <result column="REGISTER_CODE" jdbcType="CHAR" property="registerCode" />
+        <result column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode" />
+        <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    </resultMap>
+
+    <select id="getBranch" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        select REGISTER_CODE,FUND_CODE,ORG_CODE from regn_fund a
+        <where>
+            <if test="registerCode!=null and registerCode!=''">
+                and  a.REGISTER_CODE =#{registerCode}
+            </if>
+            <if test="fundCode !=null and fundCode!=''">
+                and  a.FUND_CODE =#{fundCode}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryBranch" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        SELECT DISTINCT ORG_BR ORG_CODE,ORG_NAME FROM regnt WHERE  ORG_BR NOT IN(SELECT ORG_CODE
+        FROM regn_fund
+        WHERE 1=1
+            <if test="registerCode!=null and registerCode!=''">
+                and REGISTER_CODE =#{registerCode}
+            </if>
+            <if test="fundCode !=null and fundCode!=''">
+                and  FUND_CODE =#{fundCode}
+            </if>
+         )
+
+    </select>
+
+    <select id="findAllBranch" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        SELECT DISTINCT ORG_BR ORG_CODE,ORG_NAME FROM regnt
+    </select>
+
+    <delete id="delete" parameterType="java.lang.String">
+	 delete from regn_fund where REGISTER_CODE=#{registerCode} and FUND_CODE=#{fundCode}
+	</delete>
+
+    <insert id="save" parameterType="com.newtouch.structfund.entity.SaleBranchDate">
+	insert into regn_fund(REGISTER_CODE,ORG_CODE,FUND_CODE)
+	values(#{registerCode},#{orgCode},#{fundCode})
+	</insert>
+</mapper>
