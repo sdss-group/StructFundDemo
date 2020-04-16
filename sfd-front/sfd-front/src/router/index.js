@@ -13,6 +13,7 @@ import costparameters from '@/components/fundinfo/costparameters'
 import fundCustType from '@/components/fundCustType/fundCustType'
 import workDay from '@/components/tradeDay/workDay'
 import confirmDay from '@/components/tradeDay/confirmDay'
+import fundSaleChannel from '@/components/fundSaleChannel/fundSaleChannel'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -92,6 +93,11 @@ export default new Router({
       path: '/confirmDay',
       name: 'confirmDay',
       component: confirmDay
+    },
+    {
+      path: '/fundSaleChannel',
+      name: 'fundSaleChannel',
+      component: fundSaleChannel
     }
   ]
 })
