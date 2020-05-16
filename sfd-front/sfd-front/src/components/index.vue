@@ -40,6 +40,7 @@ export default {
         {name: '产品销售渠道维护', index: '/fundSaleChannel'},
         {name: '产品销售参数信息维护', index: '/fundsale'},
         {name: '产品销售分行维护', index: '/saleBranch'}
+		
       ]
 
     }

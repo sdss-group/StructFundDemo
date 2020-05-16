@@ -74,6 +74,7 @@ export default new Router({
       path: '/salebranch',
       name: 'salebranch',
       component: salebranch
+      
     },
     {
       path: '/fundSale',
