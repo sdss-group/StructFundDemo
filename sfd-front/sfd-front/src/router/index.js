@@ -10,11 +10,11 @@ import orgAmt from '@/components/orgAmt/orgAmt'
 import saleBillDate from '@/components/saleBillDate/saleBillDate'
 import fundSale from '@/components/fundinfoset/fundSale'
 import salebranch from '@/components/fundSaleBranch/saleBranch'
-
 import fundCustType from '@/components/fundCustType/fundCustType'
 import workDay from '@/components/tradeDay/workDay'
 import confirmDay from '@/components/tradeDay/confirmDay'
 import fundSaleChannel from '@/components/fundSaleChannel/fundSaleChannel'
+import costparameters from '@/components/fundinfo/costparameters'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -74,7 +74,6 @@ export default new Router({
       path: '/salebranch',
       name: 'salebranch',
       component: salebranch
-      
     },
     {
       path: '/fundSale',
@@ -100,6 +99,11 @@ export default new Router({
       path: '/fundSaleChannel',
       name: 'fundSaleChannel',
       component: fundSaleChannel
+    },
+    {
+      path: '/costparameters',
+      name: 'costparameters',
+      component: costparameters
     }
   ]
 })
