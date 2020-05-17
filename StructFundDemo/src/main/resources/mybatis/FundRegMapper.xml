@@ -24,13 +24,8 @@
 		<result column="AUTHORIZER" jdbcType="CHAR" property="authorizer" />
 	</resultMap>
 
-	<select id="queryAllAgencyAndProcode" resultMap="BaseResultMap">
-		select a.REGISTER_CODE,b.REGISTER_NAME,a.FUND_CODE from FUND_SET a
-		left join FUND_REG b on a.REGISTER_CODE=b.REGISTER_CODE order by FUND_CODE
-	</select>
-
 	<select id="queryFundCode" parameterType="java.lang.String" resultMap="BaseResultMap">
-		select a.FUND_CODE from FUND_SET a
+		select distinct a.FUND_CODE from FUND_SET a
 		left join FUND_INFO b on a.REGISTER_CODE=b.REGISTER_CODE and a.FUND_CODE=b.FUND_CODE where b.fund_status !='8'
 		<if test="registerCode != '' and registerCode != null">
 			and a.REGISTER_CODE=#{registerCode}
@@ -39,12 +34,12 @@
 	</select>
 
 	<select id="queryAgency" parameterType="java.lang.String" resultMap="BaseResultMap">
-		select a.REGISTER_CODE,b.REGISTER_NAME from FUND_SET a
+		select distinct a.REGISTER_CODE,b.REGISTER_NAME from FUND_SET a
 		left join FUND_REG b on a.REGISTER_CODE=b.REGISTER_CODE where 1=1
 		<if test="fundCode != '' and fundCode != null">
 			and a.FUND_CODE=#{fundCode}
 		</if>
-		order by REGISTER_CODE desc limit 1
+		order by REGISTER_CODE
 	</select>
 
 </mapper>
