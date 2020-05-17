@@ -137,7 +137,7 @@ export default {
   },
   created () {
     this.getDataList()
-    this.initAgencyNameAndProcode()
+    this.initAgency()
   },
   methods: {
     getDataList () {
@@ -181,9 +181,9 @@ export default {
       this.getDataListPage()
     },
     // 登记机构
-    async initAgencyNameAndProcode () {
+    async initAgency () {
       this.registerCodeList = []
-      this.registerCodeList = (await this.$req.queryAllAgencyAndProcode()).data
+      this.registerCodeList = (await this.$req.queryRegList()).data
     },
     amtFormat (row, column, cellValue) {
       if (cellValue !== '' && cellValue !== null) {

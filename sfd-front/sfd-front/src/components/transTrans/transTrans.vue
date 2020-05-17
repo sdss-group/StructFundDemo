@@ -1,7 +1,7 @@
 <template>
   <div class="mod-config">
     <!--表格菜单-->
-    <el-form :inline="true" :rules="dataRule" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
+    <el-form :inline="true" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" @change="queryFundCode()">
           <el-option v-for="item in registerCodeList" :key="item.index" :label="item.registerName"
@@ -139,7 +139,8 @@ export default {
   },
   created () {
     this.getDataList()
-    this.initAgencyAndProcode()
+    this.initAgency()
+    this.initFundCode()
   },
   methods: {
     getDataList () {
@@ -173,7 +174,8 @@ export default {
     // 重置
     resetForm (formName) {
       this.$refs[formName].resetFields()
-      this.initAgencyAndProcode()
+      this.initAgency()
+      this.initFundCode()
       this.dataList = []
       this.dataListOut = []
       this.dataForm.currentPage = 1
@@ -204,17 +206,21 @@ export default {
       return wbout
     },
     // 登记机构
-    async initAgencyAndProcode () {
+    async initAgency () {
       this.registerCodeList = []
-      this.fundCodeList = []
-      let result = await this.$req.queryAllAgencyAndProcode()
+      let result = await this.$req.queryRegList()
       this.registerCodeList = result.data
+    },
+    // 初始化产品代码列表
+    async initFundCode () {
+      this.fundCodeList = []
+      let result = await this.$req.queryfundList()
       this.fundCodeList = result.data
     },
     queryAgency () {
       this.$ajax({
         method: 'post',
-        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/queryTrans/queryAgencyByFundCode',
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/queryTrans/queryAgency',
         data: this.$qs.stringify({'fundCode': this.dataForm.fundCode})
       }).then((result) => {
         this.dataForm.registerCode = result.data[0].registerCode
@@ -224,10 +230,12 @@ export default {
     queryFundCode () {
       this.$ajax({
         method: 'post',
-        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/queryTrans/queryFundCodeByAgency',
+        url: 'http://' + this.$Config.ip + ':' + this.$Config.port + '/queryTrans/queryFundCode',
         data: this.$qs.stringify({'registerCode': this.dataForm.registerCode})
       }).then((result) => {
-        this.dataForm.fundCode = result.data[0].fundCode
+        if (typeof result.data[0] !== 'undefined') {
+          this.dataForm.fundCode = result.data[0].fundCode
+        }
         this.fundCodeList = result.data
       })
     },

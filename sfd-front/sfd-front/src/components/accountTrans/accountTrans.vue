@@ -1,7 +1,7 @@
 <template>
   <div class="mod-config">
     <!--表格菜单-->
-    <el-form :inline="true" :rules="dataRule" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
+    <el-form :inline="true" :model="dataForm" ref="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item label="登记机构" prop="registerCode">
         <el-select v-model="dataForm.registerCode" filterable clearable>
           <el-option v-for="item in registerCodeList" :key="item.index" :label="item.registerName"
@@ -100,7 +100,7 @@ export default {
   },
   created () {
     this.getDataList()
-    this.initAgencyAndProcode()
+    this.initAgency()
   },
   methods: {
     getDataList () {
@@ -164,9 +164,9 @@ export default {
       return wbout
     },
     // 登记机构
-    async initAgencyAndProcode () {
+    async initAgency () {
       this.registerCodeList = []
-      this.registerCodeList = (await this.$req.queryAllAgencyAndProcode()).data
+      this.registerCodeList = (await this.$req.queryRegList()).data
     },
     amtFormat (row, column, cellValue) {
       if (cellValue !== '' && cellValue !== null) {

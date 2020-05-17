@@ -13,14 +13,12 @@ import Config from '@/Config'
 import moment from 'moment'
 Vue.prototype.$moment = moment
 moment.locale('zh-cn')
-
 Vue.prototype.$param = param
 Vue.prototype.$req = req
 Vue.prototype.$qs = qs
 Vue.prototype.$Config = Config
 Vue.use(Element, axios)
 Vue.prototype.$ajax = axios
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

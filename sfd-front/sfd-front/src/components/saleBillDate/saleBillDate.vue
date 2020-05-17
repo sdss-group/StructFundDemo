@@ -7,7 +7,7 @@
           <el-option
             v-for="item in registerCodeList"
             :key="item.registerCode"
-            :label="item.registerCode"
+            :label="item.registerName"
             :value="item.registerCode"
           > </el-option>
         </el-select>
@@ -19,7 +19,7 @@
         <el-button @click="getDataList(1)">查询</el-button>
         <el-button type="primary" @click="resetForm('dataForm')">重置</el-button>
         <el-button type="primary" @click="addOrUpdateHandle(1,null)">新增</el-button>
-        
+
         <el-button
           type="danger"
           @click="ifDelete(0)"
@@ -58,7 +58,7 @@
       <el-table-column prop header-align="center" align="center" label="操作人"></el-table-column>
       <el-table-column prop="timestampU" header-align="center" align="center" label="更新时间"></el-table-column>
 
-     
+
 
       <el-table-column fixed="right" header-align="center" align="center" width="150" label="操作">
         <template slot-scope="scope">
@@ -72,7 +72,7 @@
       </el-table-column>
     </el-table>
     <!--分页-->
-    
+
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -94,7 +94,7 @@ import {queryRegList, queryfundList} from "../../common/req"
 export default {
   data() {
     return {
-      
+
       totalPieces:0,
 
       dataForm: {
@@ -106,7 +106,7 @@ export default {
 
       moneyTypeAllot: this.$param.moneyTypeAllot,
       dataList: [],
-      
+
       dataListLoading: false,
       dataListSelections: [],
       addOrUpdateVisible: false,
@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     getDataList(uniqueQuery) {
-      
+
       //如果是点击查询，不是点击分页触发的查询
       if(uniqueQuery){
         this.dataForm.currentPage=1
