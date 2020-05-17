@@ -1,0 +1,651 @@
+[ WARN ] [2020-04-12 08:02:32] com.zaxxer.hikari.pool.HikariPool [779] - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7h49m41s761ms539µs400ns).
+[ INFO ] [2020-04-12 08:15:57] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:15:57] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 08:15:57] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 08:17:27] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 8524 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 08:17:27] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 08:17:27] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 08:17:27] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 08:17:28] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 08:17:29] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:17:29] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 08:17:29] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 08:17:29] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 08:17:29] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1392 ms
+[ INFO ] [2020-04-12 08:17:29] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:17:29] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 08:17:29] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 08:17:29] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:17:29] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 08:17:29] com.newtouch.StartApplication [61] - Started StartApplication in 2.935 seconds (JVM running for 4.617)
+[ INFO ] [2020-04-12 08:17:37] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:17:37] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:17:37] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 5 ms
+[ INFO ] [2020-04-12 08:22:22] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:26:53] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 6020 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 08:26:53] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 08:26:53] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 08:26:53] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 08:26:54] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 08:26:54] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:26:54] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 08:26:54] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 08:26:54] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 08:26:54] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1394 ms
+[ INFO ] [2020-04-12 08:26:55] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:26:55] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 08:26:55] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 08:26:55] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:26:55] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 08:26:55] com.newtouch.StartApplication [61] - Started StartApplication in 2.866 seconds (JVM running for 4.366)
+[ INFO ] [2020-04-12 08:27:03] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:27:03] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:27:03] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 4 ms
+[ INFO ] [2020-04-12 08:27:52] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:28:16] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 8556 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 08:28:16] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 08:28:16] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 08:28:16] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 08:28:17] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 08:28:17] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:28:17] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 08:28:17] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 08:28:17] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 08:28:17] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1334 ms
+[ INFO ] [2020-04-12 08:28:18] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:28:18] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 08:28:18] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 08:28:18] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:28:18] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 08:28:18] com.newtouch.StartApplication [61] - Started StartApplication in 2.768 seconds (JVM running for 4.343)
+[ INFO ] [2020-04-12 08:28:23] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:28:23] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:28:23] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 6 ms
+[ INFO ] [2020-04-12 08:28:23] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 08:28:24] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 08:28:48] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:28:48] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 08:28:48] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 08:30:01] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 10580 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 08:30:01] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 08:30:02] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:30:02] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 08:30:03] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.402 seconds (JVM running for 3.263)
+[ INFO ] [2020-04-12 08:30:03] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:43:18] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 11316 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 08:43:18] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 08:43:20] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:43:20] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 08:43:20] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.273 seconds (JVM running for 3.115)
+[ INFO ] [2020-04-12 08:43:20] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:43:33] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 12980 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 08:43:33] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 08:43:33] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 08:43:33] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 08:43:34] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 08:43:34] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:43:34] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 08:43:34] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 08:43:34] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 08:43:34] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1227 ms
+[ INFO ] [2020-04-12 08:43:34] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:43:35] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 08:43:35] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 08:43:35] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:43:35] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 08:43:35] com.newtouch.StartApplication [61] - Started StartApplication in 2.616 seconds (JVM running for 4.041)
+[ INFO ] [2020-04-12 08:43:38] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:43:38] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:43:38] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 5 ms
+[ INFO ] [2020-04-12 08:43:39] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 08:43:39] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 08:44:11] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:44:11] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 08:44:11] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 08:57:39] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 3500 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 08:57:39] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 08:57:39] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 08:57:39] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 08:57:40] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 08:57:40] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:57:40] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 08:57:40] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 08:57:40] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 08:57:40] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1376 ms
+[ INFO ] [2020-04-12 08:57:41] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:57:41] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 08:57:41] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 08:57:41] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 08:57:41] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 08:57:41] com.newtouch.StartApplication [61] - Started StartApplication in 2.939 seconds (JVM running for 4.448)
+[ INFO ] [2020-04-12 08:57:48] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:57:48] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 08:57:48] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 4 ms
+[ INFO ] [2020-04-12 08:57:49] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 08:57:49] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 08:59:08] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 2960 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 08:59:08] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 08:59:10] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 08:59:10] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 08:59:10] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.245 seconds (JVM running for 3.097)
+[ INFO ] [2020-04-12 08:59:10] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:02:54] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 9756 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:02:54] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:02:55] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:02:55] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:02:56] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.272 seconds (JVM running for 3.139)
+[ INFO ] [2020-04-12 09:02:56] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:08:45] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:08:45] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 09:08:45] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 09:08:46] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 3500 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:08:46] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:08:47] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3526 (http)
+[ INFO ] [2020-04-12 09:08:47] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3526"]
+[ INFO ] [2020-04-12 09:08:47] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 09:08:47] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 09:08:47] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 09:08:47] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 528 ms
+[ INFO ] [2020-04-12 09:08:47] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:08:47] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 09:08:47] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3526"]
+[ INFO ] [2020-04-12 09:08:47] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3526 (http) with context path ''
+[ INFO ] [2020-04-12 09:08:47] com.newtouch.StartApplication [61] - Started StartApplication in 0.975 seconds (JVM running for 670.383)
+[ INFO ] [2020-04-12 09:08:47] org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [63] - Condition evaluation unchanged
+[ INFO ] [2020-04-12 09:12:56] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:12:56] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:12:56] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 5 ms
+[ INFO ] [2020-04-12 09:18:05] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 10532 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:18:05] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:18:05] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 09:18:05] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 09:18:06] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3526 (http)
+[ INFO ] [2020-04-12 09:18:06] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3526"]
+[ INFO ] [2020-04-12 09:18:06] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 09:18:06] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 09:18:06] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 09:18:06] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1421 ms
+[ INFO ] [2020-04-12 09:18:07] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:18:07] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:18:07] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 09:18:07] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3526"]
+[ INFO ] [2020-04-12 09:18:07] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3526 (http) with context path ''
+[ INFO ] [2020-04-12 09:18:07] com.newtouch.StartApplication [61] - Started StartApplication in 3.151 seconds (JVM running for 5.153)
+[ INFO ] [2020-04-12 09:18:21] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:18:21] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:18:21] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 4 ms
+[ INFO ] [2020-04-12 09:19:12] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:19:30] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 13012 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:19:30] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:19:30] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 09:19:30] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 09:19:31] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 09:19:31] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:19:31] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 09:19:31] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 09:19:31] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 09:19:31] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1302 ms
+[ INFO ] [2020-04-12 09:19:32] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:19:32] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:19:32] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 09:19:32] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:19:32] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 09:19:32] com.newtouch.StartApplication [61] - Started StartApplication in 2.797 seconds (JVM running for 4.325)
+[ INFO ] [2020-04-12 09:19:43] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:19:43] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:19:43] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 4 ms
+[ INFO ] [2020-04-12 09:19:44] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 09:19:44] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 09:20:37] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 1336 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:20:37] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:20:39] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:20:39] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:20:40] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.946 seconds (JVM running for 3.806)
+[ INFO ] [2020-04-12 09:20:40] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:30:42] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:30:42] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 09:30:42] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 09:30:43] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 13012 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:30:43] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:30:43] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 09:30:43] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:30:43] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 09:30:43] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 09:30:43] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 09:30:43] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 394 ms
+[ INFO ] [2020-04-12 09:30:43] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:30:43] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:30:43] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 09:30:43] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:30:43] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 09:30:43] com.newtouch.StartApplication [61] - Started StartApplication in 0.761 seconds (JVM running for 675.659)
+[ INFO ] [2020-04-12 09:30:43] org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [63] - Condition evaluation unchanged
+[ INFO ] [2020-04-12 09:31:07] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:31:08] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 13012 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:31:08] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:31:09] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 09:31:09] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:31:09] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 09:31:09] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 09:31:09] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 09:31:09] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 414 ms
+[ INFO ] [2020-04-12 09:31:09] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:31:09] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:31:09] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 09:31:09] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:31:09] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 09:31:09] com.newtouch.StartApplication [61] - Started StartApplication in 0.836 seconds (JVM running for 701.582)
+[ INFO ] [2020-04-12 09:31:09] org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [63] - Condition evaluation unchanged
+[ INFO ] [2020-04-12 09:31:19] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 10608 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:31:19] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:31:20] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:31:20] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:31:21] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.35 seconds (JVM running for 3.297)
+[ INFO ] [2020-04-12 09:31:21] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:40:36] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:40:37] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 13012 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:40:37] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:40:37] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 09:40:37] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:40:37] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 09:40:37] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 09:40:37] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 09:40:37] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 502 ms
+[ INFO ] [2020-04-12 09:40:37] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:40:37] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:40:38] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 09:40:38] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:40:38] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 09:40:38] com.newtouch.StartApplication [61] - Started StartApplication in 0.944 seconds (JVM running for 1269.944)
+[ INFO ] [2020-04-12 09:40:38] org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [63] - Condition evaluation unchanged
+[ INFO ] [2020-04-12 09:40:40] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 2816 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:40:40] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:40:41] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:40:41] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:40:42] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.302 seconds (JVM running for 3.18)
+[ INFO ] [2020-04-12 09:40:42] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:44:37] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:44:37] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:44:37] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 3 ms
+[ INFO ] [2020-04-12 09:45:38] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:45:39] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 13012 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:45:39] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:45:39] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 09:45:39] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:45:39] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 09:45:39] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 09:45:39] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 09:45:39] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 413 ms
+[ INFO ] [2020-04-12 09:45:40] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:45:40] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:45:40] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 09:45:40] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:45:40] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 09:45:40] com.newtouch.StartApplication [61] - Started StartApplication in 0.807 seconds (JVM running for 1572.23)
+[ INFO ] [2020-04-12 09:45:40] org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [63] - Condition evaluation unchanged
+[ INFO ] [2020-04-12 09:53:23] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:53:34] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 12824 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:53:34] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:53:34] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 09:53:34] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 09:53:36] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 09:53:36] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:53:36] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 09:53:36] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 09:53:36] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 09:53:36] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1367 ms
+[ INFO ] [2020-04-12 09:53:36] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:53:36] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:53:36] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 09:53:37] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 09:53:37] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 09:53:37] com.newtouch.StartApplication [61] - Started StartApplication in 2.835 seconds (JVM running for 4.338)
+[ INFO ] [2020-04-12 09:53:45] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:53:45] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 09:53:45] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 4 ms
+[ INFO ] [2020-04-12 09:53:46] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 09:53:46] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 09:54:32] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 9864 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 09:54:32] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 09:54:34] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 09:54:34] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 09:54:34] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.497 seconds (JVM running for 3.374)
+[ INFO ] [2020-04-12 09:54:35] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:10:02] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:10:02] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 10:10:02] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 10:10:10] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 12596 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 10:10:10] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 10:10:10] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 10:10:10] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 10:10:12] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 10:10:12] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 10:10:12] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 10:10:12] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 10:10:12] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 10:10:12] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1684 ms
+[ INFO ] [2020-04-12 10:10:13] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:10:13] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 10:10:13] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 10:10:13] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 10:10:13] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 10:10:13] com.newtouch.StartApplication [61] - Started StartApplication in 3.603 seconds (JVM running for 5.597)
+[ INFO ] [2020-04-12 10:10:34] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 10:10:34] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 10:10:34] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 5 ms
+[ INFO ] [2020-04-12 10:10:35] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 10:10:35] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 10:10:53] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 5584 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 10:10:53] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 10:10:55] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:10:55] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 10:10:55] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.424 seconds (JVM running for 3.322)
+[ INFO ] [2020-04-12 10:10:56] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:21:36] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 13072 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 10:21:36] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 10:21:38] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:21:39] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 10:21:39] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.768 seconds (JVM running for 3.769)
+[ INFO ] [2020-04-12 10:21:39] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:22:18] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:22:18] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 10:22:18] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 10:22:26] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 9200 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 10:22:26] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 10:22:26] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 10:22:26] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 10:22:28] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 10:22:28] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 10:22:28] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 10:22:28] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 10:22:28] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 10:22:28] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1480 ms
+[ INFO ] [2020-04-12 10:22:29] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:22:29] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 10:22:29] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 10:22:29] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 10:22:29] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 10:22:29] com.newtouch.StartApplication [61] - Started StartApplication in 3.129 seconds (JVM running for 4.837)
+[ INFO ] [2020-04-12 10:22:59] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 10:22:59] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 10:22:59] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 5 ms
+[ INFO ] [2020-04-12 10:23:00] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 10:23:00] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 10:54:36] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 12324 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 10:54:36] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 10:54:36] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 10:54:36] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 10:54:39] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 10:54:39] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 10:54:39] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 10:54:39] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 10:54:39] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 10:54:39] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 2556 ms
+[ INFO ] [2020-04-12 10:54:40] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:54:40] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 10:54:40] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 10:54:40] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-3525"]
+[ INFO ] [2020-04-12 10:54:40] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 10:54:40] com.newtouch.StartApplication [61] - Started StartApplication in 5.391 seconds (JVM running for 8.523)
+[ INFO ] [2020-04-12 10:55:06] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 10:55:06] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 10:55:06] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 9 ms
+[ INFO ] [2020-04-12 10:55:09] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 10:55:10] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 10:55:28] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 3852 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 10:55:28] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 10:55:32] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 10:55:32] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 10:55:32] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 4.532 seconds (JVM running for 6.987)
+[ INFO ] [2020-04-12 10:55:33] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:42:55] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:42:55] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 11:42:55] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ ERROR] [2020-04-12 11:42:56] org.springframework.boot.SpringApplication [826] - Application run failed
+java.lang.IllegalStateException: Failed to load property source from location 'classpath:/application-dev.yml'
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:545)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.loadForFileExtension(ConfigFileApplicationListener.java:483)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:464)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.lambda$null$7(ConfigFileApplicationListener.java:443)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.lambda$load$8(ConfigFileApplicationListener.java:443)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:440)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.lambda$load$0(ConfigFileApplicationListener.java:335)
+	at org.springframework.boot.context.config.FilteredPropertySource.apply(FilteredPropertySource.java:54)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:323)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener.addPropertySources(ConfigFileApplicationListener.java:214)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener.postProcessEnvironment(ConfigFileApplicationListener.java:198)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener.onApplicationEnvironmentPreparedEvent(ConfigFileApplicationListener.java:188)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener.onApplicationEvent(ConfigFileApplicationListener.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:76)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:53)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:345)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
+	at com.newtouch.StartApplication.main(StartApplication.java:12)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.yaml.snakeyaml.scanner.ScannerException: mapping values are not allowed here
+ in 'reader', line 3, column 12:
+        address: 0.0.0.0
+               ^
+
+	at org.yaml.snakeyaml.scanner.ScannerImpl.fetchValue(ScannerImpl.java:870)
+	at org.yaml.snakeyaml.scanner.ScannerImpl.fetchMoreTokens(ScannerImpl.java:358)
+	at org.yaml.snakeyaml.scanner.ScannerImpl.checkToken(ScannerImpl.java:227)
+	at org.yaml.snakeyaml.parser.ParserImpl$ParseBlockMappingKey.produce(ParserImpl.java:558)
+	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:158)
+	at org.yaml.snakeyaml.parser.ParserImpl.checkEvent(ParserImpl.java:148)
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:217)
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:144)
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:239)
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:230)
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:218)
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:144)
+	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:85)
+	at org.yaml.snakeyaml.constructor.BaseConstructor.getData(BaseConstructor.java:125)
+	at org.yaml.snakeyaml.Yaml$1.next(Yaml.java:548)
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:160)
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:134)
+	at org.springframework.boot.env.OriginTrackedYamlLoader.load(OriginTrackedYamlLoader.java:75)
+	at org.springframework.boot.env.YamlPropertySourceLoader.load(YamlPropertySourceLoader.java:50)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.loadDocuments(ConfigFileApplicationListener.java:562)
+	at org.springframework.boot.context.config.ConfigFileApplicationListener$Loader.load(ConfigFileApplicationListener.java:518)
+	... 30 common frames omitted
+[ INFO ] [2020-04-12 11:43:06] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 12324 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 11:43:06] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 11:43:07] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 11:43:07] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-0.0.0.0-3525"]
+[ INFO ] [2020-04-12 11:43:07] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 11:43:07] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 11:43:07] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 11:43:07] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 1669 ms
+[ INFO ] [2020-04-12 11:43:08] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:43:08] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 11:43:08] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 11:43:08] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-0.0.0.0-3525"]
+[ INFO ] [2020-04-12 11:43:08] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 11:43:08] com.newtouch.StartApplication [61] - Started StartApplication in 2.881 seconds (JVM running for 2916.555)
+[ INFO ] [2020-04-12 11:43:09] org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [63] - Condition evaluation unchanged
+[ INFO ] [2020-04-12 11:43:11] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 12952 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 11:43:11] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 11:43:14] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:43:14] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 11:43:14] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.824 seconds (JVM running for 5.638)
+[ INFO ] [2020-04-12 11:43:15] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:43:43] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:43:45] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 12324 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 11:43:45] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 11:43:46] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3526 (http)
+[ INFO ] [2020-04-12 11:43:46] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-0.0.0.0-3526"]
+[ INFO ] [2020-04-12 11:43:46] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 11:43:46] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 11:43:46] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 11:43:46] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 846 ms
+[ INFO ] [2020-04-12 11:43:46] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:43:46] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 11:43:47] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 11:43:47] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-0.0.0.0-3526"]
+[ INFO ] [2020-04-12 11:43:47] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3526 (http) with context path ''
+[ INFO ] [2020-04-12 11:43:47] com.newtouch.StartApplication [61] - Started StartApplication in 1.724 seconds (JVM running for 2954.71)
+[ INFO ] [2020-04-12 11:43:47] org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [63] - Condition evaluation unchanged
+[ INFO ] [2020-04-12 11:43:48] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 6224 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 11:43:48] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 11:43:50] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:43:50] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 11:43:51] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.453 seconds (JVM running for 5.155)
+[ INFO ] [2020-04-12 11:43:51] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:44:47] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:45:02] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 5988 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 11:45:02] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 11:45:02] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 11:45:02] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 11:45:04] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 11:45:04] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-0.0.0.0-3525"]
+[ INFO ] [2020-04-12 11:45:04] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 11:45:04] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 11:45:05] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 11:45:05] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 2661 ms
+[ INFO ] [2020-04-12 11:45:06] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:45:06] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 11:45:06] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 11:45:06] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-0.0.0.0-3525"]
+[ INFO ] [2020-04-12 11:45:06] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 11:45:06] com.newtouch.StartApplication [61] - Started StartApplication in 5.716 seconds (JVM running for 8.808)
+[ INFO ] [2020-04-12 11:45:18] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 11:45:18] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 11:45:18] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 8 ms
+[ INFO ] [2020-04-12 11:45:19] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 11:45:20] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 11:54:53] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 8208 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 11:54:53] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 11:54:55] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 11:54:55] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 11:54:56] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.513 seconds (JVM running for 4.793)
+[ INFO ] [2020-04-12 11:54:56] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 12:12:28] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 12:12:28] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 12:12:28] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 12:14:01] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 2252 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 12:14:01] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 12:14:03] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 12:14:03] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 12:14:04] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 4.027 seconds (JVM running for 5.445)
+[ INFO ] [2020-04-12 12:14:04] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 12:23:20] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 3056 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 12:23:20] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 12:23:24] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 12:23:24] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 12:23:24] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 5.121 seconds (JVM running for 6.836)
+[ INFO ] [2020-04-12 12:23:25] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 12:34:04] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 2948 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 12:34:04] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 12:34:07] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 12:34:07] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 12:34:07] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 4.266 seconds (JVM running for 6.031)
+[ INFO ] [2020-04-12 12:34:08] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 13:37:31] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 1684 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 13:37:31] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 13:37:34] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 13:37:34] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 13:37:34] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.939 seconds (JVM running for 5.206)
+[ INFO ] [2020-04-12 13:37:35] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 13:52:53] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 11364 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 13:52:53] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 13:52:55] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 13:52:55] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 13:52:56] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.808 seconds (JVM running for 5.184)
+[ INFO ] [2020-04-12 13:52:56] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 14:04:51] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 748 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 14:04:51] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 14:04:54] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 14:04:54] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 14:04:55] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 4.26 seconds (JVM running for 5.992)
+[ INFO ] [2020-04-12 14:04:55] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 14:05:40] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 764 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 14:05:40] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 14:05:42] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 14:05:43] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 14:05:43] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.754 seconds (JVM running for 4.997)
+[ INFO ] [2020-04-12 14:05:43] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 14:27:15] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 13016 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 14:27:15] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 14:27:18] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 14:27:18] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 14:27:19] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 4.334 seconds (JVM running for 6.243)
+[ INFO ] [2020-04-12 14:27:19] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 14:28:15] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 11616 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 14:28:15] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 14:28:17] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 14:28:18] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 14:28:18] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.257 seconds (JVM running for 4.612)
+[ INFO ] [2020-04-12 14:28:18] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 16:43:07] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 5848 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 16:43:07] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 16:43:10] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 16:43:10] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 16:43:11] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.826 seconds (JVM running for 5.231)
+[ INFO ] [2020-04-12 16:43:11] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 19:25:24] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 8964 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 19:25:24] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 19:25:26] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 19:25:27] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 19:25:27] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.274 seconds (JVM running for 4.42)
+[ INFO ] [2020-04-12 19:25:27] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 20:29:02] com.newtouch.StartApplication [55] - Starting StartApplication on SC-201811271830 with PID 10128 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 20:29:02] com.newtouch.StartApplication [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 20:29:02] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[ INFO ] [2020-04-12 20:29:02] org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [225] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[ INFO ] [2020-04-12 20:29:05] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [92] - Tomcat initialized with port(s): 3525 (http)
+[ INFO ] [2020-04-12 20:29:05] org.apache.coyote.http11.Http11NioProtocol [173] - Initializing ProtocolHandler ["http-nio-0.0.0.0-3525"]
+[ INFO ] [2020-04-12 20:29:05] org.apache.catalina.core.StandardService [173] - Starting service [Tomcat]
+[ INFO ] [2020-04-12 20:29:05] org.apache.catalina.core.StandardEngine [173] - Starting Servlet engine: [Apache Tomcat/9.0.30]
+[ INFO ] [2020-04-12 20:29:05] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring embedded WebApplicationContext
+[ INFO ] [2020-04-12 20:29:05] org.springframework.web.context.ContextLoader [284] - Root WebApplicationContext: initialization completed in 2490 ms
+[ INFO ] [2020-04-12 20:29:06] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 20:29:06] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 20:29:06] org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [58] - LiveReload server is running on port 35729
+[ INFO ] [2020-04-12 20:29:06] org.apache.coyote.http11.Http11NioProtocol [173] - Starting ProtocolHandler ["http-nio-0.0.0.0-3525"]
+[ INFO ] [2020-04-12 20:29:06] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [204] - Tomcat started on port(s): 3525 (http) with context path ''
+[ INFO ] [2020-04-12 20:29:06] com.newtouch.StartApplication [61] - Started StartApplication in 5.137 seconds (JVM running for 7.708)
+[ INFO ] [2020-04-12 20:35:58] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 20:35:58] org.springframework.web.servlet.DispatcherServlet [525] - Initializing Servlet 'dispatcherServlet'
+[ INFO ] [2020-04-12 20:35:58] org.springframework.web.servlet.DispatcherServlet [547] - Completed initialization in 9 ms
+[ INFO ] [2020-04-12 20:35:58] com.zaxxer.hikari.HikariDataSource [110] - HikariPool-1 - Starting...
+[ INFO ] [2020-04-12 20:35:58] com.zaxxer.hikari.HikariDataSource [123] - HikariPool-1 - Start completed.
+[ INFO ] [2020-04-12 20:46:18] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 20:46:18] com.zaxxer.hikari.HikariDataSource [350] - HikariPool-1 - Shutdown initiated...
+[ INFO ] [2020-04-12 20:46:18] com.zaxxer.hikari.HikariDataSource [352] - HikariPool-1 - Shutdown completed.
+[ INFO ] [2020-04-12 20:48:14] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 11760 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 20:48:14] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 20:48:16] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 20:48:16] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 20:48:16] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.122 seconds (JVM running for 4.21)
+[ INFO ] [2020-04-12 20:48:16] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 22:25:01] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 14272 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 22:25:01] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 22:25:03] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 22:25:03] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 22:25:03] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.525 seconds (JVM running for 3.46)
+[ INFO ] [2020-04-12 22:25:03] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 23:03:20] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 4912 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 23:03:20] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 23:03:22] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 23:03:22] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 23:03:22] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 3.343 seconds (JVM running for 5.845)
+[ INFO ] [2020-04-12 23:03:23] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 23:03:50] com.newtouch.DemoApplicationTests [55] - Starting DemoApplicationTests on SC-201811271830 with PID 7620 (started by Administrator in F:\工作相关\新致\sfd_demo\code\StructFundDemo\StructFundDemo)
+[ INFO ] [2020-04-12 23:03:50] com.newtouch.DemoApplicationTests [655] - The following profiles are active: dev
+[ INFO ] [2020-04-12 23:03:52] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [171] - Initializing ExecutorService 'applicationTaskExecutor'
+[ INFO ] [2020-04-12 23:03:52] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [54] - Adding welcome page: class path resource [static/index.html]
+[ INFO ] [2020-04-12 23:03:52] com.newtouch.DemoApplicationTests [61] - Started DemoApplicationTests in 2.454 seconds (JVM running for 3.254)
+[ INFO ] [2020-04-12 23:03:53] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [208] - Shutting down ExecutorService 'applicationTaskExecutor'
